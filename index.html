@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pele em Camadas — cuidado com estrias</title>
+<meta name="theme-color" content="#100D0B">
+<meta name="description" content="Acompanhamento diário e plano de tratamento personalizado para estrias, por área do corpo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PELE EM CAMADAS — design system
+   ============================================================ */
+:root{
+  --bg:#100D0B;
+  --bg-alt:#17130F;
+  --surface:#1D1710;
+  --surface-2:#241D15;
+  --surface-3:#2B2318;
+  --border:#332A1F;
+  --border-soft:#241D15;
+  --text:#F4ECE1;
+  --text-dim:#C6B7A6;
+  --text-mute:#8E7E6D;
+  --amber:#E3A93E;
+  --amber-strong:#F0BE5E;
+  --amber-soft:rgba(227,169,62,.14);
+  --amber-line:rgba(227,169,62,.35);
+  --sage:#79A18C;
+  --sage-soft:rgba(121,161,140,.14);
+  --sage-line:rgba(121,161,140,.4);
+  --clay:#B06B4F;
+  --clay-soft:rgba(176,107,79,.16);
+  --danger:#C0574C;
+  --danger-soft:rgba(192,87,76,.14);
+  --radius-s:8px;
+  --radius-m:14px;
+  --radius-l:22px;
+  --shadow-1:0 1px 0 rgba(0,0,0,.4);
+  --shadow-2:0 12px 30px -12px rgba(0,0,0,.55);
+  --font-display:'Fraunces', serif;
+  --font-body:'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:'IBM Plex Mono', monospace;
+  --nav-w:236px;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;
+  background:
+    radial-gradient(ellipse 900px 500px at 85% -10%, rgba(227,169,62,.07), transparent 60%),
+    radial-gradient(ellipse 700px 500px at -10% 20%, rgba(121,161,140,.05), transparent 60%),
+    var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:15.5px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+h1,h2,h3,h4{
+  font-family:var(--font-display);
+  font-weight:500;
+  letter-spacing:.1px;
+  margin:0 0 .4em;
+  color:var(--text);
+}
+h1{font-weight:400;}
+p{margin:0 0 1em;color:var(--text-dim);}
+a{color:var(--amber-strong);}
+small{color:var(--text-mute);}
+button{font-family:inherit;}
+ul{margin:0;padding:0;}
+li{list-style:none;}
+img{max-width:100%;display:block;}
+::selection{background:var(--amber-soft);color:var(--amber-strong);}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:4px;}
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--surface-3);border-radius:8px;}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+}
+
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--amber);
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:10px;
+}
+.eyebrow::before{content:"";width:16px;height:1px;background:var(--amber-line);}
+
+/* ---------- toast ---------- */
+#toast-wrap{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:999;display:flex;flex-direction:column;gap:8px;width:min(92vw,380px);}
+.toast{
+  background:var(--surface-3);border:1px solid var(--border);border-left:3px solid var(--amber);
+  padding:12px 14px;border-radius:var(--radius-s);font-size:13.5px;color:var(--text);box-shadow:var(--shadow-2);
+  animation:toast-in .25s ease;
+}
+.toast.ok{border-left-color:var(--sage);}
+.toast.warn{border-left-color:var(--danger);}
+@keyframes toast-in{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+
+/* ---------- shell ---------- */
+.app-shell{display:flex;min-height:100vh;}
+
+.sidenav{
+  width:var(--nav-w);flex:0 0 var(--nav-w);
+  background:var(--bg-alt);
+  border-right:1px solid var(--border-soft);
+  padding:22px 14px 18px;
+  display:flex;flex-direction:column;gap:18px;
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+}
+.brand{display:flex;align-items:center;gap:10px;padding:0 8px;}
+.brand-mark{
+  width:34px;height:34px;border-radius:10px;
+  background:linear-gradient(155deg, var(--amber), var(--clay));
+  display:flex;align-items:center;justify-content:center;flex:none;
+  box-shadow:0 4px 14px -4px rgba(227,169,62,.5);
+}
+.brand-mark svg{width:18px;height:18px;stroke:#171310;}
+.brand-name{font-family:var(--font-display);font-size:17px;line-height:1.15;}
+.brand-name span{display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--text-mute);text-transform:uppercase;margin-top:2px;}
+
+.navlist{display:flex;flex-direction:column;gap:2px;margin-top:6px;}
+.navlist .group-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-mute);padding:14px 10px 6px;}
+.navbtn{
+  display:flex;align-items:center;gap:11px;
+  width:100%;text-align:left;background:transparent;border:1px solid transparent;color:var(--text-dim);
+  padding:9px 10px;border-radius:var(--radius-s);cursor:pointer;font-size:13.5px;font-weight:500;
+  transition:background .15s ease, color .15s ease, border-color .15s ease;
+}
+.navbtn svg{width:17px;height:17px;flex:none;stroke:currentColor;fill:none;}
+.navbtn:hover{background:var(--surface);color:var(--text);}
+.navbtn.active{background:var(--amber-soft);color:var(--amber-strong);border-color:var(--amber-line);}
+
+.pregnant-pill{
+  margin-top:auto;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:11px 12px;border-radius:var(--radius-m);
+  background:var(--sage-soft);border:1px solid var(--sage-line);
+}
+.pregnant-pill .lbl{font-size:12px;color:var(--text);font-weight:600;display:flex;align-items:center;gap:7px;}
+.pregnant-pill .lbl svg{width:15px;height:15px;stroke:var(--sage);}
+.switch{position:relative;width:36px;height:20px;flex:none;}
+.switch input{opacity:0;width:0;height:0;position:absolute;}
+.switch .track{position:absolute;inset:0;background:var(--surface-3);border-radius:20px;transition:.2s;cursor:pointer;}
+.switch .track::after{content:"";position:absolute;width:14px;height:14px;left:3px;top:3px;background:var(--text-mute);border-radius:50%;transition:.2s;}
+.switch input:checked + .track{background:var(--sage);}
+.switch input:checked + .track::after{transform:translateX(16px);background:#0f1a15;}
+
+.bottomnav{display:none;}
+
+/* ---------- main ---------- */
+.main-col{flex:1;min-width:0;display:flex;flex-direction:column;}
+.topbar{
+  position:sticky;top:0;z-index:20;
+  background:rgba(16,13,11,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border-soft);
+  padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.topbar h1{font-size:20px;margin:0;}
+.topbar .sub{font-size:12.5px;color:var(--text-mute);margin-top:2px;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.streak-chip{
+  display:flex;align-items:center;gap:6px;
+  font-family:var(--font-mono);font-size:11.5px;color:var(--text-dim);
+  background:var(--surface);border:1px solid var(--border);padding:6px 11px;border-radius:99px;
+}
+.streak-chip b{color:var(--amber-strong);font-weight:600;}
+
+main{padding:26px 28px 90px;max-width:1180px;}
+.view{display:none;animation:view-in .35s ease;}
+.view.active{display:block;}
+@keyframes view-in{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* ---------- generic pieces ---------- */
+.grid{display:grid;gap:16px;}
+.grid-3{grid-template-columns:repeat(3,1fr);}
+.grid-2{grid-template-columns:repeat(2,1fr);}
+@media (max-width:980px){.grid-3{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:640px){.grid-3,.grid-2{grid-template-columns:1fr;}}
+
+.card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-m);
+  padding:18px;box-shadow:var(--shadow-1);
+}
+.card.pad-l{padding:24px;}
+.card-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px;}
+.card-title h3{font-size:15px;margin:0;}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-body);font-weight:600;font-size:13.5px;cursor:pointer;
+  padding:10px 16px;border-radius:99px;border:1px solid transparent;
+  transition:transform .12s ease, background .15s ease, border-color .15s ease;
+  white-space:nowrap;
+}
+.btn:active{transform:scale(.97);}
+.btn svg{width:15px;height:15px;stroke:currentColor;fill:none;}
+.btn-primary{background:var(--amber);color:#211705;}
+.btn-primary:hover{background:var(--amber-strong);}
+.btn-outline{background:transparent;border-color:var(--border);color:var(--text);}
+.btn-outline:hover{border-color:var(--amber-line);color:var(--amber-strong);}
+.btn-ghost{background:transparent;color:var(--text-dim);padding:10px 12px;}
+.btn-ghost:hover{color:var(--text);}
+.btn-sm{padding:7px 12px;font-size:12.5px;}
+.btn-block{width:100%;}
+.btn[disabled]{opacity:.45;cursor:not-allowed;}
+
+.tag{
+  display:inline-flex;align-items:center;gap:5px;font-family:var(--font-mono);font-size:10.5px;
+  letter-spacing:.04em;padding:4px 9px;border-radius:99px;background:var(--surface-2);color:var(--text-dim);
+  border:1px solid var(--border);
+}
+.tag.amber{background:var(--amber-soft);color:var(--amber-strong);border-color:var(--amber-line);}
+.tag.sage{background:var(--sage-soft);color:var(--sage);border-color:var(--sage-line);}
+.tag.clay{background:var(--clay-soft);color:var(--clay);border-color:rgba(176,107,79,.4);}
+
+.divider{height:1px;background:var(--border-soft);margin:20px 0;border:none;}
+
+input[type=text],input[type=time],input[type=number],select,textarea{
+  width:100%;background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  padding:10px 12px;border-radius:var(--radius-s);font-family:var(--font-body);font-size:13.5px;
+}
+textarea{resize:vertical;min-height:70px;}
+label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bottom:6px;font-weight:600;}
+.field{margin-bottom:14px;}
+
+/* ---------- dashboard ---------- */
+.hero{
+  border-radius:var(--radius-l);
+  background:linear-gradient(155deg, var(--surface-2), var(--surface));
+  border:1px solid var(--border);
+  padding:36px;display:flex;gap:30px;align-items:center;justify-content:space-between;
+  margin-bottom:20px;position:relative;overflow:hidden;
+}
+.hero::after{
+  content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle, rgba(227,169,62,.16), transparent 70%);
+}
+.hero-txt{position:relative;z-index:1;max-width:560px;}
+.hero h1{font-size:32px;line-height:1.15;margin-bottom:12px;}
+.hero p{font-size:14.5px;max-width:460px;}
+.hero-stats{display:flex;gap:22px;position:relative;z-index:1;flex-wrap:wrap;}
+.stat{min-width:96px;}
+.stat .n{font-family:var(--font-display);font-size:28px;color:var(--amber-strong);line-height:1;}
+.stat .l{font-family:var(--font-mono);font-size:10.5px;color:var(--text-mute);text-transform:uppercase;letter-spacing:.08em;margin-top:6px;}
+
+.quicklinks{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0;}
+@media (max-width:900px){.quicklinks{grid-template-columns:repeat(2,1fr);}}
+.qlink{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-m);
+  padding:16px;cursor:pointer;text-align:left;transition:border-color .15s ease, transform .15s ease;
+  display:flex;flex-direction:column;gap:8px;
+}
+.qlink:hover{border-color:var(--amber-line);transform:translateY(-2px);}
+.qlink svg{width:20px;height:20px;stroke:var(--amber);fill:none;}
+.qlink b{font-size:13.5px;font-weight:600;}
+.qlink span{font-size:12px;color:var(--text-mute);}
+
+/* ---------- body map ---------- */
+.map-layout{display:grid;grid-template-columns:320px 1fr;gap:26px;align-items:start;}
+@media (max-width:900px){.map-layout{grid-template-columns:1fr;}}
+.map-stage{
+  background:radial-gradient(circle at 50% 20%, var(--surface-2), var(--surface) 70%);
+  border:1px solid var(--border);border-radius:var(--radius-l);padding:22px;
+  display:flex;flex-direction:column;align-items:center;gap:16px;position:sticky;top:78px;
+}
+.view-toggle{display:flex;gap:4px;background:var(--surface-2);border-radius:99px;padding:4px;border:1px solid var(--border);}
+.view-toggle button{
+  border:none;background:transparent;color:var(--text-mute);font-size:12px;font-weight:700;
+  padding:7px 16px;border-radius:99px;cursor:pointer;font-family:var(--font-mono);letter-spacing:.05em;
+}
+.view-toggle button.active{background:var(--amber);color:#211705;}
+.bodymap-svg{width:230px;height:auto;}
+.zone{
+  fill:url(#skin-dots); stroke:var(--border); stroke-width:1.4;
+  cursor:pointer; transition:stroke .2s ease, filter .2s ease;
+}
+.zone:hover{stroke:var(--amber);filter:drop-shadow(0 0 8px rgba(227,169,62,.35));}
+.zone.selected{stroke:var(--amber-strong);stroke-width:2.2;filter:drop-shadow(0 0 10px rgba(227,169,62,.5));}
+.zone-label{font-family:var(--font-mono);font-size:9px;fill:var(--text-mute);pointer-events:none;}
+.zone-dot{fill:var(--clay);opacity:.85;pointer-events:none;}
+
+.area-list{display:flex;flex-direction:column;gap:8px;width:100%;}
+.area-row{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-s);
+  padding:10px 12px;cursor:pointer;font-size:13px;
+}
+.area-row:hover{border-color:var(--amber-line);}
+.area-row.selected{border-color:var(--amber);background:var(--amber-soft);}
+.area-row .dot{width:8px;height:8px;border-radius:50%;background:var(--sage);flex:none;}
+.area-row.has-notes .dot{background:var(--amber);}
+
+.area-detail{min-height:420px;}
+.area-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:8px;}
+.area-detail-head h2{font-size:24px;margin-bottom:4px;}
+.routine-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;}
+@media (max-width:640px){.routine-cols{grid-template-columns:1fr;}}
+.routine-col{border:1px solid var(--border);border-radius:var(--radius-m);padding:16px;background:var(--surface-2);}
+.routine-col h4{display:flex;align-items:center;gap:8px;font-size:13px;text-transform:uppercase;letter-spacing:.06em;font-family:var(--font-mono);margin-bottom:12px;}
+.routine-col.am h4{color:var(--amber-strong);}
+.routine-col.pm h4{color:var(--sage);}
+.routine-step{display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed var(--border-soft);font-size:13.5px;}
+.routine-step:last-child{border-bottom:none;}
+.routine-step .num{font-family:var(--font-mono);font-size:11px;color:var(--text-mute);flex:none;width:16px;}
+.causes-list{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 4px;}
+
+/* ---------- questionnaire ---------- */
+.quiz-wrap{max-width:640px;margin:0 auto;}
+.quiz-progress{display:flex;gap:6px;margin-bottom:26px;}
+.quiz-progress i{flex:1;height:3px;border-radius:3px;background:var(--surface-3);}
+.quiz-progress i.done{background:var(--amber);}
+.quiz-step{display:none;}
+.quiz-step.active{display:block;animation:view-in .3s ease;}
+.quiz-step h2{font-size:22px;}
+.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;}
+@media (max-width:560px){.opt-grid{grid-template-columns:1fr;}}
+.opt-card{
+  border:1px solid var(--border);background:var(--surface);border-radius:var(--radius-m);
+  padding:15px;cursor:pointer;text-align:left;transition:border-color .15s ease, background .15s ease;
+}
+.opt-card b{display:block;font-size:13.5px;margin-bottom:3px;}
+.opt-card span{font-size:12px;color:var(--text-mute);}
+.opt-card:hover{border-color:var(--amber-line);}
+.opt-card.selected{border-color:var(--amber);background:var(--amber-soft);}
+.quiz-nav{display:flex;justify-content:space-between;margin-top:26px;}
+
+/* ---------- diary ---------- */
+.diary-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:18px;}
+.diary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;}
+.photo-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-m);overflow:hidden;
+}
+.photo-thumb{width:100%;aspect-ratio:3/4;object-fit:cover;background:var(--surface-2);}
+.photo-meta{padding:9px 11px;font-size:11.5px;color:var(--text-mute);display:flex;justify-content:space-between;font-family:var(--font-mono);}
+.empty-state{
+  border:1px dashed var(--border);border-radius:var(--radius-m);padding:40px 24px;text-align:center;color:var(--text-mute);
+}
+.empty-state svg{width:34px;height:34px;stroke:var(--text-mute);margin-bottom:12px;fill:none;}
+.compare-wrap{position:relative;width:100%;max-width:420px;aspect-ratio:3/4;border-radius:var(--radius-m);overflow:hidden;border:1px solid var(--border);margin:16px auto;}
+.compare-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.compare-wrap .after-wrap{position:absolute;inset:0;overflow:hidden;}
+.compare-range{width:100%;max-width:420px;margin:6px auto 0;display:block;accent-color:var(--amber);}
+.compare-labels{display:flex;justify-content:space-between;max-width:420px;margin:6px auto 0;font-family:var(--font-mono);font-size:11px;color:var(--text-mute);}
+
+/* ---------- scanner ---------- */
+.scanner-stage{position:relative;max-width:420px;margin:0 auto;border-radius:var(--radius-m);overflow:hidden;border:1px solid var(--border);background:var(--surface-2);}
+.scanner-stage canvas{width:100%;display:block;touch-action:none;cursor:crosshair;}
+.scanner-hint{text-align:center;font-size:12px;color:var(--text-mute);margin-top:8px;}
+.chart-wrap{margin-top:8px;}
+.chart-wrap svg{width:100%;height:150px;}
+
+/* ---------- reminders ---------- */
+.reminder-row{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-m);padding:13px 16px;margin-bottom:9px;}
+.reminder-time{font-family:var(--font-mono);font-size:19px;color:var(--amber-strong);flex:none;width:70px;}
+.reminder-info{flex:1;min-width:0;}
+.reminder-info b{font-size:13.5px;display:block;}
+.reminder-days{display:flex;gap:4px;margin-top:5px;}
+.day-chip{width:20px;height:20px;border-radius:50%;font-size:9.5px;display:flex;align-items:center;justify-content:center;background:var(--surface-2);color:var(--text-mute);font-family:var(--font-mono);}
+.day-chip.on{background:var(--sage);color:#0f1a15;}
+.add-reminder-form{display:grid;grid-template-columns:110px 1fr auto;gap:10px;align-items:end;}
+@media (max-width:600px){.add-reminder-form{grid-template-columns:1fr;}}
+.days-picker{display:flex;gap:6px;}
+.days-picker button{
+  width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:var(--surface-2);
+  color:var(--text-mute);font-size:10.5px;font-family:var(--font-mono);cursor:pointer;
+}
+.days-picker button.on{background:var(--sage);border-color:var(--sage);color:#0f1a15;}
+
+/* ---------- products ---------- */
+.filter-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
+.filter-chip{
+  border:1px solid var(--border);background:var(--surface);color:var(--text-dim);font-size:12px;
+  padding:7px 13px;border-radius:99px;cursor:pointer;font-family:var(--font-mono);
+}
+.filter-chip.active{background:var(--amber);border-color:var(--amber);color:#211705;font-weight:700;}
+.product-card{display:flex;flex-direction:column;gap:8px;}
+.product-card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+.product-card h3{font-size:15.5px;}
+.product-card .active-ing{font-family:var(--font-mono);font-size:11px;color:var(--amber);}
+.product-card .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+.price-dots{display:flex;gap:3px;align-items:center;}
+.price-dots i{width:5px;height:5px;border-radius:50%;background:var(--border);}
+.price-dots i.on{background:var(--amber);}
+
+/* ---------- accordion (mitos) ---------- */
+.accordion-item{border:1px solid var(--border);border-radius:var(--radius-m);margin-bottom:10px;overflow:hidden;background:var(--surface);}
+.accordion-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px;cursor:pointer;}
+.accordion-head b{font-size:14px;font-weight:600;line-height:1.4;}
+.accordion-head svg{width:16px;height:16px;stroke:var(--text-mute);flex:none;transition:transform .2s ease;}
+.accordion-item.open .accordion-head svg{transform:rotate(45deg);}
+.accordion-body{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+.accordion-item.open .accordion-body{max-height:260px;}
+.accordion-body-in{padding:0 18px 17px;font-size:13.5px;color:var(--text-dim);}
+.verdict{
+  display:inline-block;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+  padding:3px 10px;border-radius:99px;margin-right:9px;font-weight:700;
+}
+.verdict.mito{background:var(--danger-soft);color:var(--danger);}
+.verdict.verdade{background:var(--sage-soft);color:var(--sage);}
+
+/* ---------- recipes ---------- */
+.recipe-card{display:flex;flex-direction:column;gap:10px;}
+.recipe-card h3{font-size:16px;}
+.recipe-card .ing-list{font-size:13px;color:var(--text-dim);}
+.recipe-card .ing-list li{padding:3px 0;display:flex;gap:8px;}
+.recipe-card .ing-list li::before{content:"·";color:var(--amber);font-weight:700;}
+.recipe-steps{font-size:13px;color:var(--text-dim);}
+.recipe-steps li{display:flex;gap:8px;padding:4px 0;}
+.recipe-steps .n{font-family:var(--font-mono);color:var(--text-mute);flex:none;}
+
+/* ---------- pregnant view ---------- */
+.safe-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;}
+@media (max-width:640px){.safe-grid{grid-template-columns:1fr;}}
+.safe-col{border-radius:var(--radius-m);padding:18px;border:1px solid var(--border);}
+.safe-col.ok{background:var(--sage-soft);border-color:var(--sage-line);}
+.safe-col.avoid{background:var(--danger-soft);border-color:rgba(192,87,76,.4);}
+.safe-col h4{font-size:13px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.05em;}
+.safe-col.ok h4{color:var(--sage);}
+.safe-col.avoid h4{color:var(--danger);}
+.safe-col li{padding:6px 0;font-size:13.5px;border-bottom:1px dashed rgba(255,255,255,.06);}
+.safe-col li:last-child{border:none;}
+
+/* ---------- install ---------- */
+.install-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px;}
+@media (max-width:760px){.install-cols{grid-template-columns:1fr;}}
+.step-list{counter-reset:step;}
+.step-list li{
+  counter-increment:step;position:relative;padding:12px 0 12px 40px;border-bottom:1px dashed var(--border-soft);font-size:13.5px;color:var(--text-dim);
+}
+.step-list li:last-child{border-bottom:none;}
+.step-list li::before{
+  content:counter(step);position:absolute;left:0;top:10px;width:26px;height:26px;border-radius:50%;
+  background:var(--surface-3);color:var(--amber-strong);font-family:var(--font-mono);font-size:12px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.platform-badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;margin-bottom:6px;}
+
+/* ---------- footer ---------- */
+.disclaimer-foot{
+  margin-top:40px;padding:18px 20px;border-radius:var(--radius-m);background:var(--surface-2);border:1px solid var(--border);
+  font-size:12px;color:var(--text-mute);
+}
+
+/* ---------- responsive shell ---------- */
+@media (max-width:900px){
+  .sidenav{display:none;}
+  main{padding:20px 16px 100px;}
+  .topbar{padding:12px 16px;}
+  .bottomnav{
+    display:flex;position:fixed;bottom:0;left:0;right:0;z-index:30;
+    background:rgba(23,19,15,.94);backdrop-filter:blur(10px);border-top:1px solid var(--border-soft);
+    padding:8px 4px calc(8px + env(safe-area-inset-bottom));overflow-x:auto;gap:2px;
+  }
+  .bottomnav button{
+    flex:1;min-width:64px;display:flex;flex-direction:column;align-items:center;gap:4px;
+    background:transparent;border:none;color:var(--text-mute);font-size:9.5px;font-family:var(--font-mono);padding:5px 2px;cursor:pointer;
+  }
+  .bottomnav button svg{width:19px;height:19px;stroke:currentColor;fill:none;}
+  .bottomnav button.active{color:var(--amber-strong);}
+  .hero{flex-direction:column;align-items:flex-start;padding:26px;}
+}
+</style>
+</head>
+<body>
+
+<div id="toast-wrap"></div>
+
+<div class="app-shell">
+  <!-- ================= SIDEBAR ================= -->
+  <nav class="sidenav" aria-label="Navegação principal">
+    <div class="brand">
+      <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 3c3 3 6 6.5 6 10.5A6 6 0 0 1 6 13.5C6 9.5 9 6 12 3z"/></svg></div>
+      <div class="brand-name">Pele em Camadas<span>cuidado com estrias</span></div>
+    </div>
+
+    <div class="navlist" id="navlist">
+      <span class="group-label">Acompanhar</span>
+      <button class="navbtn" data-view="dashboard">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Início
+      </button>
+      <button class="navbtn" data-view="mapa">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.3"/><path d="M8 21l1.5-7L7 11l1-4.2c.4-1.3 1.3-1.8 2.6-1.8h2.8c1.3 0 2.2.5 2.6 1.8L17 11l-2.5 3 1.5 7"/><path d="M9.5 14h5"/></svg>
+        Mapa do corpo
+      </button>
+      <button class="navbtn" data-view="diario">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M8 6l1.5-3h5L16 6"/><circle cx="12" cy="13" r="3.4"/></svg>
+        Diário de fotos
+      </button>
+      <button class="navbtn" data-view="scanner">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"/><circle cx="12" cy="12" r="3.5"/></svg>
+        Scanner de estria
+      </button>
+
+      <span class="group-label">Plano</span>
+      <button class="navbtn" data-view="questionario">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 1 1 4 2.8c-.8.4-1.5.9-1.5 1.9v.6"/><circle cx="12" cy="17.2" r=".4" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="9"/></svg>
+        Questionário
+      </button>
+      <button class="navbtn" data-view="plano">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6l1 3H8l1-3z"/><rect x="5" y="7" width="14" height="14" rx="2"/><path d="M9 12h6M9 16h4"/></svg>
+        Meu plano
+      </button>
+      <button class="navbtn" data-view="lembretes">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        Lembretes
+      </button>
+
+      <span class="group-label">Explorar</span>
+      <button class="navbtn" data-view="produtos">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8V6a3.5 3.5 0 0 1 7 0v2"/><rect x="3" y="8" width="17" height="13" rx="2"/></svg>
+        Produtos
+      </button>
+      <button class="navbtn" data-view="mitos">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.8.3-1.4.9-1.4 1.7v.3"/><circle cx="12" cy="16.5" r=".4" fill="currentColor" stroke="none"/></svg>
+        Mitos e verdades
+      </button>
+      <button class="navbtn" data-view="receitas">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v18M5 3c3 0 3 3 3 5s0 5-3 5"/><path d="M14 3v18M19 3c-2.5 1-2.5 3.5-2.5 6s.7 3 2.5 3"/></svg>
+        Receitas caseiras
+      </button>
+      <button class="navbtn" data-view="gestante">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="2.5"/><path d="M8.5 21c-.5-4 .5-6.3 2-7.6-1-1-1.3-2.4-.6-3.7C10.5 8.4 11.6 8 12.5 8c1.7 0 3 1 3.6 2.6.6 1.7 2.4 2.4 2.4 2.4"/></svg>
+        Modo gestante
+      </button>
+      <button class="navbtn" data-view="instalar">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        Instalar app
+      </button>
+    </div>
+
+    <div class="pregnant-pill">
+      <span class="lbl"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="6" r="2.5"/><path d="M8.5 21c-.5-4 .5-6.3 2-7.6-1-1-1.3-2.4-.6-3.7C10.5 8.4 11.6 8 12.5 8c1.7 0 3 1 3.6 2.6.6 1.7 2.4 2.4 2.4 2.4"/></svg>Modo gestante</span>
+      <label class="switch"><input type="checkbox" id="pregnantToggle"><span class="track"></span></label>
+    </div>
+  </nav>
+
+  <!-- ================= MAIN ================= -->
+  <div class="main-col">
+    <header class="topbar">
+      <div>
+        <h1 id="topbarTitle">Início</h1>
+        <div class="sub" id="topbarSub">seu acompanhamento de hoje</div>
+      </div>
+      <div class="topbar-right">
+        <span class="streak-chip" id="streakChip">🔥 <b>0</b>&nbsp;semanas seguidas</span>
+      </div>
+    </header>
+
+    <main id="main-content">
+
+      <!-- ============ DASHBOARD ============ -->
+      <section class="view" id="view-dashboard">
+        <div class="hero">
+          <div class="hero-txt">
+            <div class="eyebrow">acompanhamento contínuo</div>
+            <h1>A pele muda devagar. Por isso a gente registra toda semana.</h1>
+            <p>Escolha as áreas do corpo que quer cuidar, monte sua rotina personalizada e tire uma foto por semana, sempre no mesmo lugar e na mesma luz — daqui a um ano você vai ver a linha do tempo inteira.</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;">
+              <button class="btn btn-primary" data-nav="questionario">Montar meu plano</button>
+              <button class="btn btn-outline" data-nav="mapa">Ver mapa do corpo</button>
+            </div>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><div class="n" id="statFotos">0</div><div class="l">fotos no diário</div></div>
+            <div class="stat"><div class="n" id="statAreas">0</div><div class="l">áreas acompanhadas</div></div>
+            <div class="stat"><div class="n" id="statLembretes">0</div><div class="l">lembretes ativos</div></div>
+          </div>
+        </div>
+
+        <div class="quicklinks">
+          <button class="qlink" data-nav="diario">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/></svg>
+            <b>Foto da semana</b><span id="qlDiario">nenhuma foto ainda</span>
+          </button>
+          <button class="qlink" data-nav="scanner">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"/><circle cx="12" cy="12" r="3.5"/></svg>
+            <b>Marcar estria</b><span>medir e comparar área</span>
+          </button>
+          <button class="qlink" data-nav="lembretes">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+            <b>Lembretes</b><span id="qlLembretes">nenhum cadastrado</span>
+          </button>
+          <button class="qlink" data-nav="produtos">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8V6a3.5 3.5 0 0 1 7 0v2"/><rect x="3" y="8" width="17" height="13" rx="2"/></svg>
+            <b>Ver produtos</b><span>por ativo e objetivo</span>
+          </button>
+        </div>
+
+        <div class="card pad-l">
+          <div class="eyebrow">continue de onde parou</div>
+          <h3 style="margin-bottom:8px;">Ainda não fez o questionário?</h3>
+          <p style="margin-bottom:16px;">Três minutos: tipo de pele, tempo da estria e se está gestante. No fim você recebe uma rotina de manhã e de noite para cada área escolhida.</p>
+          <button class="btn btn-primary" data-nav="questionario">Começar questionário</button>
+        </div>
+      </section>
+
+      <!-- ============ MAPA DO CORPO ============ -->
+      <section class="view" id="view-mapa">
+        <div class="eyebrow">seis áreas comuns</div>
+        <h1>Toque em uma área para ver causas e rotina</h1>
+        <p>Estrias no bumbum, no peito, na perna, na barriga, no quadril e nos braços têm origens parecidas — estiramento rápido da pele — mas respondem melhor a rotinas ligeiramente diferentes.</p>
+
+        <div class="map-layout">
+          <div class="map-stage">
+            <div class="view-toggle">
+              <button data-bodyview="frente" class="active">Frente</button>
+              <button data-bodyview="costas">Costas</button>
+            </div>
+            <svg id="bodySvg" class="bodymap-svg" viewBox="0 0 200 420">
+              <defs>
+                <pattern id="skin-dots" width="6" height="6" patternUnits="userSpaceOnUse">
+                  <rect width="6" height="6" fill="#241D15"/>
+                  <circle cx="1.2" cy="1.2" r="0.7" fill="#332A1F"/>
+                </pattern>
+              </defs>
+              <!-- head/neck decorative, not clickable -->
+              <circle cx="100" cy="34" r="22" fill="url(#skin-dots)" stroke="#332A1F" stroke-width="1.4"/>
+              <rect x="90" y="52" width="20" height="16" fill="url(#skin-dots)" stroke="#332A1F" stroke-width="1.4"/>
+              <g id="zonesGroup"></g>
+            </svg>
+            <div class="area-list" id="areaList"></div>
+          </div>
+
+          <div class="card area-detail" id="areaDetail">
+            <div class="empty-state">
+              <svg viewBox="0 0 24 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M8 21l1.5-7L7 11l1-4.2c.4-1.3 1.3-1.8 2.6-1.8h2.8c1.3 0 2.2.5 2.6 1.8L17 11l-2.5 3 1.5 7"/></svg>
+              Escolha uma área no mapa ou na lista ao lado para ver causas comuns e a rotina recomendada.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ QUESTIONÁRIO ============ -->
+      <section class="view" id="view-questionario">
+        <div class="quiz-wrap">
+          <div class="eyebrow">3 minutos</div>
+          <h1>Vamos montar sua rotina</h1>
+          <div class="quiz-progress" id="quizProgress"></div>
+
+          <div class="quiz-step active" data-step="0">
+            <h2>Como você descreveria sua pele?</h2>
+            <p>Isso muda a concentração dos ativos e a textura recomendada.</p>
+            <div class="opt-grid" data-q="tipoPele">
+              <button class="opt-card" data-val="seca"><b>Seca</b><span>repuxa, descama, sente aspereza</span></button>
+              <button class="opt-card" data-val="oleosa"><b>Oleosa</b><span>brilho ao longo do dia, poros mais visíveis</span></button>
+              <button class="opt-card" data-val="mista"><b>Mista</b><span>oleosa em algumas áreas, seca em outras</span></button>
+              <button class="opt-card" data-val="sensivel"><b>Sensível</b><span>arde ou fica vermelha com facilidade</span></button>
+            </div>
+          </div>
+
+          <div class="quiz-step" data-step="1">
+            <h2>Há quanto tempo estão as estrias que mais te incomodam?</h2>
+            <p>Estrias recentes (rubras) e antigas (albas) pedem abordagens diferentes.</p>
+            <div class="opt-grid" data-q="tempoEstria">
+              <button class="opt-card" data-val="recente"><b>Até 6 meses — rubras</b><span>ainda avermelhadas ou arroxeadas</span></button>
+              <button class="opt-card" data-val="media"><b>6 meses a 2 anos</b><span>clareando, entre rosada e esbranquiçada</span></button>
+              <button class="opt-card" data-val="antiga"><b>Mais de 2 anos — albas</b><span>esbranquiçadas, textura mais fina</span></button>
+              <button class="opt-card" data-val="misto"><b>Um pouco de cada</b><span>áreas em fases diferentes</span></button>
+            </div>
+          </div>
+
+          <div class="quiz-step" data-step="2">
+            <h2>Você está gestante ou amamentando?</h2>
+            <p>Alguns ativos (retinoico, por exemplo) não são recomendados nessa fase — a gente ajusta sua rotina automaticamente.</p>
+            <div class="opt-grid" data-q="gestante">
+              <button class="opt-card" data-val="sim"><b>Sim</b><span>gestante ou amamentando agora</span></button>
+              <button class="opt-card" data-val="nao"><b>Não</b><span>nenhuma das duas situações</span></button>
+            </div>
+          </div>
+
+          <div class="quiz-step" data-step="3">
+            <h2>Quais áreas você quer acompanhar?</h2>
+            <p>Pode marcar mais de uma — a rotina é montada área por área.</p>
+            <div class="opt-grid" id="quizAreaGrid" data-q="areas"></div>
+          </div>
+
+          <div class="quiz-step" data-step="4">
+            <h2>Quanto tempo você tem por dia para a rotina?</h2>
+            <div class="opt-grid" data-q="tempoDisponivel">
+              <button class="opt-card" data-val="rapida"><b>Rápida — 5 min</b><span>essencial: hidratar e proteger</span></button>
+              <button class="opt-card" data-val="completa"><b>Completa — 15 min</b><span>inclui esfoliação e massagem com óleo</span></button>
+            </div>
+          </div>
+
+          <div class="quiz-nav">
+            <button class="btn btn-ghost" id="quizBack">Voltar</button>
+            <button class="btn btn-primary" id="quizNext">Continuar</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PLANO ============ -->
+      <section class="view" id="view-plano">
+        <div class="eyebrow">seu plano</div>
+        <h1>Rotina personalizada</h1>
+        <div id="planoContent"></div>
+      </section>
+
+      <!-- ============ DIÁRIO DE FOTOS ============ -->
+      <section class="view" id="view-diario">
+        <div class="eyebrow">uma foto por semana</div>
+        <h1>Diário de fotos</h1>
+        <p>Fotografe sempre no mesmo lugar, com a mesma luz e a mesma distância. Pequenas mudanças só ficam visíveis quando comparadas lado a lado, meses depois.</p>
+
+        <div class="diary-toolbar">
+          <select id="diaryAreaSelect"></select>
+          <label class="btn btn-primary" style="cursor:pointer;">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/></svg>
+            Tirar / enviar foto
+            <input type="file" id="diaryFileInput" accept="image/*" capture="environment" style="display:none;">
+          </label>
+          <span class="tag" id="diaryGateTag"></span>
+        </div>
+
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-title"><h3>Comparar linha do tempo</h3><span class="tag amber" id="compareCountTag">0 fotos</span></div>
+          <div id="compareArea"></div>
+        </div>
+
+        <h3 style="font-size:14px;margin-bottom:12px;">Todas as fotos desta área</h3>
+        <div class="diary-grid" id="diaryGrid"></div>
+      </section>
+
+      <!-- ============ SCANNER ============ -->
+      <section class="view" id="view-scanner">
+        <div class="eyebrow">acompanhamento visual</div>
+        <h1>Scanner de estria</h1>
+        <p>Envie uma foto da área e desenhe um círculo sobre a estria para marcá-la. A cada nova marcação, o app compara o tamanho relativo com a primeira e mostra a tendência ao longo do tempo. É uma referência visual para acompanhar em casa — não substitui avaliação de um dermatologista.</p>
+
+        <div class="diary-toolbar">
+          <select id="scannerAreaSelect"></select>
+          <label class="btn btn-primary" style="cursor:pointer;">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/></svg>
+            Nova marcação
+            <input type="file" id="scannerFileInput" accept="image/*" capture="environment" style="display:none;">
+          </label>
+        </div>
+
+        <div class="card">
+          <div class="scanner-stage" id="scannerStage">
+            <canvas id="scannerCanvas" width="400" height="500"></canvas>
+          </div>
+          <div class="scanner-hint" id="scannerHint">Envie uma foto para começar a marcar.</div>
+          <div style="display:flex;gap:10px;justify-content:center;margin-top:12px;" id="scannerActions"></div>
+        </div>
+
+        <div class="card" style="margin-top:18px;">
+          <div class="card-title"><h3>Tendência da área marcada</h3><span class="tag sage" id="scannerTrendTag">—</span></div>
+          <div class="chart-wrap" id="scannerChart"></div>
+        </div>
+      </section>
+
+      <!-- ============ LEMBRETES ============ -->
+      <section class="view" id="view-lembretes">
+        <div class="eyebrow">não esquecer o creme</div>
+        <h1>Lembretes</h1>
+        <p>Cadastre horários fixos — de manhã para o gel e protetor, à noite para o óleo de massagem. Enquanto esta aba estiver aberta, você recebe um aviso na hora certa.</p>
+
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-title"><h3>Novo lembrete</h3></div>
+          <div class="add-reminder-form">
+            <div class="field" style="margin:0;">
+              <label class="field-label">Horário</label>
+              <input type="time" id="reminderTime" value="08:00">
+            </div>
+            <div class="field" style="margin:0;">
+              <label class="field-label">Texto</label>
+              <input type="text" id="reminderText" placeholder="Ex: passar gel hidratante + protetor">
+            </div>
+            <button class="btn btn-primary" id="addReminderBtn">Adicionar</button>
+          </div>
+          <div class="field" style="margin-top:12px;">
+            <label class="field-label">Dias da semana</label>
+            <div class="days-picker" id="daysPicker"></div>
+          </div>
+          <button class="btn btn-outline btn-sm" id="notifPermBtn" style="margin-top:6px;">Ativar notificações do navegador</button>
+        </div>
+
+        <div id="reminderList"></div>
+      </section>
+
+      <!-- ============ PRODUTOS ============ -->
+      <section class="view" id="view-produtos">
+        <div class="eyebrow">catálogo por ativo</div>
+        <h1>Produtos indicados</h1>
+        <p>Cosméticos e ativos usados com mais frequência no cuidado com estrias, organizados por objetivo. Sempre teste em uma pequena área antes do uso completo.</p>
+        <div class="filter-row" id="productFilters"></div>
+        <div class="grid grid-3" id="productGrid"></div>
+      </section>
+
+      <!-- ============ MITOS E VERDADES ============ -->
+      <section class="view" id="view-mitos">
+        <div class="eyebrow">separando fato de crença</div>
+        <h1>Mitos e verdades sobre estrias</h1>
+        <div id="accordionList"></div>
+      </section>
+
+      <!-- ============ RECEITAS CASEIRAS ============ -->
+      <section class="view" id="view-receitas">
+        <div class="eyebrow">complementos naturais</div>
+        <h1>Receitas caseiras</h1>
+        <p>Ajudam na hidratação e na esfoliação suave — são complementos e não substituem ativos com eficácia comprovada como o ácido retinoico ou a vitamina C.</p>
+        <div class="grid grid-3" id="recipeGrid"></div>
+      </section>
+
+      <!-- ============ MODO GESTANTE ============ -->
+      <section class="view" id="view-gestante">
+        <div class="eyebrow">segurança em primeiro lugar</div>
+        <h1>Modo gestante</h1>
+        <p>Quando o modo gestante está ativo, o app troca automaticamente os ativos contraindicados por alternativas seguras em qualquer rotina, produto ou receita sugerida no site inteiro.</p>
+        <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+          <div>
+            <b style="font-size:14.5px;">Ativar modo gestante agora</b>
+            <p style="margin:4px 0 0;">Também pode ser ativado a qualquer momento pelo interruptor no menu lateral.</p>
+          </div>
+          <label class="switch"><input type="checkbox" id="pregnantToggle2"><span class="track"></span></label>
+        </div>
+
+        <div class="safe-grid">
+          <div class="safe-col ok">
+            <h4>Pode usar</h4>
+            <ul id="gestSafeList"></ul>
+          </div>
+          <div class="safe-col avoid">
+            <h4>Evitar na gestação e amamentação</h4>
+            <ul id="gestAvoidList"></ul>
+          </div>
+        </div>
+        <p style="margin-top:16px;font-size:12.5px;">Esta lista é informativa. Converse sempre com seu obstetra ou dermatologista antes de iniciar qualquer ativo novo durante a gestação.</p>
+      </section>
+
+      <!-- ============ INSTALAR APP ============ -->
+      <section class="view" id="view-instalar">
+        <div class="eyebrow">use como aplicativo</div>
+        <h1>Instalar na tela inicial</h1>
+        <p>Instalando, o app abre em tela cheia, sem a barra do navegador, e fica com um ícone junto dos seus outros aplicativos.</p>
+
+        <div class="install-cols">
+          <div class="card">
+            <div class="platform-badge">🤖 Android</div>
+            <ol class="step-list">
+              <li>Abra este site no navegador Chrome.</li>
+              <li>Toque no botão abaixo — se o seu navegador suportar instalação automática, a caixa de instalação abre na hora.</li>
+              <li>Se o botão não aparecer, toque nos três pontinhos do menu do navegador e escolha <b>"Instalar aplicativo"</b> ou <b>"Adicionar à tela inicial"</b>.</li>
+              <li>Confirme em <b>"Instalar"</b>. O ícone aparece na sua tela inicial.</li>
+            </ol>
+            <button class="btn btn-primary btn-block" id="androidInstallBtn" style="margin-top:14px;" disabled>Instalar aplicativo</button>
+            <div class="sub" id="androidInstallHint" style="margin-top:8px;font-size:12px;color:var(--text-mute);">Aguardando disponibilidade da instalação automática neste navegador…</div>
+          </div>
+
+          <div class="card">
+            <div class="platform-badge">🍎 iPhone / iPad</div>
+            <ol class="step-list">
+              <li>Abra este site no navegador Safari (a instalação só funciona pelo Safari no iOS).</li>
+              <li>Toque no ícone de <b>Compartilhar</b> (o quadrado com uma seta para cima), na barra inferior.</li>
+              <li>Deslize a lista de opções e toque em <b>"Adicionar à Tela de Início"</b>.</li>
+              <li>Toque em <b>"Adicionar"</b> no canto superior direito. O ícone aparece na sua tela inicial.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px;" id="alreadyInstalledCard" style="display:none;">
+          <b>✓ Você já está usando o app instalado.</b>
+        </div>
+      </section>
+
+    </main>
+
+    <div class="disclaimer-foot">
+      Este site tem propósito educativo e de organização pessoal. Não substitui consulta com dermatologista, especialmente em caso de estrias inflamadas, dor, ou durante a gestação. Seus dados (fotos, respostas e lembretes) ficam salvos apenas durante esta sessão do navegador.
+    </div>
+  </div>
+</div>
+
+<nav class="bottomnav" id="bottomnav" aria-label="Navegação inferior"></nav>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================
+   DADOS
+   ============================================================ */
+
+var ICONS = {
+  arm:'<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l3 8-1 8M18 4l-3 8 1 8"/></svg>',
+  chest:'<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-2-2-6-2-7 1s0 6 7 11c7-5 8-8 7-11s-5-3-7-1z"/></svg>',
+  belly:'<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg>',
+  hip:'<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14l-2 8-3 9-2-7-2 7-3-9-2-8z"/></svg>',
+  butt:'<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5a4 4 0 0 1 8 0v3a6 6 0 0 1 3 9 5 5 0 0 1-6-1 5 5 0 0 1-6 1 6 6 0 0 1 3-9V5z"/></svg>',
+  leg:'<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 9-1 9h-3l-1-8-1 8H7l1-9L9 3z"/></svg>'
+};
+
+var AREAS = [
+  {
+    id:'braços', nome:'Braços', view:'frente', icon:'arm',
+    causas:['Crescimento na adolescência','Ganho ou perda rápida de massa muscular','Uso prolongado de corticoide tópico'],
+    obs:'Pele mais fina que a do tronco — prefira texturas leves para não obstruir os poros.'
+  },
+  {
+    id:'peito', nome:'Peito', view:'frente', icon:'chest',
+    causas:['Crescimento durante a puberdade','Aumento de peso ou de volume mamário','Gestação e amamentação'],
+    obs:'Área sensível: evite esfoliação mecânica forte, priorize massagem circular leve.'
+  },
+  {
+    id:'abdomen', nome:'Abdômen', view:'frente', icon:'belly',
+    causas:['Gestação','Oscilação de peso','Estirões de crescimento'],
+    obs:'Área mais estudada em tratamento de estrias — costuma responder bem a rotina constante.'
+  },
+  {
+    id:'quadril', nome:'Quadril', view:'frente', icon:'hip',
+    causas:['Puberdade e mudança de silhueta','Ganho de peso concentrado no quadril','Genética / histórico familiar'],
+    obs:'Pele com boa espessura — tolera ativos esfoliantes com mais frequência que o peito.'
+  },
+  {
+    id:'bumbum', nome:'Bumbum', view:'costas', icon:'butt',
+    causas:['Treino de hipertrofia (agachamento, avanço)','Ganho rápido de massa muscular ou gordura','Puberdade'],
+    obs:'Área de fricção com roupas — dê preferência a óleos e cremes sem perfume forte.'
+  },
+  {
+    id:'pernas', nome:'Pernas', view:'costas', icon:'leg',
+    causas:['Estirão de crescimento na adolescência','Treino de perna intenso','Gestação (parte interna da coxa)'],
+    obs:'Coxas internas puxam mais durante o dia — reforce a hidratação após depilação.'
+  }
+];
+
+var PRODUCTS = [
+  {id:'rosa-mosqueta', nome:'Óleo de rosa mosqueta', ativo:'ácidos graxos essenciais', goals:['hidratar','gestante'], gestanteSafe:true, uso:'Noite, massageando até absorver, sobre a estria e ao redor.', preco:1},
+  {id:'manteiga-karite', nome:'Manteiga de karité', ativo:'ácidos graxos + vitamina A natural', goals:['hidratar','gestante'], gestanteSafe:true, uso:'Manhã ou noite, em camada generosa nas áreas mais secas.', preco:1},
+  {id:'retinoico', nome:'Creme com ácido retinoico', ativo:'retinoico (tretinoína)', goals:['estimular-colageno','estria-alba'], gestanteSafe:false, uso:'Apenas à noite, uso contínuo com orientação — não gestante nem amamentando.', preco:3},
+  {id:'vitamina-c', nome:'Sérum de vitamina C', ativo:'ácido ascórbico', goals:['estimular-colageno','antioxidante'], gestanteSafe:true, uso:'Manhã, antes do hidratante e do protetor solar.', preco:2},
+  {id:'centella', nome:'Creme com centella asiática', ativo:'centela asiática (madecassosídeo)', goals:['cicatrizar','gestante','estria-rubra'], gestanteSafe:true, uso:'Manhã e noite, em estrias recentes e áreas irritadas.', preco:2},
+  {id:'acido-hialuronico', nome:'Sérum de ácido hialurônico', ativo:'ácido hialurônico', goals:['hidratar','gestante'], gestanteSafe:true, uso:'Manhã e noite, antes do óleo ou manteiga, na pele levemente úmida.', preco:2},
+  {id:'manteiga-cacau', nome:'Manteiga de cacau', ativo:'ácidos graxos', goals:['hidratar','gestante'], gestanteSafe:true, uso:'Noite, camada espessa em áreas de maior estiramento.', preco:1},
+  {id:'oleo-amendoas', nome:'Óleo de amêndoas doces', ativo:'vitamina E + ácidos graxos', goals:['hidratar','massagem','gestante'], gestanteSafe:true, uso:'Base para massagem diária, sozinho ou misturado a outro ativo.', preco:1},
+  {id:'niacinamida', nome:'Sérum de niacinamida', ativo:'niacinamida', goals:['uniformizar','antioxidante','gestante'], gestanteSafe:true, uso:'Manhã ou noite, ajuda a uniformizar o tom ao redor da estria.', preco:2},
+  {id:'alantoina', nome:'Creme com alantoína', ativo:'alantoína', goals:['cicatrizar','estria-rubra','gestante'], gestanteSafe:true, uso:'Em estrias recentes ainda sensíveis, manhã e noite.', preco:1}
+];
+
+var PRODUCT_FILTERS = [
+  {id:'todos', label:'Todos'},
+  {id:'hidratar', label:'Hidratar'},
+  {id:'estimular-colageno', label:'Estimular colágeno'},
+  {id:'cicatrizar', label:'Cicatrizar'},
+  {id:'estria-rubra', label:'Estria recente (rubra)'},
+  {id:'estria-alba', label:'Estria antiga (alba)'},
+  {id:'gestante', label:'Seguro na gestação'}
+];
+
+var MYTHS = [
+  {q:'Manteiga de cacau sozinha faz a estria sumir.', v:'mito', r:'Ajuda a hidratar e deixa a pele mais confortável, mas isolada não reduz estrias já formadas — o resultado visível costuma vir de ativos como retinoico, vitamina C ou procedimentos, combinados com hidratação constante.'},
+  {q:'Estrias recentes (avermelhadas) respondem melhor ao tratamento do que estrias antigas (esbranquiçadas).', v:'verdade', r:'Enquanto a estria ainda está rubra, há mais vasos sanguíneos ativos na região, o que geralmente favorece a resposta a ativos e a procedimentos. Depois que ela vira alba, o tecido já cicatrizou e o resultado costuma ser mais lento.'},
+  {q:'Só quem engravida tem estria.', v:'mito', r:'Estrias aparecem em qualquer estiramento rápido da pele: estirão de crescimento na adolescência, ganho de massa muscular, oscilação de peso — atingem homens e mulheres, gestantes ou não.'},
+  {q:'Bronzear a pele disfarça a estria.', v:'mito', r:'O bronzeado costuma aumentar o contraste entre a pele ao redor (mais escura) e a estria (que não bronzeia da mesma forma), deixando a marca mais visível, não menos.'},
+  {q:'Ácido retinoico não deve ser usado na gestação nem na amamentação.', v:'verdade', r:'É um dos ativos com recomendação de evitar nesses períodos. O modo gestante deste app substitui automaticamente por alternativas como centella asiática e ácido hialurônico.'},
+  {q:'Beber muita água sozinho já previne estrias.', v:'mito', r:'A hidratação interna ajuda a saúde geral da pele, mas o principal fator de proteção é evitar estiramento rápido e manter a pele hidratada por fora, com cremes e óleos, de forma constante.'},
+  {q:'Genética influencia a chance de ter estrias.', v:'verdade', r:'Histórico familiar de estrias é um dos fatores de risco mais consistentes — a estrutura de colágeno da pele tem componente hereditário.'},
+  {q:'Esfoliar todo dia acelera o resultado.', v:'mito', r:'Esfoliação em excesso pode irritar e sensibilizar a pele, atrapalhando a barreira cutânea. O recomendado costuma ser de uma a duas vezes por semana, dependendo da sensibilidade da área.'}
+];
+
+var RECIPES = [
+  {
+    nome:'Esfoliante de café e óleo de coco',
+    gestanteSafe:true,
+    ing:['2 colheres de sopa de borra de café','1 colher de sopa de óleo de coco','algumas gotas de mel (opcional)'],
+    passos:['Misture os ingredientes até formar uma pasta.','Aplique com movimentos circulares na área seca, por 2 a 3 minutos.','Enxágue com água morna e finalize com hidratante.'],
+    indicacao:'Esfoliação suave semanal em quadril, pernas e bumbum.'
+  },
+  {
+    nome:'Gel calmante de babosa (aloe vera)',
+    gestanteSafe:true,
+    ing:['1 folha de babosa fresca','algumas gotas de óleo de amêndoas'],
+    passos:['Extraia o gel transparente de dentro da folha.','Bata levemente com o óleo de amêndoas até ficar homogêneo.','Aplique à noite em estrias recentes e sensíveis.'],
+    indicacao:'Acalma áreas com estrias rubras ainda irritadas.'
+  },
+  {
+    nome:'Manteiga caseira de cacau e karité',
+    gestanteSafe:true,
+    ing:['2 colheres de sopa de manteiga de karité','1 colher de sopa de manteiga de cacau','1 colher de chá de óleo de rosa mosqueta'],
+    passos:['Derreta as manteigas em banho-maria em fogo baixo.','Retire do fogo e misture o óleo de rosa mosqueta.','Deixe esfriar até virar creme e guarde em pote fechado.'],
+    indicacao:'Hidratação profunda noturna para abdômen e quadril.'
+  },
+  {
+    nome:'Esfoliante de aveia e mel',
+    gestanteSafe:true,
+    ing:['3 colheres de sopa de aveia em flocos finos','1 colher de sopa de mel','1 colher de sopa de iogurte natural'],
+    passos:['Misture todos os ingredientes até formar uma pasta.','Aplique com massagem leve, evitando pele muito sensível.','Deixe agir 5 minutos e enxágue.'],
+    indicacao:'Boa opção para pele sensível que não tolera café.'
+  },
+  {
+    nome:'Óleo de massagem para pernas cansadas',
+    gestanteSafe:true,
+    ing:['3 colheres de sopa de óleo de amêndoas','5 gotas de óleo essencial de lavanda (opcional, fora da gestação)'],
+    passos:['Misture os óleos em um vidro escuro.','Massageie as pernas de baixo para cima antes de dormir.','Guarde ao abrigo da luz por até 30 dias.'],
+    indicacao:'Relaxa e hidrata coxas e panturrilhas.'
+  },
+  {
+    nome:'Compressa de chá verde para o peito',
+    gestanteSafe:true,
+    ing:['1 saquinho de chá verde','água quente'],
+    passos:['Prepare o chá e deixe esfriar até ficar morno.','Encoste o saquinho úmido sobre a área por 5 minutos.','Finalize com o hidratante de costume.'],
+    indicacao:'Efeito calmante antioxidante em estrias recentes no peito.'
+  }
+];
+
+var GEST_SAFE = ['Óleo de rosa mosqueta','Manteiga de karité e de cacau','Ácido hialurônico','Centella asiática','Niacinamida','Óleo de amêndoas doces','Vitamina C em concentração cosmética','Protetor solar mineral'];
+var GEST_AVOID = ['Ácido retinoico e derivados de vitamina A em alta dose','Ácido salicílico em alta concentração','Óleos essenciais concentrados sem diluição','Procedimentos a laser sem liberação médica','Peelings químicos profissionais fortes'];
+
+var WEEKDAYS = ['D','S','T','Q','Q','S','S'];
+
+/* ============================================================
+   ESTADO (em memória — reinicia ao recarregar a página)
+   ============================================================ */
+var state = {
+  view:'dashboard',
+  pregnant:false,
+  bodyView:'frente',
+  selectedArea:null,
+  quizStep:0,
+  quiz:{ tipoPele:null, tempoEstria:null, gestante:null, areas:[], tempoDisponivel:null },
+  photos:[],       // {id, areaId, dataUrl, date}
+  scans:{},        // areaId -> [{id,date,dataUrl,score}]
+  scannerCurrentArea: null,
+  scannerPendingImage: null,
+  reminders:[],    // {id,time,text,days:[0..6]}
+  reminderDaysDraft:[1,2,3,4,5]
+};
+
+function uid(){ return Math.random().toString(36).slice(2,10); }
+function todayISO(){ return new Date().toISOString().slice(0,10); }
+function fmtDate(iso){
+  var d = new Date(iso+'T00:00:00');
+  var meses=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  return d.getDate()+' '+meses[d.getMonth()];
+}
+function daysBetween(a,b){ return Math.round((new Date(b)-new Date(a))/86400000); }
+function areaById(id){ return AREAS.filter(function(a){return a.id===id;})[0]; }
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+function toast(msg, kind){
+  var wrap = document.getElementById('toast-wrap');
+  var el = document.createElement('div');
+  el.className = 'toast'+(kind?' '+kind:'');
+  el.textContent = msg;
+  wrap.appendChild(el);
+  setTimeout(function(){ el.style.opacity='0'; el.style.transition='opacity .3s'; setTimeout(function(){ el.remove(); }, 300); }, 3800);
+}
+
+/* ============================================================
+   NAVEGAÇÃO
+   ============================================================ */
+var VIEW_TITLES = {
+  dashboard:['Início','seu acompanhamento de hoje'],
+  mapa:['Mapa do corpo','causas e rotina por área'],
+  questionario:['Questionário','monte sua rotina em 3 minutos'],
+  plano:['Meu plano','rotina personalizada por área'],
+  diario:['Diário de fotos','uma foto por semana, sempre igual'],
+  scanner:['Scanner de estria','marque e acompanhe o tamanho'],
+  lembretes:['Lembretes','a hora certa de passar o creme'],
+  produtos:['Produtos','catálogo por ativo e objetivo'],
+  mitos:['Mitos e verdades','o que realmente funciona'],
+  receitas:['Receitas caseiras','complementos naturais'],
+  gestante:['Modo gestante','segurança em primeiro lugar'],
+  instalar:['Instalar app','tela inicial, Android e iOS']
+};
+
+function navigate(view){
+  state.view = view;
+  document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
+  document.getElementById('view-'+view).classList.add('active');
+  document.querySelectorAll('.navbtn').forEach(function(b){ b.classList.toggle('active', b.dataset.view===view); });
+  document.querySelectorAll('.bottomnav button').forEach(function(b){ b.classList.toggle('active', b.dataset.view===view); });
+  document.getElementById('topbarTitle').textContent = VIEW_TITLES[view][0];
+  document.getElementById('topbarSub').textContent = VIEW_TITLES[view][1];
+  window.scrollTo({top:0, behavior:'auto'});
+  if(view==='mapa') renderMapa();
+  if(view==='diario') renderDiario();
+  if(view==='scanner') renderScanner();
+  if(view==='lembretes') renderReminders();
+  if(view==='produtos') renderProdutos();
+  if(view==='mitos') renderMitos();
+  if(view==='receitas') renderReceitas();
+  if(view==='gestante') renderGestante();
+  if(view==='plano') renderPlano();
+  if(view==='dashboard') renderDashboard();
+  if(view==='questionario') renderQuiz();
+}
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+function renderDashboard(){
+  document.getElementById('statFotos').textContent = state.photos.length;
+  var areasComFoto = {};
+  state.photos.forEach(function(p){ areasComFoto[p.areaId]=true; });
+  document.getElementById('statAreas').textContent = Object.keys(areasComFoto).length;
+  document.getElementById('statLembretes').textContent = state.reminders.length;
+
+  var lastPhoto = state.photos.slice().sort(function(a,b){return b.date>a.date?1:-1;})[0];
+  document.getElementById('qlDiario').textContent = lastPhoto ? ('última: '+fmtDate(lastPhoto.date)) : 'nenhuma foto ainda';
+  document.getElementById('qlLembretes').textContent = state.reminders.length ? (state.reminders.length+' cadastrado(s)') : 'nenhum cadastrado';
+
+  // streak: count consecutive weeks with at least one photo
+  var streak = computeStreak();
+  document.getElementById('streakChip').innerHTML = '🔥 <b>'+streak+'</b>&nbsp;semanas seguidas';
+}
+
+function computeStreak(){
+  if(!state.photos.length) return 0;
+  var weeks = {};
+  state.photos.forEach(function(p){
+    var d = new Date(p.date+'T00:00:00');
+    var onejan = new Date(d.getFullYear(),0,1);
+    var week = Math.ceil((((d-onejan)/86400000)+onejan.getDay()+1)/7);
+    weeks[d.getFullYear()+'-'+week]=true;
+  });
+  var keys = Object.keys(weeks);
+  return keys.length; // simplified: total distinct weeks with a photo logged
+}
+
+/* ============================================================
+   MAPA DO CORPO
+   ============================================================ */
+var ZONES_FRENTE = [
+  {id:'braços', x:20, y:100, w:26, h:110, rx:12, side:'left'},
+  {id:'braços', x:154, y:100, w:26, h:110, rx:12, side:'right'},
+  {id:'peito', x:66, y:82, w:68, h:56, rx:16},
+  {id:'abdomen', x:70, y:140, w:60, h:70, rx:14},
+  {id:'quadril', x:62, y:212, w:76, h:46, rx:16}
+];
+var ZONES_COSTAS = [
+  {id:'bumbum', x:66, y:150, w:68, h:66, rx:22},
+  {id:'pernas', x:64, y:220, w:34, h:150, rx:16},
+  {id:'pernas', x:102, y:220, w:34, h:150, rx:16}
+];
+
+function renderMapa(){
+  var toggleBtns = document.querySelectorAll('.view-toggle button');
+  toggleBtns.forEach(function(b){ b.classList.toggle('active', b.dataset.bodyview===state.bodyView); });
+
+  var group = document.getElementById('zonesGroup');
+  group.innerHTML = '';
+  var zones = state.bodyView==='frente' ? ZONES_FRENTE : ZONES_COSTAS;
+  zones.forEach(function(z){
+    var rect = document.createElementNS('http://www.w3.org/2000/svg','rect');
+    rect.setAttribute('x', z.x); rect.setAttribute('y', z.y);
+    rect.setAttribute('width', z.w); rect.setAttribute('height', z.h);
+    rect.setAttribute('rx', z.rx);
+    rect.setAttribute('class','zone'+(state.selectedArea===z.id?' selected':''));
+    rect.dataset.area = z.id;
+    rect.addEventListener('click', function(){ selectArea(z.id); });
+    group.appendChild(rect);
+
+    if(hasNotes(z.id)){
+      var dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      dot.setAttribute('cx', z.x + z.w - 6);
+      dot.setAttribute('cy', z.y + 6);
+      dot.setAttribute('r', 4);
+      dot.setAttribute('class','zone-dot');
+      group.appendChild(dot);
+    }
+  });
+
+  // torso outline decorative (once, both views) — simple connecting shape
+  var listedAreas = AREAS.filter(function(a){ return a.view===state.bodyView; });
+  var listEl = document.getElementById('areaList');
+  listEl.innerHTML = listedAreas.map(function(a){
+    return '<div class="area-row'+(state.selectedArea===a.id?' selected':'')+(hasNotes(a.id)?' has-notes':'')+'" data-area="'+a.id+'">'
+      +'<span style="display:flex;align-items:center;gap:9px;"><span class="dot"></span>'+a.nome+'</span>'
+      +'<span style="color:var(--text-mute);font-family:var(--font-mono);font-size:11px;">'+photoCountFor(a.id)+' foto(s)</span>'
+      +'</div>';
+  }).join('');
+  listEl.querySelectorAll('.area-row').forEach(function(row){
+    row.addEventListener('click', function(){ selectArea(row.dataset.area); });
+  });
+
+  if(state.selectedArea){ renderAreaDetail(state.selectedArea); }
+}
+
+function hasNotes(areaId){
+  return state.photos.some(function(p){return p.areaId===areaId;}) || (state.scans[areaId]&&state.scans[areaId].length);
+}
+function photoCountFor(areaId){
+  return state.photos.filter(function(p){return p.areaId===areaId;}).length;
+}
+
+function selectArea(id){
+  state.selectedArea = id;
+  var a = areaById(id);
+  if(a.view !== state.bodyView){ state.bodyView = a.view; }
+  renderMapa();
+}
+
+document.addEventListener('click', function(e){
+  var t = e.target.closest('.view-toggle button');
+  if(t){ state.bodyView = t.dataset.bodyview; renderMapa(); }
+});
+
+function buildRotina(areaId, answers){
+  var pregnant = state.pregnant;
+  var quick = answers.tempoDisponivel === 'rapida';
+  var manha = [];
+  var noite = [];
+  var obs = '';
+
+  manha.push('Limpar a área com água morna, sem esfregar.');
+  if(answers.tipoPele==='sensivel' || pregnant){
+    manha.push('Gel de centella asiática ou ácido hialurônico, em camada fina.');
+  } else {
+    manha.push('Sérum de vitamina C, aguardar absorver.');
+  }
+  manha.push('Hidratante ou manteiga de karité em camada média.');
+  manha.push('Protetor solar na área, se ficar exposta ao sol.');
+
+  noite.push('Remover resíduos do dia com água morna.');
+  if(!quick){
+    noite.push('Uma a duas vezes por semana: esfoliação suave (veja receitas caseiras).');
+  }
+  if(pregnant){
+    noite.push('Óleo de rosa mosqueta ou amêndoas, massageando por 2 a 3 minutos.');
+    noite.push('Manteiga de karité ou cacau para selar a hidratação.');
+    obs = 'Rotina ajustada para gestação/amamentação: sem ácido retinoico nem ativos contraindicados.';
+  } else if(answers.tempoEstria==='recente' || answers.tempoEstria==='misto'){
+    noite.push('Creme com alantoína ou centella nas estrias ainda rubras.');
+    noite.push('Óleo de massagem (rosa mosqueta ou amêndoas) ao redor da área.');
+    obs = 'Estrias recentes tendem a responder melhor: mantenha a rotina diária sem pular dias.';
+  } else {
+    noite.push('Ácido retinoico em creme, uso contínuo, apenas à noite.');
+    noite.push('Óleo de massagem nos minutos seguintes para reduzir o ressecamento.');
+    obs = 'Estrias mais antigas (albas) respondem mais devagar — resultado costuma aparecer após 8 a 12 semanas de uso constante.';
+  }
+
+  var areaTip = areaById(areaId).obs;
+  return {manha:manha, noite:noite, obs:obs, areaTip:areaTip};
+}
+
+function renderAreaDetail(id){
+  var a = areaById(id);
+  var answers = state.quiz.tipoPele ? state.quiz : {tipoPele:'mista', tempoEstria:'media', tempoDisponivel:'completa'};
+  var rot = buildRotina(id, answers);
+  var el = document.getElementById('areaDetail');
+  el.innerHTML =
+    '<div class="area-detail-head">'
+      +'<div><div class="eyebrow">área selecionada</div><h2>'+a.nome+'</h2>'
+      +'<p style="margin:0;">'+a.obs+'</p></div>'
+      +'<span class="tag amber">'+ICONS[a.icon]+'</span>'
+    +'</div>'
+    +'<div class="causes-list">'+a.causas.map(function(c){return '<span class="tag">'+c+'</span>';}).join('')+'</div>'
+    +(rot.obs?'<div class="card" style="background:var(--sage-soft);border-color:var(--sage-line);margin:14px 0;padding:12px 14px;"><small style="color:var(--sage);">'+rot.obs+'</small></div>':'')
+    +'<div class="routine-cols">'
+      +'<div class="routine-col am"><h4>☀️ Manhã</h4>'+rot.manha.map(function(s,i){return '<div class="routine-step"><span class="num">'+(i+1)+'</span>'+s+'</div>';}).join('')+'</div>'
+      +'<div class="routine-col pm"><h4>🌙 Noite</h4>'+rot.noite.map(function(s,i){return '<div class="routine-step"><span class="num">'+(i+1)+'</span>'+s+'</div>';}).join('')+'</div>'
+    +'</div>'
+    +'<div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;">'
+      +'<button class="btn btn-primary" data-nav="diario" data-preset-area="'+id+'">Registrar foto desta área</button>'
+      +'<button class="btn btn-outline" data-nav="scanner" data-preset-area="'+id+'">Marcar estria no scanner</button>'
+    +'</div>';
+
+  el.querySelectorAll('[data-preset-area]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var preset = btn.dataset.presetArea;
+      if(btn.dataset.nav==='diario'){ state.diaryPresetArea = preset; }
+      if(btn.dataset.nav==='scanner'){ state.scannerCurrentArea = preset; }
+    });
+  });
+}
+
+/* ============================================================
+   QUESTIONÁRIO
+   ============================================================ */
+var QUIZ_STEPS = ['tipoPele','tempoEstria','gestante','areas','tempoDisponivel'];
+
+function renderQuiz(){
+  var grid = document.getElementById('quizAreaGrid');
+  if(!grid.dataset.built){
+    grid.innerHTML = AREAS.map(function(a){
+      return '<button class="opt-card" data-val="'+a.id+'"><b>'+a.nome+'</b><span>'+a.causas[0]+'</span></button>';
+    }).join('');
+    grid.dataset.built='1';
+  }
+  updateQuizProgress();
+  showQuizStep(state.quizStep);
+}
+
+function updateQuizProgress(){
+  var wrap = document.getElementById('quizProgress');
+  wrap.innerHTML = QUIZ_STEPS.map(function(_,i){ return '<i class="'+(i<=state.quizStep?'done':'')+'"></i>'; }).join('');
+}
+
+function showQuizStep(idx){
+  document.querySelectorAll('.quiz-step').forEach(function(s){ s.classList.toggle('active', +s.dataset.step===idx); });
+  document.getElementById('quizBack').style.visibility = idx===0 ? 'hidden' : 'visible';
+  document.getElementById('quizNext').textContent = idx===QUIZ_STEPS.length-1 ? 'Ver meu plano' : 'Continuar';
+  refreshQuizSelections();
+}
+
+function refreshQuizSelections(){
+  document.querySelectorAll('.quiz-step').forEach(function(stepEl){
+    var q = stepEl.querySelector('[data-q]');
+    if(!q) return;
+    var key = q.dataset.q;
+    q.querySelectorAll('.opt-card').forEach(function(card){
+      var val = card.dataset.val;
+      var active = key==='areas' ? state.quiz.areas.indexOf(val)>-1 : state.quiz[key]===val;
+      card.classList.toggle('selected', active);
+    });
+  });
+}
+
+document.addEventListener('click', function(e){
+  var card = e.target.closest('.opt-card');
+  if(!card) return;
+  var qwrap = card.closest('[data-q]');
+  var key = qwrap.dataset.q;
+  var val = card.dataset.val;
+  if(key==='areas'){
+    var i = state.quiz.areas.indexOf(val);
+    if(i>-1) state.quiz.areas.splice(i,1); else state.quiz.areas.push(val);
+  } else {
+    state.quiz[key] = val;
+  }
+  refreshQuizSelections();
+});
+
+document.getElementById('quizNext').addEventListener('click', function(){
+  var key = QUIZ_STEPS[state.quizStep];
+  var valid = key==='areas' ? state.quiz.areas.length>0 : !!state.quiz[key];
+  if(!valid){ toast('Escolha uma opção para continuar.', 'warn'); return; }
+  if(key==='gestante'){ state.pregnant = state.quiz.gestante==='sim'; syncPregnantToggles(); }
+  if(state.quizStep < QUIZ_STEPS.length-1){
+    state.quizStep++;
+    updateQuizProgress();
+    showQuizStep(state.quizStep);
+  } else {
+    toast('Plano gerado! ✨', 'ok');
+    navigate('plano');
+  }
+});
+document.getElementById('quizBack').addEventListener('click', function(){
+  if(state.quizStep>0){ state.quizStep--; updateQuizProgress(); showQuizStep(state.quizStep); }
+});
+
+/* ============================================================
+   PLANO
+   ============================================================ */
+function renderPlano(){
+  var el = document.getElementById('planoContent');
+  if(!state.quiz.areas.length){
+    el.innerHTML = '<div class="empty-state"><svg viewBox="0 0 24 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="14" rx="2"/><path d="M9 4h6l1 3H8l1-3z"/></svg>Você ainda não respondeu o questionário.<br><br><button class="btn btn-primary" data-nav="questionario">Responder agora</button></div>';
+    return;
+  }
+  var html = '<div class="grid grid-2">';
+  state.quiz.areas.forEach(function(id){
+    var a = areaById(id);
+    var rot = buildRotina(id, state.quiz);
+    html += '<div class="card">'
+      +'<div class="card-title"><h3>'+a.nome+'</h3>'+(state.pregnant?'<span class="tag sage">gestante</span>':'')+'</div>'
+      +(rot.obs?'<p style="font-size:12.5px;">'+rot.obs+'</p>':'')
+      +'<div class="routine-cols">'
+        +'<div class="routine-col am"><h4>☀️ Manhã</h4>'+rot.manha.map(function(s,i){return '<div class="routine-step"><span class="num">'+(i+1)+'</span>'+s+'</div>';}).join('')+'</div>'
+        +'<div class="routine-col pm"><h4>🌙 Noite</h4>'+rot.noite.map(function(s,i){return '<div class="routine-step"><span class="num">'+(i+1)+'</span>'+s+'</div>';}).join('')+'</div>'
+      +'</div>'
+    +'</div>';
+  });
+  html += '</div>';
+  html += '<div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;"><button class="btn btn-outline" data-nav="lembretes">Criar lembretes para essa rotina</button><button class="btn btn-outline" data-nav="questionario">Refazer questionário</button></div>';
+  el.innerHTML = html;
+}
+
+/* ============================================================
+   DIÁRIO DE FOTOS
+   ============================================================ */
+function fillAreaSelect(select, presetArea){
+  select.innerHTML = AREAS.map(function(a){ return '<option value="'+a.id+'">'+a.nome+'</option>'; }).join('');
+  if(presetArea) select.value = presetArea;
+}
+
+function renderDiario(){
+  var sel = document.getElementById('diaryAreaSelect');
+  fillAreaSelect(sel, state.diaryPresetArea);
+  state.diaryPresetArea = null;
+  updateDiaryGate();
+  renderDiaryGrid();
+  renderCompare();
+  sel.onchange = function(){ updateDiaryGate(); renderDiaryGrid(); renderCompare(); };
+}
+
+function currentDiaryArea(){ return document.getElementById('diaryAreaSelect').value; }
+
+function updateDiaryGate(){
+  var areaId = currentDiaryArea();
+  var photos = state.photos.filter(function(p){return p.areaId===areaId;}).sort(function(a,b){return b.date>a.date?1:-1;});
+  var tag = document.getElementById('diaryGateTag');
+  if(!photos.length){ tag.textContent='pronta para a primeira foto'; tag.className='tag sage'; return; }
+  var diff = daysBetween(photos[0].date, todayISO());
+  if(diff>=7){ tag.textContent='pronta para nova foto'; tag.className='tag sage'; }
+  else{ tag.textContent='próxima foto em '+(7-diff)+' dia(s)'; tag.className='tag amber'; }
+}
+
+document.getElementById('diaryFileInput').addEventListener('change', function(e){
+  var file = e.target.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev){
+    state.photos.push({id:uid(), areaId:currentDiaryArea(), dataUrl:ev.target.result, date:todayISO()});
+    toast('Foto adicionada ao diário 📸', 'ok');
+    renderDiario();
+    renderDashboard();
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+});
+
+function renderDiaryGrid(){
+  var areaId = currentDiaryArea();
+  var photos = state.photos.filter(function(p){return p.areaId===areaId;}).sort(function(a,b){return b.date>a.date?1:-1;});
+  var grid = document.getElementById('diaryGrid');
+  if(!photos.length){
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><svg viewBox="0 0 24 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/></svg>Nenhuma foto ainda nesta área. Tire a primeira foto para começar sua linha do tempo.</div>';
+    return;
+  }
+  grid.innerHTML = photos.map(function(p){
+    return '<div class="photo-card"><img class="photo-thumb" src="'+p.dataUrl+'" alt="Foto de '+areaId+' em '+p.date+'"><div class="photo-meta"><span>'+fmtDate(p.date)+'</span></div></div>';
+  }).join('');
+}
+
+function renderCompare(){
+  var areaId = currentDiaryArea();
+  var photos = state.photos.filter(function(p){return p.areaId===areaId;}).sort(function(a,b){return a.date>b.date?1:-1;});
+  document.getElementById('compareCountTag').textContent = photos.length+' foto(s)';
+  var area = document.getElementById('compareArea');
+  if(photos.length<2){
+    area.innerHTML = '<div class="empty-state">Serão necessárias pelo menos 2 fotos desta área para comparar o antes e o depois.</div>';
+    return;
+  }
+  var first = photos[0], last = photos[photos.length-1];
+  area.innerHTML =
+    '<div class="compare-wrap" id="compareWrap">'
+      +'<img src="'+first.dataUrl+'" alt="Foto mais antiga">'
+      +'<div class="after-wrap" id="compareAfterWrap" style="width:50%;"><img src="'+last.dataUrl+'" alt="Foto mais recente" style="width:'+ (2) +'00%;max-width:none;"></div>'
+    +'</div>'
+    +'<input type="range" class="compare-range" min="0" max="100" value="50" id="compareRange">'
+    +'<div class="compare-labels"><span>'+fmtDate(first.date)+'</span><span>'+fmtDate(last.date)+'</span></div>';
+
+  // fix width scaling for the "after" image so it fills the wrap and only its container clips
+  var afterWrap = document.getElementById('compareAfterWrap');
+  var afterImg = afterWrap.querySelector('img');
+  function sizeAfterImg(){
+    var full = document.getElementById('compareWrap').offsetWidth;
+    afterImg.style.width = full+'px';
+  }
+  sizeAfterImg();
+  window.addEventListener('resize', sizeAfterImg);
+
+  document.getElementById('compareRange').addEventListener('input', function(e){
+    afterWrap.style.width = e.target.value+'%';
+  });
+}
+
+/* ============================================================
+   SCANNER DE ESTRIA
+   ============================================================ */
+var scannerImg = null;
+var scannerDraw = {active:false, x0:0, y0:0, x1:0, y1:0};
+
+function renderScanner(){
+  var sel = document.getElementById('scannerAreaSelect');
+  fillAreaSelect(sel, state.scannerCurrentArea);
+  state.scannerCurrentArea = sel.value;
+  sel.onchange = function(){ state.scannerCurrentArea = sel.value; clearCanvas(); renderScannerChart(); renderScannerActions(); };
+  clearCanvas();
+  renderScannerChart();
+  renderScannerActions();
+}
+
+function clearCanvas(){
+  var cv = document.getElementById('scannerCanvas');
+  var ctx = cv.getContext('2d');
+  ctx.clearRect(0,0,cv.width,cv.height);
+  ctx.fillStyle = '#1D1710';
+  ctx.fillRect(0,0,cv.width,cv.height);
+  ctx.fillStyle = '#8E7E6D';
+  ctx.font = '14px Manrope, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Envie uma foto para marcar a estria', cv.width/2, cv.height/2);
+  scannerImg = null;
+  document.getElementById('scannerHint').textContent = 'Envie uma foto para começar a marcar.';
+}
+
+document.getElementById('scannerFileInput').addEventListener('change', function(e){
+  var file = e.target.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev){
+    var img = new Image();
+    img.onload = function(){
+      scannerImg = img;
+      drawScannerBase();
+      document.getElementById('scannerHint').textContent = 'Arraste sobre a estria para desenhar um círculo de marcação.';
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+});
+
+function drawScannerBase(ellipse){
+  var cv = document.getElementById('scannerCanvas');
+  var ctx = cv.getContext('2d');
+  ctx.clearRect(0,0,cv.width,cv.height);
+  if(scannerImg){
+    var ratio = Math.min(cv.width/scannerImg.width, cv.height/scannerImg.height);
+    var w = scannerImg.width*ratio, h = scannerImg.height*ratio;
+    var ox = (cv.width-w)/2, oy=(cv.height-h)/2;
+    ctx.drawImage(scannerImg, ox, oy, w, h);
+  }
+  if(ellipse){
+    ctx.strokeStyle = '#E3A93E';
+    ctx.lineWidth = 2.5;
+    ctx.setLineDash([5,4]);
+    ctx.beginPath();
+    ctx.ellipse((ellipse.x0+ellipse.x1)/2, (ellipse.y0+ellipse.y1)/2, Math.abs(ellipse.x1-ellipse.x0)/2, Math.abs(ellipse.y1-ellipse.y0)/2, 0, 0, Math.PI*2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = 'rgba(227,169,62,.15)';
+    ctx.fill();
+  }
+}
+
+(function attachCanvasEvents(){
+  var cv = document.getElementById('scannerCanvas');
+  function pos(e){
+    var rect = cv.getBoundingClientRect();
+    var scaleX = cv.width/rect.width, scaleY = cv.height/rect.height;
+    var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return {x:(clientX-rect.left)*scaleX, y:(clientY-rect.top)*scaleY};
+  }
+  function start(e){
+    if(!scannerImg) return;
+    e.preventDefault();
+    var p = pos(e);
+    scannerDraw = {active:true, x0:p.x, y0:p.y, x1:p.x, y1:p.y};
+  }
+  function move(e){
+    if(!scannerDraw.active) return;
+    e.preventDefault();
+    var p = pos(e);
+    scannerDraw.x1 = p.x; scannerDraw.y1 = p.y;
+    drawScannerBase(scannerDraw);
+  }
+  function end(){
+    scannerDraw.active = false;
+    renderScannerActions();
+  }
+  cv.addEventListener('mousedown', start);
+  cv.addEventListener('mousemove', move);
+  window.addEventListener('mouseup', end);
+  cv.addEventListener('touchstart', start, {passive:false});
+  cv.addEventListener('touchmove', move, {passive:false});
+  cv.addEventListener('touchend', end);
+})();
+
+function renderScannerActions(){
+  var wrap = document.getElementById('scannerActions');
+  wrap.innerHTML = '';
+  if(!scannerImg) return;
+  var saveBtn = document.createElement('button');
+  saveBtn.className = 'btn btn-primary btn-sm';
+  saveBtn.textContent = 'Salvar marcação';
+  saveBtn.addEventListener('click', saveScanMark);
+  wrap.appendChild(saveBtn);
+  var resetBtn = document.createElement('button');
+  resetBtn.className = 'btn btn-ghost btn-sm';
+  resetBtn.textContent = 'Refazer círculo';
+  resetBtn.addEventListener('click', function(){ scannerDraw={active:false,x0:0,y0:0,x1:0,y1:0}; drawScannerBase(); });
+  wrap.appendChild(resetBtn);
+}
+
+function saveScanMark(){
+  var rx = Math.abs(scannerDraw.x1-scannerDraw.x0)/2;
+  var ry = Math.abs(scannerDraw.y1-scannerDraw.y0)/2;
+  if(rx<4 || ry<4){ toast('Desenhe um círculo maior sobre a estria.', 'warn'); return; }
+  var cv = document.getElementById('scannerCanvas');
+  var areaScore = (Math.PI*rx*ry) / (cv.width*cv.height) * 1000; // normalized score
+  var areaId = state.scannerCurrentArea;
+  if(!state.scans[areaId]) state.scans[areaId]=[];
+  state.scans[areaId].push({id:uid(), date:todayISO(), score:areaScore, dataUrl:cv.toDataURL('image/jpeg',.7)});
+  toast('Marcação salva ✓', 'ok');
+  renderScannerChart();
+}
+
+function renderScannerChart(){
+  var areaId = state.scannerCurrentArea;
+  var records = (state.scans[areaId]||[]).slice().sort(function(a,b){return a.date>b.date?1:-1;});
+  var tag = document.getElementById('scannerTrendTag');
+  var chartEl = document.getElementById('scannerChart');
+  if(records.length<2){
+    tag.textContent = records.length ? '1ª marcação registrada' : 'sem marcações ainda';
+    tag.className = 'tag';
+    chartEl.innerHTML = '<div class="empty-state">Faça pelo menos duas marcações nesta área, em datas diferentes, para ver a tendência.</div>';
+    return;
+  }
+  var first = records[0].score, lastRec = records[records.length-1];
+  var change = ((lastRec.score-first)/first)*100;
+  var improved = change < 0;
+  tag.textContent = (improved?'▼ ':'▲ ')+Math.abs(change).toFixed(0)+'% desde a 1ª marcação';
+  tag.className = 'tag '+(improved?'sage':'clay');
+
+  var w=560,h=140,pad=20;
+  var maxScore = Math.max.apply(null, records.map(function(r){return r.score;}));
+  var minScore = Math.min.apply(null, records.map(function(r){return r.score;}));
+  var range = (maxScore-minScore)||1;
+  var pts = records.map(function(r,i){
+    var x = pad + (i/(records.length-1))*(w-pad*2);
+    var y = h-pad - ((r.score-minScore)/range)*(h-pad*2);
+    return x+','+y;
+  });
+  var circles = records.map(function(r,i){
+    var coords = pts[i].split(',');
+    return '<circle cx="'+coords[0]+'" cy="'+coords[1]+'" r="4" fill="#E3A93E"/>';
+  }).join('');
+  chartEl.innerHTML = '<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none">'
+    +'<polyline points="'+pts.join(' ')+'" fill="none" stroke="#E3A93E" stroke-width="2.5"/>'
+    +circles
+    +'</svg>'
+    +'<div style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px;color:var(--text-mute);margin-top:4px;">'
+      +'<span>'+fmtDate(records[0].date)+'</span><span>'+fmtDate(records[records.length-1].date)+'</span>'
+    +'</div>';
+}
+
+/* ============================================================
+   LEMBRETES
+   ============================================================ */
+function renderDaysPicker(){
+  var wrap = document.getElementById('daysPicker');
+  wrap.innerHTML = WEEKDAYS.map(function(d,i){
+    return '<button data-day="'+i+'" class="'+(state.reminderDaysDraft.indexOf(i)>-1?'on':'')+'">'+d+'</button>';
+  }).join('');
+  wrap.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var d = +btn.dataset.day;
+      var idx = state.reminderDaysDraft.indexOf(d);
+      if(idx>-1) state.reminderDaysDraft.splice(idx,1); else state.reminderDaysDraft.push(d);
+      renderDaysPicker();
+    });
+  });
+}
+renderDaysPicker();
+
+document.getElementById('addReminderBtn').addEventListener('click', function(){
+  var time = document.getElementById('reminderTime').value;
+  var text = document.getElementById('reminderText').value.trim();
+  if(!time || !text){ toast('Preencha horário e texto do lembrete.', 'warn'); return; }
+  if(!state.reminderDaysDraft.length){ toast('Escolha ao menos um dia da semana.', 'warn'); return; }
+  state.reminders.push({id:uid(), time:time, text:text, days:state.reminderDaysDraft.slice()});
+  document.getElementById('reminderText').value='';
+  toast('Lembrete criado ✓', 'ok');
+  renderReminders();
+  renderDashboard();
+});
+
+document.getElementById('notifPermBtn').addEventListener('click', function(){
+  if(!('Notification' in window)){ toast('Este navegador não suporta notificações.', 'warn'); return; }
+  Notification.requestPermission().then(function(perm){
+    toast(perm==='granted' ? 'Notificações ativadas ✓' : 'Permissão não concedida.', perm==='granted'?'ok':'warn');
+  });
+});
+
+function renderReminders(){
+  var list = document.getElementById('reminderList');
+  if(!state.reminders.length){
+    list.innerHTML = '<div class="empty-state"><svg viewBox="0 0 24 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Nenhum lembrete cadastrado ainda.</div>';
+    return;
+  }
+  var sorted = state.reminders.slice().sort(function(a,b){ return a.time>b.time?1:-1; });
+  list.innerHTML = sorted.map(function(r){
+    return '<div class="reminder-row">'
+      +'<div class="reminder-time">'+r.time+'</div>'
+      +'<div class="reminder-info"><b>'+r.text+'</b><div class="reminder-days">'+WEEKDAYS.map(function(d,i){return '<span class="day-chip '+(r.days.indexOf(i)>-1?'on':'')+'">'+d+'</span>';}).join('')+'</div></div>'
+      +'<button class="btn btn-ghost btn-sm" data-del="'+r.id+'">Remover</button>'
+    +'</div>';
+  }).join('');
+  list.querySelectorAll('[data-del]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      state.reminders = state.reminders.filter(function(r){return r.id!==btn.dataset.del;});
+      renderReminders(); renderDashboard();
+      toast('Lembrete removido.', 'ok');
+    });
+  });
+}
+
+var firedThisMinute = {};
+setInterval(function(){
+  var now = new Date();
+  var hhmm = ('0'+now.getHours()).slice(-2)+':'+('0'+now.getMinutes()).slice(-2);
+  var dow = now.getDay();
+  state.reminders.forEach(function(r){
+    if(r.time===hhmm && r.days.indexOf(dow)>-1){
+      var key = r.id+hhmm;
+      if(firedThisMinute[key]) return;
+      firedThisMinute[key]=true;
+      toast('⏰ '+r.text, 'ok');
+      if('Notification' in window && Notification.permission==='granted'){
+        new Notification('Pele em Camadas', {body:r.text});
+      }
+    }
+  });
+}, 20000);
+
+/* ============================================================
+   PRODUTOS
+   ============================================================ */
+var productFilterActive = 'todos';
+function renderProdutosFilters(){
+  var wrap = document.getElementById('productFilters');
+  wrap.innerHTML = PRODUCT_FILTERS.map(function(f){
+    return '<button class="filter-chip '+(productFilterActive===f.id?'active':'')+'" data-f="'+f.id+'">'+f.label+'</button>';
+  }).join('');
+  wrap.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click', function(){ productFilterActive=b.dataset.f; renderProdutos(); });
+  });
+}
+function renderProdutos(){
+  renderProdutosFilters();
+  var grid = document.getElementById('productGrid');
+  var list = PRODUCTS.filter(function(p){
+    if(state.pregnant && !p.gestanteSafe) return false;
+    if(productFilterActive==='todos') return true;
+    return p.goals.indexOf(productFilterActive)>-1;
+  });
+  if(!list.length){
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;">Nenhum produto nesse filtro'+(state.pregnant?' compatível com o modo gestante':'')+'.</div>';
+    return;
+  }
+  grid.innerHTML = list.map(function(p){
+    return '<div class="card product-card">'
+      +'<div class="top"><h3>'+p.nome+'</h3>'+(p.gestanteSafe?'<span class="tag sage">gestante ok</span>':'<span class="tag clay">evitar na gestação</span>')+'</div>'
+      +'<div class="active-ing">ativo: '+p.ativo+'</div>'
+      +'<p style="font-size:13px;margin:2px 0 4px;">'+p.uso+'</p>'
+      +'<div class="tags">'+p.goals.map(function(g){return '<span class="tag">'+(PRODUCT_FILTERS.filter(function(f){return f.id===g;})[0]||{label:g}).label+'</span>';}).join('')+'</div>'
+      +'<div class="price-dots">'+[1,2,3].map(function(n){return '<i class="'+(n<=p.preco?'on':'')+'"></i>';}).join('')+'<small style="margin-left:6px;">faixa de preço</small></div>'
+    +'</div>';
+  }).join('');
+}
+
+/* ============================================================
+   MITOS E VERDADES
+   ============================================================ */
+function renderMitos(){
+  var wrap = document.getElementById('accordionList');
+  wrap.innerHTML = MYTHS.map(function(m,i){
+    return '<div class="accordion-item" data-i="'+i+'">'
+      +'<div class="accordion-head"><b><span class="verdict '+m.v+'">'+m.v+'</span>'+m.q+'</b><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>'
+      +'<div class="accordion-body"><div class="accordion-body-in">'+m.r+'</div></div>'
+    +'</div>';
+  }).join('');
+  wrap.querySelectorAll('.accordion-head').forEach(function(h){
+    h.addEventListener('click', function(){ h.closest('.accordion-item').classList.toggle('open'); });
+  });
+}
+
+/* ============================================================
+   RECEITAS
+   ============================================================ */
+function renderReceitas(){
+  var grid = document.getElementById('recipeGrid');
+  var list = RECIPES.filter(function(r){ return !state.pregnant || r.gestanteSafe; });
+  grid.innerHTML = list.map(function(r){
+    return '<div class="card recipe-card">'
+      +'<div class="card-title"><h3>'+r.nome+'</h3>'+(r.gestanteSafe?'<span class="tag sage">gestante ok</span>':'')+'</div>'
+      +'<small>'+r.indicacao+'</small>'
+      +'<ul class="ing-list">'+r.ing.map(function(i){return '<li>'+i+'</li>';}).join('')+'</ul>'
+      +'<ol class="recipe-steps">'+r.passos.map(function(p,i){return '<li><span class="n">'+(i+1)+'.</span>'+p+'</li>';}).join('')+'</ol>'
+    +'</div>';
+  }).join('');
+}
+
+/* ============================================================
+   MODO GESTANTE (view dedicada)
+   ============================================================ */
+function renderGestante(){
+  document.getElementById('gestSafeList').innerHTML = GEST_SAFE.map(function(s){return '<li>'+s+'</li>';}).join('');
+  document.getElementById('gestAvoidList').innerHTML = GEST_AVOID.map(function(s){return '<li>'+s+'</li>';}).join('');
+}
+
+function syncPregnantToggles(){
+  document.getElementById('pregnantToggle').checked = state.pregnant;
+  document.getElementById('pregnantToggle2').checked = state.pregnant;
+}
+document.getElementById('pregnantToggle').addEventListener('change', function(e){
+  state.pregnant = e.target.checked; syncPregnantToggles();
+  toast(state.pregnant ? 'Modo gestante ativado — ativos ajustados no site inteiro.' : 'Modo gestante desativado.', 'ok');
+  if(state.view==='produtos') renderProdutos();
+  if(state.view==='receitas') renderReceitas();
+  if(state.view==='plano') renderPlano();
+  if(state.view==='mapa' && state.selectedArea) renderAreaDetail(state.selectedArea);
+});
+document.getElementById('pregnantToggle2').addEventListener('change', function(e){
+  document.getElementById('pregnantToggle').checked = e.target.checked;
+  document.getElementById('pregnantToggle').dispatchEvent(new Event('change'));
+});
+
+/* ============================================================
+   NAV BINDINGS
+   ============================================================ */
+document.querySelectorAll('.navbtn').forEach(function(b){
+  b.addEventListener('click', function(){ navigate(b.dataset.view); });
+});
+document.addEventListener('click', function(e){
+  var t = e.target.closest('[data-nav]');
+  if(t){ navigate(t.dataset.nav); }
+});
+
+// build bottom nav (mobile) mirroring core items
+var BOTTOM_ITEMS = ['dashboard','mapa','diario','scanner','lembretes','produtos'];
+var bottomEl = document.getElementById('bottomnav');
+bottomEl.innerHTML = BOTTOM_ITEMS.map(function(v){
+  var src = document.querySelector('.navbtn[data-view="'+v+'"]');
+  return '<button data-view="'+v+'">'+src.querySelector('svg').outerHTML+'<span>'+VIEW_TITLES[v][0]+'</span></button>';
+}).join('');
+bottomEl.querySelectorAll('button').forEach(function(b){
+  b.addEventListener('click', function(){ navigate(b.dataset.view); });
+});
+
+/* ============================================================
+   PWA INSTALL
+   ============================================================ */
+var deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', function(e){
+  e.preventDefault();
+  deferredPrompt = e;
+  var btn = document.getElementById('androidInstallBtn');
+  btn.disabled = false;
+  document.getElementById('androidInstallHint').textContent = 'Pronto para instalar neste navegador.';
+});
+document.getElementById('androidInstallBtn').addEventListener('click', function(){
+  if(!deferredPrompt){ toast('Use o menu do navegador (⋮) e escolha "Instalar aplicativo".', 'warn'); return; }
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(function(choice){
+    toast(choice.outcome==='accepted' ? 'Aplicativo instalado ✓' : 'Instalação cancelada.', choice.outcome==='accepted'?'ok':'warn');
+    deferredPrompt = null;
+  });
+});
+window.addEventListener('appinstalled', function(){
+  toast('Aplicativo instalado com sucesso ✓', 'ok');
+});
+if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone===true){
+  document.addEventListener('DOMContentLoaded', function(){
+    var card = document.getElementById('alreadyInstalledCard');
+    if(card){ card.style.display='block'; }
+  });
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+function init(){
+  navigate('dashboard');
+  renderDashboard();
+}
+init();
+
+})();
+</script>
+</body>
+</html>
