@@ -135,7 +135,11 @@ img{max-width:100%;display:block;}
 .brand-name span{display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--text-mute);text-transform:uppercase;margin-top:2px;}
 
 .navlist{display:flex;flex-direction:column;gap:2px;margin-top:6px;}
-.navlist .group-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-mute);padding:14px 10px 6px;}
+/* Organização: cada grupo do menu (Acompanhar / Plano / Explorar) agora
+   tem uma linha divisória fina acima, em vez de só um espaço em branco —
+   fica mais claro onde um grupo termina e o outro começa. */
+.navlist .group-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-mute);padding:16px 10px 6px;border-top:1px solid var(--border-soft);margin-top:8px;}
+.navlist .group-label:first-child{border-top:none;margin-top:0;padding-top:6px;}
 .navbtn{
   display:flex;align-items:center;gap:11px;
   width:100%;text-align:left;background:transparent;border:1px solid transparent;color:var(--text-dim);
@@ -181,10 +185,25 @@ img{max-width:100%;display:block;}
 }
 .streak-chip b{color:var(--amber-strong);font-weight:600;}
 
-main{padding:26px 28px 90px;max-width:1180px;}
-.view{display:none;animation:view-in .35s ease;}
+main{padding:30px 28px 90px;max-width:1180px;}
+/* Organização: o parágrafo de introdução de cada tela (texto logo abaixo
+   do h1, direto dentro da section) agora tem mais respiro antes do
+   conteúdo — antes o card/grid seguinte colava quase direto no texto,
+   deixando a tela com sensação de aperto. */
+.view > p{margin-bottom:28px;max-width:640px;}
+.view > h1{margin-bottom:10px;}
+/* BUG CORRIGIDO: .view tinha uma animação CSS (view-in) que começa em
+   opacity:0, disparada assim que a tela vira "display:block" — inclusive
+   na primeira tela mostrada ao carregar o site, sem nenhuma interação do
+   usuário. Vários navegadores móveis pausam/adiam animações desse tipo
+   até o primeiro toque na tela (economia de bateria para conteúdo
+   pintado antes de qualquer gesto do usuário), o que travava a página
+   inteira em opacity:0 — exatamente o "fica invisível até eu clicar em
+   algo". A troca de tela agora é instantânea, sem animação de entrada,
+   o que também deixa a navegação com uma sensação mais direta e menos
+   "carregada".  */
+.view{display:none;}
 .view.active{display:block;}
-@keyframes view-in{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 
 /* ---------- generic pieces ---------- */
 .grid{display:grid;gap:16px;}
@@ -354,7 +373,7 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
 .quiz-progress i{flex:1;height:3px;border-radius:3px;background:var(--surface-3);}
 .quiz-progress i.done{background:var(--amber);}
 .quiz-step{display:none;}
-.quiz-step.active{display:block;animation:view-in .3s ease;}
+.quiz-step.active{display:block;}
 .quiz-step h2{font-size:22px;}
 .opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;}
 @media (max-width:560px){.opt-grid{grid-template-columns:1fr;}}
@@ -518,6 +537,155 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
   .bottomnav button.active{color:var(--amber-strong);}
   .hero{flex-direction:column;align-items:flex-start;padding:26px;}
 }
+/* ============================================================
+   NOVO — 7 seções adicionadas
+   ============================================================ */
+
+/* -- disclaimer médico reutilizável (regra de UX 2) -- */
+.med-disclaimer{
+  display:flex;align-items:flex-start;gap:8px;
+  font-size:11.5px;color:var(--text-mute);
+  background:var(--surface-2);border:1px solid var(--border-soft);
+  border-radius:var(--radius-s);padding:9px 12px;margin-top:12px;
+}
+.med-disclaimer svg{width:14px;height:14px;stroke:var(--text-mute);flex:none;margin-top:1px;}
+
+/* -- 1. HISTÓRIAS REAIS -- */
+.story-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.story-filters{display:flex;flex-wrap:wrap;gap:8px;}
+.story-grid{display:flex;flex-direction:column;gap:14px;}
+.story-card{display:flex;gap:16px;padding:18px;}
+.story-photo{
+  width:64px;height:64px;border-radius:50%;flex:none;object-fit:cover;
+  filter:blur(9px) saturate(85%);background:var(--surface-2);
+}
+.story-photo-empty{
+  width:64px;height:64px;border-radius:50%;flex:none;background:var(--surface-2);
+  display:flex;align-items:center;justify-content:center;color:var(--text-mute);
+  border:1px dashed var(--border);
+}
+.story-body{flex:1;min-width:0;}
+.story-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:6px;}
+.story-head b{font-size:14.5px;}
+.story-stats{display:flex;flex-wrap:wrap;gap:16px;margin:8px 0;}
+.story-stat{font-size:12px;color:var(--text-mute);}
+.story-stat b{display:block;font-family:var(--font-display);font-size:18px;color:var(--amber-strong);}
+.story-quote{font-size:13.8px;color:var(--text-dim);font-style:italic;}
+.story-form-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media (max-width:640px){.story-form-fields{grid-template-columns:1fr;}}
+
+/* -- 2. CALCULADORA DE EVOLUÇÃO -- */
+.evo-card{margin-top:18px;}
+.evo-metrics{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
+@media (max-width:560px){.evo-metrics{grid-template-columns:1fr;}}
+.evo-metric{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-m);padding:16px;text-align:center;}
+.evo-metric .val{font-family:var(--font-display);font-size:28px;color:var(--sage);}
+.evo-metric .val.up{color:var(--clay);}
+.evo-metric .lbl{font-size:12px;color:var(--text-mute);margin-top:4px;}
+.evo-sidebyside{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+.evo-sidebyside figure{margin:0;}
+.evo-sidebyside img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:var(--radius-m);border:1px solid var(--border);}
+.evo-sidebyside figcaption{text-align:center;font-family:var(--font-mono);font-size:11px;color:var(--text-mute);margin-top:6px;}
+
+/* -- 3. CUIDADOS EM CASA -- */
+.homecare-card{display:flex;flex-direction:column;gap:10px;}
+.homecare-card h3{font-size:16px;}
+.homecare-field{border-top:1px dashed var(--border-soft);padding-top:9px;margin-top:2px;}
+.homecare-field b{display:block;font-family:var(--font-mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--amber);margin-bottom:3px;}
+.homecare-field p{font-size:13px;margin:0;}
+.homecare-field.attention b{color:var(--danger);}
+
+/* -- 4. POR FASE DA VIDA -- */
+.phase-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 22px;}
+.phase-tab{
+  border:1px solid var(--border);background:var(--surface);color:var(--text-dim);
+  padding:10px 16px;border-radius:99px;cursor:pointer;font-size:13px;font-weight:700;
+}
+.phase-tab.active{background:var(--amber);border-color:var(--amber);color:#1c1530;}
+.phase-panel{display:none;}
+.phase-panel.active{display:block;animation:none;}
+
+/* -- 5. ASSISTENTE IA -- */
+.chat-fab{
+  position:fixed;right:20px;bottom:20px;z-index:80;
+  display:flex;align-items:center;gap:8px;
+  background:var(--amber);color:#1c1530;border:none;border-radius:99px;
+  padding:14px 20px;font-weight:800;font-size:14px;cursor:pointer;
+  box-shadow:0 10px 26px -8px rgba(185,166,232,.6);
+}
+.chat-fab svg{width:19px;height:19px;stroke:#1c1530;fill:none;}
+@media (max-width:900px){.chat-fab{bottom:calc(74px + env(safe-area-inset-bottom));right:14px;padding:12px 16px;}}
+.chat-panel{
+  position:fixed;right:20px;bottom:88px;z-index:81;
+  width:min(360px,calc(100vw - 28px));max-height:min(70vh,560px);
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-l);
+  box-shadow:var(--shadow-2);display:none;flex-direction:column;overflow:hidden;
+}
+.chat-panel.open{display:flex;}
+@media (max-width:900px){.chat-panel{bottom:calc(140px + env(safe-area-inset-bottom));right:14px;}}
+.chat-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border-soft);background:var(--surface-2);}
+.chat-head b{font-size:13.5px;}
+.chat-head .sub{font-size:11px;color:var(--text-mute);display:block;}
+.chat-close{background:none;border:none;color:var(--text-mute);font-size:18px;cursor:pointer;line-height:1;padding:4px;}
+.chat-body{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;}
+.chat-msg{max-width:85%;padding:10px 13px;border-radius:14px;font-size:13.3px;line-height:1.45;}
+.chat-msg.bot{background:var(--surface-2);border:1px solid var(--border-soft);align-self:flex-start;border-bottom-left-radius:4px;}
+.chat-msg.user{background:var(--amber-soft);border:1px solid var(--amber-line);color:var(--text);align-self:flex-end;border-bottom-right-radius:4px;}
+.chat-msg.risk{border-color:rgba(217,105,92,.5);background:var(--danger-soft);}
+.chat-suggest-row{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;}
+.chat-suggest{border:1px dashed var(--border);background:transparent;color:var(--text-mute);font-size:11px;padding:6px 10px;border-radius:99px;cursor:pointer;}
+.chat-inputrow{display:flex;gap:8px;padding:12px;border-top:1px solid var(--border-soft);}
+.chat-inputrow input{flex:1;}
+.chat-send{width:40px;height:40px;border-radius:50%;border:none;background:var(--amber);color:#1c1530;flex:none;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.chat-send svg{width:17px;height:17px;stroke:#1c1530;fill:none;}
+
+/* -- 6. LOJINHA -- */
+.kit-banner{
+  border-radius:var(--radius-l);padding:24px;margin-bottom:20px;
+  background:linear-gradient(135deg, var(--amber-soft), var(--clay-soft));
+  border:1px solid var(--amber-line);
+  display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.kit-banner .txt b{font-size:17px;font-family:var(--font-display);display:block;margin-bottom:4px;}
+.kit-banner .txt span{font-size:12.5px;color:var(--text-mute);}
+.kit-items{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+.shop-filters{display:flex;flex-wrap:wrap;gap:22px;margin-bottom:18px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-m);}
+.shop-filter-group{display:flex;flex-direction:column;gap:8px;}
+.shop-filter-group .lbl{font-family:var(--font-mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-mute);}
+.shop-filter-group .opts{display:flex;flex-wrap:wrap;gap:6px;}
+.buy-btn{margin-top:6px;}
+.buy-btn svg{width:14px;height:14px;}
+
+/* -- 7. DESAFIO 30 DIAS -- */
+.challenge-card{
+  border-radius:var(--radius-l);padding:24px;
+  background:linear-gradient(155deg, var(--sage-soft), var(--surface));
+  border:1px solid var(--sage-line);margin-bottom:20px;
+}
+.challenge-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;}
+.challenge-day{font-family:var(--font-display);font-size:30px;color:var(--sage);line-height:1;}
+.challenge-checks{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
+.challenge-check{
+  display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);
+  border-radius:99px;padding:11px 16px;cursor:pointer;font-size:13px;font-weight:600;flex:1;min-width:140px;justify-content:center;
+}
+.challenge-check.done{background:var(--sage);border-color:var(--sage);color:#0f1a15;}
+.badges-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+.badge{
+  display:flex;flex-direction:column;align-items:center;gap:4px;width:56px;opacity:.35;
+}
+.badge.earned{opacity:1;}
+.badge .ic{width:40px;height:40px;border-radius:50%;background:var(--surface-2);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;}
+.badge.earned .ic{border-color:var(--amber);background:var(--amber-soft);}
+.badge span{font-size:9.5px;color:var(--text-mute);text-align:center;}
+
+/* -- botões maiores no celular (regra de UX 3) -- */
+@media (max-width:900px){
+  .btn{padding:13px 20px;font-size:14.5px;min-height:46px;}
+  .btn-sm{padding:11px 16px;font-size:13px;min-height:40px;}
+  .navbtn, .qlink, .opt-card, .area-row, .challenge-check{min-height:46px;}
+  .filter-chip, .story-filters button{padding:9px 15px;}
+}
 </style>
 </head>
 <body>
@@ -550,6 +718,10 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
         <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"/><circle cx="12" cy="12" r="3.5"/></svg>
         Scanner de estria
       </button>
+      <button class="navbtn" data-view="historias">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10h8M8 14h5"/><path d="M21 12c0 4.4-4 8-9 8-1.3 0-2.6-.2-3.7-.7L3 20l1.1-4C3.4 14.7 3 13.4 3 12c0-4.4 4-8 9-8s9 3.6 9 8z"/></svg>
+        Histórias reais
+      </button>
 
       <span class="group-label">Plano</span>
       <button class="navbtn" data-view="questionario">
@@ -574,6 +746,10 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
         <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.8.3-1.4.9-1.4 1.7v.3"/><circle cx="12" cy="16.5" r=".4" fill="currentColor" stroke="none"/></svg>
         Mitos e verdades
       </button>
+      <button class="navbtn" data-view="cuidadosemcasa">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 3 6 6.5 6 10.5A6 6 0 0 1 6 13.5C6 9.5 9 6 12 3z"/></svg>
+        Cuidados em casa
+      </button>
       <button class="navbtn" data-view="fases">
         <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16M8 15l3-4 3 3 4-6"/></svg>
         Fases da estria
@@ -584,7 +760,7 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
       </button>
       <button class="navbtn" data-view="gestante">
         <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="2.5"/><path d="M8.5 21c-.5-4 .5-6.3 2-7.6-1-1-1.3-2.4-.6-3.7C10.5 8.4 11.6 8 12.5 8c1.7 0 3 1 3.6 2.6.6 1.7 2.4 2.4 2.4 2.4"/></svg>
-        Modo gestante
+        Por fase da vida
       </button>
       <button class="navbtn" data-view="instalar">
         <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
@@ -630,6 +806,9 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
             <div class="stat"><div class="n" id="statLembretes">0</div><div class="l">lembretes ativos</div></div>
           </div>
         </div>
+
+        <!-- ============ 7. DESAFIO 30 DIAS (NOVO) ============ -->
+        <div class="challenge-card" id="challengeCard"></div>
 
         <div class="quicklinks">
           <button class="qlink" data-nav="diario">
@@ -789,6 +968,9 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
           <div id="compareArea"></div>
         </div>
 
+        <!-- ============ 2. CALCULADORA DE EVOLUÇÃO (NOVO) ============ -->
+        <div class="card evo-card" id="evoCard"></div>
+
         <h3 style="font-size:14px;margin-bottom:12px;">Todas as fotos desta área</h3>
         <div class="diary-grid" id="diaryGrid"></div>
       </section>
@@ -820,6 +1002,23 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
           <div class="card-title"><h3>Tendência da área marcada</h3><span class="tag sage" id="scannerTrendTag">—</span></div>
           <div class="chart-wrap" id="scannerChart"></div>
         </div>
+      </section>
+
+      <!-- ============ 1. HISTÓRIAS REAIS (NOVO) ============ -->
+      <section class="view" id="view-historias">
+        <div class="eyebrow">quem já passou por isso</div>
+        <h1>Histórias reais</h1>
+        <p>Relatos de pessoas que estão tratando estrias — pra você não se sentir sozinha nesse processo e ter uma ideia realista de prazo e expectativa.</p>
+
+        <div class="story-toolbar">
+          <div class="story-filters" id="storyFilters"></div>
+          <button class="btn btn-primary" id="contarHistoriaBtn">Contar minha história</button>
+        </div>
+
+        <div class="card" id="storyFormCard" style="display:none;margin-bottom:20px;"></div>
+
+        <div class="story-grid" id="storyGrid"></div>
+        <div class="med-disclaimer"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" fill="none"><path d="M12 9v4M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>Relatos pessoais, não são garantia de resultado. Conteúdo informativo. Consulte um dermatologista.</div>
       </section>
 
       <!-- ============ LEMBRETES ============ -->
@@ -858,8 +1057,14 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
         <div class="eyebrow">catálogo por ativo</div>
         <h1>Produtos indicados</h1>
         <p>Cosméticos e ativos usados com mais frequência no cuidado com estrias, organizados por objetivo. Sempre teste em uma pequena área antes do uso completo.</p>
+
+        <!-- ============ 6. LOJINHA (NOVO) ============ -->
+        <div class="kit-banner" id="kitBanner"></div>
+        <div class="shop-filters" id="shopFilters"></div>
+
         <div class="filter-row" id="productFilters"></div>
         <div class="grid grid-3" id="productGrid"></div>
+        <div class="med-disclaimer"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" fill="none"><path d="M12 9v4M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>Conteúdo informativo. Consulte um dermatologista.</div>
       </section>
 
       <!-- ============ MITOS E VERDADES ============ -->
@@ -867,6 +1072,16 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
         <div class="eyebrow">separando fato de crença</div>
         <h1>Mitos e verdades sobre estrias</h1>
         <div id="accordionList"></div>
+        <div class="med-disclaimer"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" fill="none"><path d="M12 9v4M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>Conteúdo informativo. Consulte um dermatologista.</div>
+      </section>
+
+      <!-- ============ 3. CUIDADOS EM CASA (NOVO) ============ -->
+      <section class="view" id="view-cuidadosemcasa">
+        <div class="eyebrow">ingredientes que valem a pena conhecer</div>
+        <h1>Cuidados em casa</h1>
+        <p>Um raio-x rápido dos ingredientes mais usados no cuidado com estrias: para que servem de verdade, o que a pesquisa científica diz e quando ter atenção.</p>
+        <div class="grid grid-2" id="homecareGrid"></div>
+        <div class="med-disclaimer"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" fill="none"><path d="M12 9v4M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>Conteúdo informativo. Consulte um dermatologista.</div>
       </section>
 
       <!-- ============ FASES DA ESTRIA (NOVO) ============ -->
@@ -875,6 +1090,7 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
         <h1>As fases de uma estria</h1>
         <p>Saber em qual fase a estria está ajuda a calibrar a expectativa — e explica por que a mesma rotina rende resultados diferentes em áreas diferentes do corpo.</p>
         <div class="fase-timeline" id="faseTimeline"></div>
+        <div class="med-disclaimer"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" fill="none"><path d="M12 9v4M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>Conteúdo informativo. Consulte um dermatologista.</div>
       </section>
 
       <!-- ============ RECEITAS CASEIRAS ============ -->
@@ -883,24 +1099,29 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
         <h1>Receitas caseiras</h1>
         <p>Ajudam na hidratação e na esfoliação suave — são complementos e não substituem ativos com eficácia comprovada como o ácido retinoico ou a vitamina C.</p>
         <div class="grid grid-3" id="recipeGrid"></div>
+        <div class="med-disclaimer"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" fill="none"><path d="M12 9v4M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>Conteúdo informativo. Consulte um dermatologista.</div>
       </section>
 
-      <!-- ============ MODO GESTANTE ============ -->
+      <!-- ============ 4. POR FASE DA VIDA (expandido) ============ -->
       <section class="view" id="view-gestante">
         <div class="eyebrow">segurança em primeiro lugar</div>
-        <h1>Modo gestante</h1>
-        <p>Quando o modo gestante está ativo, o app troca automaticamente os ativos contraindicados por alternativas seguras em qualquer rotina, produto ou receita sugerida no site inteiro.</p>
-        <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <h1>Por fase da vida</h1>
+        <p>Cada fase da vida muda o que é seguro e o que faz sentido priorizar no cuidado com estrias. Escolha a sua abaixo.</p>
+
+        <div class="phase-tabs" id="phaseTabs"></div>
+        <div id="phasePanels"></div>
+
+        <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:20px;">
           <div>
-            <b style="font-size:14.5px;">Ativar modo gestante agora</b>
-            <p style="margin:4px 0 0;">Também pode ser ativado a qualquer momento pelo interruptor no menu lateral.</p>
+            <b style="font-size:14.5px;">Ativar modo gestante no site inteiro</b>
+            <p style="margin:4px 0 0;">Troca automaticamente os ativos contraindicados por alternativas seguras em produtos, rotinas e receitas. Também pode ser ativado pelo interruptor no menu lateral.</p>
           </div>
           <label class="switch"><input type="checkbox" id="pregnantToggle2"><span class="track"></span></label>
         </div>
 
         <div class="safe-grid">
           <div class="safe-col ok">
-            <h4>Pode usar</h4>
+            <h4>Pode usar (gestação/amamentação)</h4>
             <ul id="gestSafeList"></ul>
           </div>
           <div class="safe-col avoid">
@@ -908,7 +1129,7 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
             <ul id="gestAvoidList"></ul>
           </div>
         </div>
-        <p style="margin-top:16px;font-size:12.5px;">Esta lista é informativa. Converse sempre com seu obstetra ou dermatologista antes de iniciar qualquer ativo novo durante a gestação.</p>
+        <div class="med-disclaimer"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" fill="none"><path d="M12 9v4M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>Conteúdo informativo. Consulte um dermatologista, obstetra ou pediatra antes de iniciar qualquer ativo novo.</div>
       </section>
 
       <!-- ============ INSTALAR APP ============ -->
@@ -961,6 +1182,24 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
 </div>
 
 <nav class="bottomnav" id="bottomnav" aria-label="Navegação inferior"></nav>
+
+<!-- ============ 5. ASSISTENTE IA (NOVO) ============ -->
+<button class="chat-fab" id="chatFab" aria-haspopup="dialog" aria-expanded="false">
+  <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10h8M8 14h5"/><path d="M21 12c0 4.4-4 8-9 8-1.3 0-2.6-.2-3.7-.7L3 20l1.1-4C3.4 14.7 3 13.4 3 12c0-4.4 4-8 9-8s9 3.6 9 8z"/></svg>
+  Dúvidas?
+</button>
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Assistente de dúvidas sobre estrias">
+  <div class="chat-head">
+    <div><b>Assistente do site</b><span class="sub">responde só sobre estrias, com base neste app</span></div>
+    <button class="chat-close" id="chatCloseBtn" aria-label="Fechar">✕</button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-suggest-row" id="chatSuggestRow"></div>
+  <div class="chat-inputrow">
+    <input type="text" id="chatInput" placeholder="Escreva sua dúvida...">
+    <button class="chat-send" id="chatSendBtn" aria-label="Enviar"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -1048,6 +1287,31 @@ var PRODUCTS = [
   {id:'protetor-corporal', nome:'Protetor solar corporal FPS 50', ativo:'filtros físicos e químicos', goals:['uniformizar','gestante'], gestanteSafe:true, uso:'Todas as manhãs em áreas expostas ao sol, reaplicando a cada 2h.', preco:2},
   {id:'oleo-rosehip-avancado', nome:'Sérum de óleo de rosehip concentrado', ativo:'trans-retinoico natural + vitamina C', goals:['estimular-colageno','estria-alba','gestante'], gestanteSafe:true, uso:'Alternativa mais suave ao retinoico sintético, manhã ou noite.', preco:2}
 ];
+
+/* NOVO — 6. LOJINHA: enriquece cada produto com metadados de filtro
+   (faixa de preço, tipo de pele indicado, se é vegano) sem precisar
+   reescrever os 16 objetos acima um por um. */
+(function enrichProductsForShop(){
+  var SENSIVEL_IDS = ['centella','alantoina'];
+  var OLEOSA_IDS = ['vitamina-c','niacinamida','acido-glicolico'];
+  var SECA_IDS = ['rosa-mosqueta','manteiga-karite','manteiga-cacau','oleo-amendoas','manteiga-murumuru','oleo-semente-uva'];
+  var NAO_VEGANO_IDS = ['peptideos']; // peptídeos de colágeno podem ter origem animal
+  var PRECO_FAIXA = {1:'ate-30', 2:'30-60', 3:'60-mais'};
+  PRODUCTS.forEach(function(p){
+    p.vegano = NAO_VEGANO_IDS.indexOf(p.id)===-1;
+    p.precoFaixa = PRECO_FAIXA[p.preco];
+    if(SENSIVEL_IDS.indexOf(p.id)>-1) p.tipoPele = ['sensivel','todos'];
+    else if(OLEOSA_IDS.indexOf(p.id)>-1) p.tipoPele = ['oleosa','mista','todos'];
+    else if(SECA_IDS.indexOf(p.id)>-1) p.tipoPele = ['seca','todos'];
+    else p.tipoPele = ['todos'];
+  });
+})();
+
+var KIT_DO_MES = {
+  nome:'Kit Abdômen + Lombar',
+  desc:'Os três ativos mais usados juntos por quem está tratando estrias de gestação nessas duas áreas.',
+  itemIds:['centella','rosa-mosqueta','acido-hialuronico']
+};
 
 var PRODUCT_FILTERS = [
   {id:'todos', label:'Todos'},
@@ -1149,6 +1413,130 @@ var FASES = [
 var WEEKDAYS = ['D','S','T','Q','Q','S','S'];
 
 /* ============================================================
+   NOVO — 1. HISTÓRIAS REAIS
+   Depoimentos fictícios de exemplo (nenhuma pessoa real), só para o
+   feed não nascer vazio. "Contar minha história" adiciona novos
+   relatos no mesmo formato, guardados apenas nesta sessão.
+   ============================================================ */
+var STORY_CATEGORIES = [
+  {id:'todas', label:'Todas'},
+  {id:'gravidez', label:'Gravidez'},
+  {id:'emagrecimento', label:'Emagrecimento'},
+  {id:'adolescencia', label:'Adolescência'}
+];
+var STORIES_SEED = [
+  {id:'s1', nome:'Usuária anônima', categoria:'gravidez', tempo:'8 meses de rotina', melhora:35, ajudou:'Centella asiática todo dia + nunca pular a hidratação depois do banho.', temFoto:false},
+  {id:'s2', nome:'Usuária anônima', categoria:'emagrecimento', tempo:'1 ano de rotina', melhora:42, ajudou:'Ácido retinoico à noite, sem falhar, e paciência — só vi diferença clara depois do 3º mês.', temFoto:false},
+  {id:'s3', nome:'Usuária anônima', categoria:'adolescencia', tempo:'5 meses de rotina', melhora:20, ajudou:'Óleo de rosa mosqueta massageando bem, todo santo dia, mesmo cansada.', temFoto:false},
+  {id:'s4', nome:'Usuária anônima', categoria:'gravidez', tempo:'1 ano e 4 meses', melhora:55, ajudou:'Comecei ainda com a estria rubra, no começo — acho que isso fez toda diferença no resultado.', temFoto:false},
+  {id:'s5', nome:'Usuária anônima', categoria:'emagrecimento', tempo:'6 meses de rotina', melhora:18, ajudou:'Vitamina C de manhã, protetor solar todo dia — a uniformização do tom ajudou mais que eu esperava.', temFoto:false}
+];
+
+/* ============================================================
+   NOVO — 3. CUIDADOS EM CASA
+   ============================================================ */
+var HOMECARE = [
+  {
+    nome:'Óleo de rosa mosqueta', emoji:'🌹',
+    como:'Aplique de 2 a 3 gotas na área, massageando em movimentos circulares por 2 a 3 minutos, de preferência à noite.',
+    paraQue:'Hidratação profunda e reposição de ácidos graxos essenciais, que ajudam a manter a barreira da pele mais flexível.',
+    ciencia:'Estudos pequenos associam o óleo de rosa mosqueta à melhora da hidratação e da aparência de cicatrizes, mas as evidências para estrias especificamente ainda são limitadas — funciona melhor como parte de uma rotina, não sozinho.',
+    atencao:'Pode manchar tecidos claros. Rarissimamente causa irritação em pele muito sensível — teste antes numa área pequena.'
+  },
+  {
+    nome:'Babosa (aloe vera)', emoji:'🌿',
+    como:'Extraia o gel puro da folha (ou use um gel comercial sem álcool) e aplique fino, deixando absorver antes de vestir roupa.',
+    paraQue:'Efeito calmante e levemente refrescante, útil em estrias recentes que ainda coçam ou incomodam.',
+    ciencia:'A babosa tem propriedades calmantes e umectantes bem documentadas para a pele em geral. Faltam estudos robustos mostrando que ela reduz estrias já formadas.',
+    atencao:'Algumas pessoas são alérgicas à babosa — teste numa área pequena antes de aplicar em áreas grandes.'
+  },
+  {
+    nome:'Manteiga de karité', emoji:'🧈',
+    como:'Aqueça uma pequena quantidade entre as mãos até derreter levemente e aplique em camada média, à noite.',
+    paraQue:'Selar a hidratação e amaciar áreas muito ressecadas — boa opção para quem tem pele seca de base.',
+    ciencia:'Rica em ácidos graxos, tem efeito emoliente bem estabelecido. Como outros hidratantes, ajuda a manter a pele confortável durante o tratamento, mas não há evidência de que sozinha reduza estrias.',
+    atencao:'Textura mais encorpada — pode deixar sensação de oleosidade em pele já oleosa; prefira aplicar só onde está mais seco.'
+  },
+  {
+    nome:'Esfoliação', emoji:'✨',
+    como:'Uma a duas vezes por semana, com movimentos leves e circulares, por 2 a 3 minutos, seguida sempre de hidratante.',
+    paraQue:'Remover células mortas da superfície, o que pode ajudar os ativos hidratantes e cicatrizantes a penetrar melhor.',
+    ciencia:'A esfoliação regular melhora a textura geral da pele. Seu efeito direto sobre estrias é mais um coadjuvante do que um tratamento — o resultado principal vem dos ativos usados depois.',
+    atencao:'Esfoliar todo dia ou com força demais pode irritar e piorar a sensibilidade da área — nunca em estrias com ferida aberta ou inflamação visível.'
+  }
+];
+
+/* ============================================================
+   NOVO — 4. POR FASE DA VIDA
+   ============================================================ */
+var PHASES_LIFE = [
+  {
+    id:'gestante', label:'Gestante', emoji:'🤰',
+    resumo:'Prioridade em segurança: nada de ativos contraindicados, foco em hidratação e conforto.',
+    rotina:['Hidratante ou óleo neutro pela manhã em toda a área que está esticando (barriga, quadril, seios, coxas).','Massagem leve à noite com óleo de rosa mosqueta ou amêndoas.','Protetor solar em áreas expostas, mesmo grávida.'],
+    produtos:['Óleo de rosa mosqueta','Manteiga de karité','Ácido hialurônico','Centella asiática'],
+    cuidados:'Evite ácido retinoico, ácido salicílico em alta concentração e procedimentos a laser sem liberação médica. Sempre confirme qualquer ativo novo com o obstetra.'
+  },
+  {
+    id:'posparto', label:'Pós-parto', emoji:'🍼',
+    resumo:'Pele ainda sensível, corpo em recuperação — rotina simples e realista para uma fase corrida.',
+    rotina:['Hidratação rápida (5 min) aproveitando o momento da amamentação/mamadeira, se possível.','À noite, quando der, óleo de massagem nas áreas mais afetadas.','Se amamentando, mantenha os mesmos cuidados do modo gestante para ativos.'],
+    produtos:['Centella asiática','Manteiga de cacau','Niacinamida (se não amamentando)'],
+    cuidados:'Não existe pressa: a pele continua mudando por meses após o parto. Se estiver amamentando, mantenha as restrições de ativos da gestação.'
+  },
+  {
+    id:'adolescencia', label:'Adolescência', emoji:'🌱',
+    resumo:'Estirões de crescimento rápido — pele geralmente mais oleosa e resiliente, mas ainda em formação.',
+    rotina:['Hidratante leve, não comedogênico, de manhã.','À noite, óleo ou creme nas áreas que mais esticaram (coxas, quadril, seios, costas).','Protetor solar diário, mesmo em dias nublados.'],
+    produtos:['Óleo de amêndoas doces','Niacinamida','Vitamina C'],
+    cuidados:'Ativos mais fortes (retinoico, ácidos em alta concentração) costumam ser liberados por dermatologistas caso a caso — não inicie sem orientação, principalmente antes dos 16-18 anos.'
+  },
+  {
+    id:'emagrecimento', label:'Emagrecimento', emoji:'⚖️',
+    resumo:'Perda de peso rápida estica e retrai a pele — hidratação e firmeza entram no radar junto com as estrias.',
+    rotina:['Sérum com vitamina C ou peptídeos pela manhã, antes do hidratante.','Esfoliação leve 1-2x por semana.','À noite, ácido retinoico (se não gestante/amamentando) ou centella, seguido de óleo de massagem.'],
+    produtos:['Sérum de vitamina C','Peptídeos de colágeno','Creme com ácido retinoico'],
+    cuidados:'Perder peso de forma mais gradual (quando possível) reduz o estiramento rápido da pele, um dos principais fatores de risco para novas estrias.'
+  }
+];
+
+/* ============================================================
+   NOVO — 5. ASSISTENTE IA
+   Não é um modelo de linguagem de verdade: é um respondedor por
+   palavras-chave que usa o conteúdo já presente neste app (mitos,
+   fases, produtos, rotina). Qualquer sinal de risco (dor, sangramento,
+   infecção, ferida, alergia) direciona para um dermatologista, nunca
+   tenta "resolver" o caso sozinho.
+   ============================================================ */
+var CHAT_RISK_WORDS = ['dor','sangr','pus','infecç','infecc','febre','ferida aberta','alerg','inchaç','inchac','vermelhidão forte','vermelhidao forte','ardência forte','ardencia forte'];
+var CHAT_KB = [
+  { keys:['gravida','gestante','gravidez','amamenta'], reply:'Na gestação e amamentação, o mais seguro é priorizar hidratação (óleo de rosa mosqueta, manteiga de karité, centella asiática) e evitar ácido retinoico. Veja a aba "Por fase da vida" → Gestante para a rotina completa.' },
+  { keys:['retinoico','retinóico','tretinoina','tretinoína'], reply:'O ácido retinoico ajuda a estimular colágeno e costuma ser usado à noite, de forma contínua — mas não é indicado na gestação nem na amamentação. Dá uma olhada na aba "Produtos" filtrando por "Estimular colágeno".' },
+  { keys:['quanto tempo','demora','resultado','ver resultado'], reply:'Estrias recentes (rubras) costumam responder mais rápido; estrias antigas (albas) levam mais tempo, geralmente 8 a 12 semanas de uso constante para começar a notar diferença. Veja a aba "Fases da estria" para entender melhor.' },
+  { keys:['cólica','colica','crianç'], reply:'Esse app é focado em cuidado com estrias na pele — para dúvidas sobre bebês e crianças, esse não é o assunto certo por aqui. Consulte um pediatra.' },
+  { keys:['funciona mesmo','tem prova','evidência','evidencia','cientif'], reply:'A gente tenta ser honesta sobre isso na aba "Mitos e verdades" e em "Cuidados em casa": alguns ativos (retinoico, vitamina C, ácido hialurônico) têm mais evidência científica que outros (como manteiga de cacau sozinha). Vale conferir os dois.' },
+  { keys:['gluteo','bumbum','coxa','abdomen','abdômen','lombar','costas','seio','braço','braco'], reply:'Toque na área correspondente no "Mapa do corpo" — cada uma tem causas comuns e uma rotina de manhã/noite específica para ela.' },
+  { keys:['produto barato','preço','preco','quanto custa'], reply:'Na aba "Produtos" dá pra filtrar por faixa de preço, tipo de pele e se é vegano — e tem um "Kit do mês" com uma combinação comum pra abdômen e lombar.' },
+  { keys:['sumir','sumiu','desaparecer','tirar de vez'], reply:'De forma realista, estrias não costumam "sumir" por completo — o objetivo dos tratamentos é reduzir o contraste de cor e melhorar a textura, deixando-as bem menos visíveis. Veja "Mitos e verdades" para mais sobre isso.' }
+];
+var CHAT_SUGGESTIONS = ['Posso usar retinoico grávida?', 'Quanto tempo até ver resultado?', 'Isso tem comprovação científica?', 'Estria sai de vez?'];
+
+/* ============================================================
+   NOVO — 7. DESAFIO 30 DIAS
+   ============================================================ */
+var CHALLENGE_TASKS = [
+  {id:'hidratar', label:'Hidratar', emoji:'💧'},
+  {id:'foto', label:'Foto', emoji:'📸'},
+  {id:'protetor', label:'Protetor solar', emoji:'☀️'}
+];
+var CHALLENGE_BADGES = [
+  {days:7, emoji:'🥉', label:'7 dias'},
+  {days:14, emoji:'🥈', label:'14 dias'},
+  {days:21, emoji:'🥇', label:'21 dias'},
+  {days:30, emoji:'🏆', label:'30 dias'}
+];
+
+/* ============================================================
    ESTADO (em memória — reinicia ao recarregar a página)
    ============================================================ */
 var state = {
@@ -1164,7 +1552,19 @@ var state = {
   scannerCurrentArea: null,
   scannerPendingImage: null,
   reminders:[],    // {id,time,text,days:[0..6]}
-  reminderDaysDraft:[1,2,3,4,5]
+  reminderDaysDraft:[1,2,3,4,5],
+  // ---- NOVO: 7 seções ----
+  storyFilter:'todas',
+  storyFormOpen:false,
+  storyPhotoData:null,
+  phaseTabActive:'gestante',
+  shopFilters:{ preco:'todos', tipoPele:'todos', vegano:false },
+  chatOpen:false,
+  chatHistory:[],   // {from:'bot'|'user', text, risk}
+  challenge:{
+    startDate: todayISO(),
+    days:{}   // 'YYYY-MM-DD' -> {hidratar:bool, foto:bool, protetor:bool}
+  }
 };
 
 function uid(){ return Math.random().toString(36).slice(2,10); }
@@ -1199,12 +1599,14 @@ var VIEW_TITLES = {
   plano:['Meu plano','rotina personalizada por área'],
   diario:['Diário de fotos','uma foto por semana, sempre igual'],
   scanner:['Scanner de estria','marque e acompanhe o tamanho'],
+  historias:['Histórias reais','relatos de quem já passou por isso'],
   lembretes:['Lembretes','a hora certa de passar o creme'],
   produtos:['Produtos','catálogo por ativo e objetivo'],
   mitos:['Mitos e verdades','o que realmente funciona'],
+  cuidadosemcasa:['Cuidados em casa','ingredientes explicados'],
   fases:['Fases da estria','entender antes de tratar'],
   receitas:['Receitas caseiras','complementos naturais'],
-  gestante:['Modo gestante','segurança em primeiro lugar'],
+  gestante:['Por fase da vida','gestante, pós-parto, adolescência, emagrecimento'],
   instalar:['Instalar app','tela inicial, Android e iOS']
 };
 
@@ -1220,9 +1622,11 @@ function navigate(view){
   if(view==='mapa') renderMapa();
   if(view==='diario') renderDiario();
   if(view==='scanner') renderScanner();
+  if(view==='historias') renderStories();
   if(view==='lembretes') renderReminders();
   if(view==='produtos') renderProdutos();
   if(view==='mitos') renderMitos();
+  if(view==='cuidadosemcasa') renderHomecare();
   if(view==='fases') renderFases();
   if(view==='receitas') renderReceitas();
   if(view==='gestante') renderGestante();
@@ -1247,6 +1651,8 @@ function renderDashboard(){
 
   var streak = computeStreak();
   document.getElementById('streakChip').innerHTML = '🔥 <b>'+streak+'</b>&nbsp;semanas seguidas';
+
+  renderChallengeCard();
 }
 
 function computeStreak(){
@@ -1399,6 +1805,7 @@ function renderAreaDetail(id){
       +'<div class="routine-col am"><h4>☀️ Manhã</h4>'+rot.manha.map(function(s,i){return '<div class="routine-step"><span class="num">'+(i+1)+'</span>'+s+'</div>';}).join('')+'</div>'
       +'<div class="routine-col pm"><h4>🌙 Noite</h4>'+rot.noite.map(function(s,i){return '<div class="routine-step"><span class="num">'+(i+1)+'</span>'+s+'</div>';}).join('')+'</div>'
     +'</div>'
+    +'<div class="med-disclaimer"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" fill="none"><path d="M12 9v4M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>Conteúdo informativo. Consulte um dermatologista.</div>'
     +'<div class="notes-box">'
       +'<label class="field-label" for="areaNotesInput">Anotações desta área</label>'
       +'<textarea id="areaNotesInput" placeholder="Ex: comecei o retinoico dia 10, sem irritação até agora...">'+(state.notes[id]||'')+'</textarea>'
@@ -1525,6 +1932,7 @@ function renderPlano(){
         +'<div class="routine-col am"><h4>☀️ Manhã</h4>'+rot.manha.map(function(s,i){return '<div class="routine-step"><span class="num">'+(i+1)+'</span>'+s+'</div>';}).join('')+'</div>'
         +'<div class="routine-col pm"><h4>🌙 Noite</h4>'+rot.noite.map(function(s,i){return '<div class="routine-step"><span class="num">'+(i+1)+'</span>'+s+'</div>';}).join('')+'</div>'
       +'</div>'
+      +'<div class="med-disclaimer"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" fill="none"><path d="M12 9v4M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>Conteúdo informativo. Consulte um dermatologista.</div>'
     +'</div>';
   });
   html += '</div>';
@@ -1547,7 +1955,8 @@ function renderDiario(){
   updateDiaryGate();
   renderDiaryGrid();
   renderCompare();
-  sel.onchange = function(){ updateDiaryGate(); renderDiaryGrid(); renderCompare(); };
+  renderEvo();
+  sel.onchange = function(){ updateDiaryGate(); renderDiaryGrid(); renderCompare(); renderEvo(); };
 }
 
 function currentDiaryArea(){ return document.getElementById('diaryAreaSelect').value; }
@@ -1909,15 +2318,21 @@ function renderProdutosFilters(){
   });
 }
 function renderProdutos(){
+  renderKitBanner();
+  renderShopFilters();
   renderProdutosFilters();
   var grid = document.getElementById('productGrid');
   var list = PRODUCTS.filter(function(p){
     if(state.pregnant && !p.gestanteSafe) return false;
-    if(productFilterActive==='todos') return true;
-    return p.goals.indexOf(productFilterActive)>-1;
+    if(productFilterActive!=='todos' && p.goals.indexOf(productFilterActive)===-1) return false;
+    if(state.shopFilters.preco!=='todos' && p.precoFaixa!==state.shopFilters.preco) return false;
+    if(state.shopFilters.tipoPele!=='todos' && p.tipoPele.indexOf(state.shopFilters.tipoPele)===-1) return false;
+    if(state.shopFilters.vegano && !p.vegano) return false;
+    if(state.shopKitOnly && state.shopKitOnly.indexOf(p.id)===-1) return false;
+    return true;
   });
   if(!list.length){
-    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;">Nenhum produto nesse filtro'+(state.pregnant?' compatível com o modo gestante':'')+'.</div>';
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;">Nenhum produto com esses filtros'+(state.pregnant?' + modo gestante':'')+'.</div>';
     return;
   }
   grid.innerHTML = list.map(function(p){
@@ -1925,8 +2340,9 @@ function renderProdutos(){
       +'<div class="top"><h3>'+p.nome+'</h3>'+(p.gestanteSafe?'<span class="tag sage">gestante ok</span>':'<span class="tag clay">evitar na gestação</span>')+'</div>'
       +'<div class="active-ing">ativo: '+p.ativo+'</div>'
       +'<p style="font-size:13px;margin:2px 0 4px;">'+p.uso+'</p>'
-      +'<div class="tags">'+p.goals.map(function(g){return '<span class="tag">'+(PRODUCT_FILTERS.filter(function(f){return f.id===g;})[0]||{label:g}).label+'</span>';}).join('')+'</div>'
+      +'<div class="tags">'+p.goals.map(function(g){return '<span class="tag">'+(PRODUCT_FILTERS.filter(function(f){return f.id===g;})[0]||{label:g}).label+'</span>';}).join('')+(p.vegano?'<span class="tag sage">🌱 vegano</span>':'')+'</div>'
       +'<div class="price-dots">'+[1,2,3].map(function(n){return '<i class="'+(n<=p.preco?'on':'')+'"></i>';}).join('')+'<small style="margin-left:6px;">faixa de preço</small></div>'
+      +'<a class="btn btn-primary btn-sm buy-btn" href="'+buyLink(p.nome)+'" target="_blank" rel="noopener sponsored">🛒 Comprar</a>'
     +'</div>';
   }).join('');
 }
@@ -1977,6 +2393,8 @@ function renderReceitas(){
    MODO GESTANTE (view dedicada)
    ============================================================ */
 function renderGestante(){
+  renderPhaseTabs();
+  renderPhasePanels();
   document.getElementById('gestSafeList').innerHTML = GEST_SAFE.map(function(s){return '<li>'+s+'</li>';}).join('');
   document.getElementById('gestAvoidList').innerHTML = GEST_AVOID.map(function(s){return '<li>'+s+'</li>';}).join('');
 }
@@ -2050,8 +2468,409 @@ if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.s
 }
 
 /* ============================================================
-   INIT
+   NOVO — 1. HISTÓRIAS REAIS
    ============================================================ */
+var userStories = [];
+
+function allStories(){ return userStories.concat(STORIES_SEED); }
+
+function renderStoryFilters(){
+  var wrap = document.getElementById('storyFilters');
+  wrap.innerHTML = STORY_CATEGORIES.map(function(c){
+    return '<button class="filter-chip'+(state.storyFilter===c.id?' active':'')+'" data-cat="'+c.id+'">'+c.label+'</button>';
+  }).join('');
+  wrap.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click', function(){ state.storyFilter = b.dataset.cat; renderStories(); });
+  });
+}
+
+function renderStories(){
+  renderStoryFilters();
+  var grid = document.getElementById('storyGrid');
+  var list = allStories().filter(function(s){ return state.storyFilter==='todas' || s.categoria===state.storyFilter; });
+  if(!list.length){
+    grid.innerHTML = '<div class="empty-state">Nenhuma história nessa categoria ainda. Que tal ser a primeira a contar a sua?</div>';
+    return;
+  }
+  var catLabel = {};
+  STORY_CATEGORIES.forEach(function(c){ catLabel[c.id]=c.label; });
+  grid.innerHTML = list.map(function(s){
+    var photoHtml = s.temFoto && s.fotoData
+      ? '<img class="story-photo" src="'+s.fotoData+'" alt="Foto enviada, desfocada por privacidade">'
+      : '<div class="story-photo-empty">🙂</div>';
+    return '<div class="card story-card">'
+      + photoHtml
+      + '<div class="story-body">'
+        + '<div class="story-head"><b>'+s.nome+'</b><span class="tag amber">'+(catLabel[s.categoria]||s.categoria)+'</span></div>'
+        + '<div class="story-stats">'
+          + '<div class="story-stat"><b>'+s.tempo+'</b>tempo de tratamento</div>'
+          + '<div class="story-stat"><b>'+s.melhora+'%</b>melhora percebida</div>'
+        + '</div>'
+        + '<p class="story-quote">"'+s.ajudou+'"</p>'
+      + '</div>'
+    + '</div>';
+  }).join('');
+}
+
+function renderStoryForm(){
+  var card = document.getElementById('storyFormCard');
+  card.innerHTML =
+    '<h3 style="margin-bottom:12px;">Contar minha história</h3>'
+    + '<div class="story-form-fields">'
+      + '<div class="field"><label class="field-label">Categoria</label>'
+        + '<select id="storyCatInput">'+STORY_CATEGORIES.filter(function(c){return c.id!=='todas';}).map(function(c){return '<option value="'+c.id+'">'+c.label+'</option>';}).join('')+'</select></div>'
+      + '<div class="field"><label class="field-label">Tempo de tratamento</label><input type="text" id="storyTempoInput" placeholder="Ex: 6 meses de rotina"></div>'
+      + '<div class="field"><label class="field-label">% de melhora percebida</label><input type="number" id="storyMelhoraInput" min="0" max="100" placeholder="Ex: 30"></div>'
+      + '<div class="field"><label class="field-label">Foto (opcional — fica desfocada)</label><input type="file" id="storyFotoInput" accept="image/*"></div>'
+    + '</div>'
+    + '<div class="field"><label class="field-label">O que mais ajudou?</label><textarea id="storyAjudouInput" placeholder="Conte em poucas linhas o que fez diferença pra você..."></textarea></div>'
+    + '<div style="display:flex;gap:10px;">'
+      + '<button class="btn btn-primary" id="storySubmitBtn">Publicar história</button>'
+      + '<button class="btn btn-ghost" id="storyCancelBtn">Cancelar</button>'
+    + '</div>'
+    + '<div class="med-disclaimer"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" fill="none"><path d="M12 9v4M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>Sua história fica visível só nesta sessão do navegador, pra outras pessoas que abrirem o app agora — não é enviada a lugar nenhum.</div>';
+
+  document.getElementById('storyFotoInput').addEventListener('change', function(e){
+    var file = e.target.files[0];
+    if(!file){ state.storyPhotoData=null; return; }
+    var reader = new FileReader();
+    reader.onload = function(ev){ state.storyPhotoData = ev.target.result; };
+    reader.readAsDataURL(file);
+  });
+  document.getElementById('storyCancelBtn').addEventListener('click', function(){
+    state.storyFormOpen = false; state.storyPhotoData = null;
+    document.getElementById('storyFormCard').style.display='none';
+  });
+  document.getElementById('storySubmitBtn').addEventListener('click', function(){
+    var categoria = document.getElementById('storyCatInput').value;
+    var tempo = document.getElementById('storyTempoInput').value.trim();
+    var melhora = parseInt(document.getElementById('storyMelhoraInput').value)||0;
+    var ajudou = document.getElementById('storyAjudouInput').value.trim();
+    if(!tempo || !ajudou){ toast('Preencha ao menos o tempo de tratamento e o que ajudou.', 'warn'); return; }
+    userStories.unshift({
+      id:uid(), nome:'Você', categoria:categoria, tempo:tempo, melhora:Math.min(100,Math.max(0,melhora)),
+      ajudou:ajudou, temFoto: !!state.storyPhotoData, fotoData: state.storyPhotoData
+    });
+    state.storyFormOpen = false; state.storyPhotoData = null;
+    document.getElementById('storyFormCard').style.display='none';
+    toast('História publicada — obrigada por compartilhar 💛', 'ok');
+    renderStories();
+  });
+}
+
+document.getElementById('contarHistoriaBtn').addEventListener('click', function(){
+  state.storyFormOpen = !state.storyFormOpen;
+  var card = document.getElementById('storyFormCard');
+  if(state.storyFormOpen){ renderStoryForm(); card.style.display='block'; card.scrollIntoView({behavior:'smooth', block:'center'}); }
+  else{ card.style.display='none'; }
+});
+
+/* ============================================================
+   NOVO — 2. CALCULADORA DE EVOLUÇÃO
+   Compara a primeira e a última foto de uma área (via canvas):
+   estima uma "redução de vermelhidão" comparando o canal vermelho
+   médio e uma variação de "textura" comparando o contraste local.
+   São métricas aproximadas e ilustrativas, não uma medição clínica.
+   ============================================================ */
+function analyzeImage(dataUrl, callback){
+  var img = new Image();
+  img.onload = function(){
+    var c = document.createElement('canvas');
+    var size = 80;
+    c.width = size; c.height = size;
+    var ctx = c.getContext('2d');
+    ctx.drawImage(img, 0, 0, size, size);
+    var data;
+    try{ data = ctx.getImageData(0,0,size,size).data; } catch(e){ callback(null); return; }
+    var rSum=0,gSum=0,bSum=0,lumas=[];
+    for(var i=0;i<data.length;i+=4){
+      var r=data[i], g=data[i+1], b=data[i+2];
+      rSum+=r; gSum+=g; bSum+=b;
+      lumas.push(0.299*r+0.587*g+0.114*b);
+    }
+    var n = data.length/4;
+    var rAvg=rSum/n, gAvg=gSum/n, bAvg=bSum/n;
+    var redness = rAvg-(gAvg+bAvg)/2;
+    var meanLuma = lumas.reduce(function(a,b){return a+b;},0)/n;
+    var variance = lumas.reduce(function(a,b){return a+(b-meanLuma)*(b-meanLuma);},0)/n;
+    callback({ redness:redness, texture:Math.sqrt(variance) });
+  };
+  img.onerror = function(){ callback(null); };
+  img.src = dataUrl;
+}
+
+function renderEvo(){
+  var card = document.getElementById('evoCard');
+  var areaId = currentDiaryArea();
+  var photos = state.photos.filter(function(p){return p.areaId===areaId;}).sort(function(a,b){return a.date>b.date?1:-1;});
+  if(photos.length<2){
+    card.innerHTML = '<div class="card-title"><h3>Calculadora de evolução</h3></div><div class="empty-state">Envie pelo menos 2 fotos desta área (com um tempo de diferença) para calcular a evolução.</div>';
+    return;
+  }
+  var first = photos[0], last = photos[photos.length-1];
+  card.innerHTML = '<div class="card-title"><h3>Calculadora de evolução</h3><span class="tag sage">'+fmtDate(first.date)+' → '+fmtDate(last.date)+'</span></div><div id="evoBody"><div class="empty-state">Calculando…</div></div>';
+
+  analyzeImage(first.dataUrl, function(a){
+    analyzeImage(last.dataUrl, function(b){
+      var body = document.getElementById('evoBody');
+      if(!body) return; // usuário já trocou de área
+      if(!a || !b){
+        body.innerHTML = '<div class="empty-state">Não foi possível analisar essas fotos (formato não suportado pelo navegador).</div>';
+        return;
+      }
+      var rednessChange = a.redness===0 ? 0 : ((b.redness-a.redness)/Math.max(1,Math.abs(a.redness)))*100;
+      var textureChange = a.texture===0 ? 0 : ((b.texture-a.texture)/Math.max(1,a.texture))*100;
+      var rednessImproved = rednessChange < 0;   // menos vermelhidão = melhora
+      var textureImproved = textureChange < 0;    // menos variação/aspereza = melhora
+      body.innerHTML =
+        '<div class="evo-metrics">'
+          + '<div class="evo-metric"><div class="val'+(rednessImproved?'':' up')+'">'+(rednessImproved?'▼':'▲')+' '+Math.abs(rednessChange).toFixed(0)+'%</div><div class="lbl">redução de vermelhidão</div></div>'
+          + '<div class="evo-metric"><div class="val'+(textureImproved?'':' up')+'">'+(textureImproved?'▼':'▲')+' '+Math.abs(textureChange).toFixed(0)+'%</div><div class="lbl">variação de textura</div></div>'
+        + '</div>'
+        + '<div class="evo-sidebyside">'
+          + '<figure><img src="'+first.dataUrl+'" alt="Foto inicial"><figcaption>'+fmtDate(first.date)+'</figcaption></figure>'
+          + '<figure><img src="'+last.dataUrl+'" alt="Foto mais recente"><figcaption>'+fmtDate(last.date)+'</figcaption></figure>'
+        + '</div>'
+        + '<div class="med-disclaimer"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" fill="none"><path d="M12 9v4M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>Estimativa visual automática a partir das fotos enviadas — não é uma medição clínica. Conteúdo informativo. Consulte um dermatologista.</div>';
+    });
+  });
+}
+
+
+/* ============================================================
+   NOVO — 3. CUIDADOS EM CASA
+   ============================================================ */
+function renderHomecare(){
+  var grid = document.getElementById('homecareGrid');
+  grid.innerHTML = HOMECARE.map(function(h){
+    return '<div class="card homecare-card">'
+      + '<h3>'+h.emoji+' '+h.nome+'</h3>'
+      + '<div class="homecare-field"><b>Como usar</b><p>'+h.como+'</p></div>'
+      + '<div class="homecare-field"><b>Funciona pra quê</b><p>'+h.paraQue+'</p></div>'
+      + '<div class="homecare-field"><b>O que a ciência diz</b><p>'+h.ciencia+'</p></div>'
+      + '<div class="homecare-field attention"><b>Atenção</b><p>'+h.atencao+'</p></div>'
+    + '</div>';
+  }).join('');
+}
+
+/* ============================================================
+   NOVO — 4. POR FASE DA VIDA
+   ============================================================ */
+function renderPhaseTabs(){
+  var tabsWrap = document.getElementById('phaseTabs');
+  tabsWrap.innerHTML = PHASES_LIFE.map(function(p){
+    return '<button class="phase-tab'+(state.phaseTabActive===p.id?' active':'')+'" data-phase="'+p.id+'">'+p.emoji+' '+p.label+'</button>';
+  }).join('');
+  tabsWrap.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click', function(){ state.phaseTabActive = b.dataset.phase; renderPhaseTabs(); renderPhasePanels(); });
+  });
+}
+function renderPhasePanels(){
+  var wrap = document.getElementById('phasePanels');
+  wrap.innerHTML = PHASES_LIFE.map(function(p){
+    return '<div class="phase-panel'+(state.phaseTabActive===p.id?' active':'')+'" data-phase="'+p.id+'">'
+      + '<p style="margin-bottom:16px;">'+p.resumo+'</p>'
+      + '<div class="routine-cols" style="grid-template-columns:1fr;">'
+        + '<div class="routine-col am"><h4>Rotina sugerida</h4>'+p.rotina.map(function(s,i){return '<div class="routine-step"><span class="num">'+(i+1)+'</span>'+s+'</div>';}).join('')+'</div>'
+      + '</div>'
+      + '<div class="causes-list" style="margin-top:14px;">'+p.produtos.map(function(pr){return '<span class="tag amber">'+pr+'</span>';}).join('')+'</div>'
+      + '<p style="margin-top:12px;font-size:13px;">'+p.cuidados+'</p>'
+    + '</div>';
+  }).join('');
+}
+
+/* ============================================================
+   NOVO — 5. ASSISTENTE IA (respondedor por palavras-chave)
+   ============================================================ */
+function normalizeChat(s){
+  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+}
+function isRiskMessage(msg){
+  var n = normalizeChat(msg);
+  return CHAT_RISK_WORDS.some(function(w){ return n.indexOf(normalizeChat(w))>-1; });
+}
+function botAnswer(msg){
+  if(isRiskMessage(msg)){
+    return { text:'Isso parece algo que vale avaliação presencial — dor, sangramento, ferida, inchaço ou sinais de infecção não são coisa pra esperar. Procure um dermatologista.', risk:true };
+  }
+  var n = normalizeChat(msg);
+  for(var i=0;i<CHAT_KB.length;i++){
+    var entry = CHAT_KB[i];
+    for(var j=0;j<entry.keys.length;j++){
+      if(n.indexOf(normalizeChat(entry.keys[j]))>-1){
+        return { text: entry.reply, risk:false };
+      }
+    }
+  }
+  return { text:'Não tenho uma resposta certeira pra isso na base do site — dá uma olhada nas abas "Mitos e verdades" ou "Fases da estria", ou pergunta de outro jeito. Para qualquer sintoma físico (dor, ferida, alergia), procure um dermatologista.', risk:false };
+}
+function renderChatBody(){
+  var body = document.getElementById('chatBody');
+  if(state.chatHistory.length===0){
+    state.chatHistory.push({from:'bot', text:'Oi! Posso ajudar com dúvidas sobre estrias com base no conteúdo deste app — rotina, produtos, fases, gestação. Para qualquer sintoma (dor, ferida, alergia), sempre vou te indicar um dermatologista.', risk:false});
+  }
+  body.innerHTML = state.chatHistory.map(function(m){
+    return '<div class="chat-msg '+m.from+(m.risk?' risk':'')+'">'+m.text+'</div>';
+  }).join('');
+  body.scrollTop = body.scrollHeight;
+}
+function renderChatSuggestions(){
+  var row = document.getElementById('chatSuggestRow');
+  row.innerHTML = CHAT_SUGGESTIONS.map(function(s){ return '<button class="chat-suggest">'+s+'</button>'; }).join('');
+  row.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click', function(){ sendChatMessage(b.textContent); });
+  });
+}
+function sendChatMessage(text){
+  text = (text||'').trim();
+  if(!text) return;
+  state.chatHistory.push({from:'user', text:text, risk:false});
+  var answer = botAnswer(text);
+  state.chatHistory.push({from:'bot', text:answer.text, risk:answer.risk});
+  renderChatBody();
+}
+function openChat(){
+  state.chatOpen = true;
+  document.getElementById('chatPanel').classList.add('open');
+  document.getElementById('chatFab').setAttribute('aria-expanded','true');
+  renderChatBody();
+  renderChatSuggestions();
+  document.getElementById('chatInput').focus();
+}
+function closeChat(){
+  state.chatOpen = false;
+  document.getElementById('chatPanel').classList.remove('open');
+  document.getElementById('chatFab').setAttribute('aria-expanded','false');
+}
+document.getElementById('chatFab').addEventListener('click', function(){
+  state.chatOpen ? closeChat() : openChat();
+});
+document.getElementById('chatCloseBtn').addEventListener('click', closeChat);
+document.getElementById('chatSendBtn').addEventListener('click', function(){
+  var input = document.getElementById('chatInput');
+  sendChatMessage(input.value);
+  input.value='';
+});
+document.getElementById('chatInput').addEventListener('keydown', function(e){
+  if(e.key==='Enter'){
+    e.preventDefault();
+    sendChatMessage(this.value);
+    this.value='';
+  }
+});
+
+/* ============================================================
+   NOVO — 6. LOJINHA
+   ============================================================ */
+function renderKitBanner(){
+  var kit = KIT_DO_MES;
+  var items = kit.itemIds.map(function(id){ return PRODUCTS.filter(function(p){return p.id===id;})[0]; }).filter(Boolean);
+  document.getElementById('kitBanner').innerHTML =
+    '<div class="txt"><b>🎁 Kit do mês — '+kit.nome+'</b><span>'+kit.desc+'</span>'
+      + '<div class="kit-items">'+items.map(function(p){return '<span class="tag amber">'+p.nome+'</span>';}).join('')+'</div>'
+    + '</div>'
+    + '<button class="btn btn-primary" id="kitFilterBtn">Ver os 3 produtos</button>';
+  document.getElementById('kitFilterBtn').addEventListener('click', function(){
+    productFilterActive = 'todos';
+    state.shopFilters = {preco:'todos', tipoPele:'todos', vegano:false};
+    state.shopKitOnly = kit.itemIds;
+    renderProdutos();
+  });
+}
+var SHOP_PRECO_OPTS = [{id:'todos',label:'Todos'},{id:'ate-30',label:'Até R$30'},{id:'30-60',label:'R$30–60'},{id:'60-mais',label:'R$60+'}];
+var SHOP_PELE_OPTS = [{id:'todos',label:'Todos'},{id:'seca',label:'Seca'},{id:'oleosa',label:'Oleosa/mista'},{id:'sensivel',label:'Sensível'}];
+function renderShopFilters(){
+  var wrap = document.getElementById('shopFilters');
+  wrap.innerHTML =
+    '<div class="shop-filter-group"><span class="lbl">Preço</span><div class="opts" id="shopFiltroPreco">'
+      + SHOP_PRECO_OPTS.map(function(o){return '<button class="filter-chip'+(state.shopFilters.preco===o.id?' active':'')+'" data-preco="'+o.id+'">'+o.label+'</button>';}).join('')
+    + '</div></div>'
+    + '<div class="shop-filter-group"><span class="lbl">Tipo de pele</span><div class="opts" id="shopFiltroPele">'
+      + SHOP_PELE_OPTS.map(function(o){return '<button class="filter-chip'+(state.shopFilters.tipoPele===o.id?' active':'')+'" data-pele="'+o.id+'">'+o.label+'</button>';}).join('')
+    + '</div></div>'
+    + '<div class="shop-filter-group"><span class="lbl">Restrição</span><div class="opts">'
+      + '<button class="filter-chip'+(state.shopFilters.vegano?' active':'')+'" id="shopFiltroVegano">🌱 Só veganos</button>'
+    + '</div></div>';
+  wrap.querySelectorAll('#shopFiltroPreco button').forEach(function(b){
+    b.addEventListener('click', function(){ state.shopFilters.preco=b.dataset.preco; state.shopKitOnly=null; renderProdutos(); });
+  });
+  wrap.querySelectorAll('#shopFiltroPele button').forEach(function(b){
+    b.addEventListener('click', function(){ state.shopFilters.tipoPele=b.dataset.pele; state.shopKitOnly=null; renderProdutos(); });
+  });
+  document.getElementById('shopFiltroVegano').addEventListener('click', function(){
+    state.shopFilters.vegano = !state.shopFilters.vegano; state.shopKitOnly=null; renderProdutos();
+  });
+}
+function buyLink(productName){
+  // Link genérico de busca (placeholder) — troque pelo link de afiliado real de cada loja.
+  return 'https://www.google.com/search?tbm=shop&q=' + encodeURIComponent(productName);
+}
+
+/* ============================================================
+   NOVO — 7. DESAFIO 30 DIAS
+   ============================================================ */
+function challengeDayIndex(){
+  return daysBetween(state.challenge.startDate, todayISO()) + 1;
+}
+function challengeTodayEntry(){
+  var d = todayISO();
+  if(!state.challenge.days[d]) state.challenge.days[d] = {hidratar:false, foto:false, protetor:false};
+  return state.challenge.days[d];
+}
+function challengeCompletedDays(){
+  return Object.keys(state.challenge.days).filter(function(d){
+    var e = state.challenge.days[d];
+    return e.hidratar && e.foto && e.protetor;
+  }).length;
+}
+function renderChallengeCard(){
+  var card = document.getElementById('challengeCard');
+  var dayN = Math.min(30, Math.max(1, challengeDayIndex()));
+  var completed = challengeCompletedDays();
+  var today = challengeTodayEntry();
+  card.innerHTML =
+    '<div class="challenge-head">'
+      + '<div><div class="eyebrow">card na home · 7. desafio</div><h3 style="margin:0;">Desafio 30 dias</h3><p style="margin:4px 0 0;">Dia '+dayN+' de 30 — '+completed+' dia(s) completos até agora.</p></div>'
+      + '<div class="challenge-day">'+dayN+'<span style="font-size:13px;color:var(--text-mute);">/30</span></div>'
+    + '</div>'
+    + '<div class="challenge-checks" id="challengeChecks">'
+      + CHALLENGE_TASKS.map(function(t){
+          return '<button class="challenge-check'+(today[t.id]?' done':'')+'" data-task="'+t.id+'">'+t.emoji+' '+t.label+(today[t.id]?' ✓':'')+'</button>';
+        }).join('')
+    + '</div>'
+    + '<div class="badges-row">'
+      + CHALLENGE_BADGES.map(function(b){
+          var earned = completed>=b.days;
+          return '<div class="badge'+(earned?' earned':'')+'"><div class="ic">'+b.emoji+'</div><span>'+b.label+'</span></div>';
+        }).join('')
+    + '</div>'
+    + '<button class="btn btn-outline btn-sm" id="challengeReminderBtn" style="margin-top:14px;">Ativar lembrete diário do desafio</button>';
+
+  card.querySelectorAll('.challenge-check').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var task = btn.dataset.task;
+      var entry = challengeTodayEntry();
+      entry[task] = !entry[task];
+      var wasComplete = completed;
+      renderChallengeCard();
+      var nowComplete = challengeCompletedDays();
+      if(nowComplete>wasComplete){
+        toast('Dia completo! 🎉', 'ok');
+        CHALLENGE_BADGES.forEach(function(b){ if(nowComplete===b.days){ toast('Selo desbloqueado: '+b.emoji+' '+b.label, 'ok'); } });
+      }
+    });
+  });
+  document.getElementById('challengeReminderBtn').addEventListener('click', function(){
+    if(!state.reminders.some(function(r){return r.text.indexOf('Desafio 30 dias')>-1;})){
+      state.reminders.push({id:uid(), time:'20:00', text:'Desafio 30 dias: hidratar + foto + protetor', days:[0,1,2,3,4,5,6]});
+      toast('Lembrete diário do desafio criado às 20:00 ✓', 'ok');
+      renderDashboard();
+    } else {
+      toast('Você já tem um lembrete do desafio criado.', 'warn');
+    }
+  });
+}
+
 function init(){
   navigate('dashboard');
   renderDashboard();
