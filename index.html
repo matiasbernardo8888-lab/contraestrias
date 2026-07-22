@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pele em Camadas — cuidado com estrias</title>
-<meta name="theme-color" content="#100D0B">
+<meta name="theme-color" content="#100D14">
 <meta name="description" content="Acompanhamento diário e plano de tratamento personalizado para estrias, por área do corpo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,29 +12,34 @@
 <style>
 /* ============================================================
    PELE EM CAMADAS — design system
+   PALETA TROCADA: de âmbar/terracota para "lavanda clínica" —
+   lilás suave + coral, sobre um quase-preto arroxeado. Mantém
+   os NOMES das variáveis (--amber, --clay, --sage...) para não
+   quebrar nenhum seletor no restante da folha; só os valores
+   hexadecimais mudam.
    ============================================================ */
 :root{
-  --bg:#100D0B;
-  --bg-alt:#17130F;
-  --surface:#1D1710;
-  --surface-2:#241D15;
-  --surface-3:#2B2318;
-  --border:#332A1F;
-  --border-soft:#241D15;
-  --text:#F4ECE1;
-  --text-dim:#C6B7A6;
-  --text-mute:#8E7E6D;
-  --amber:#E3A93E;
-  --amber-strong:#F0BE5E;
-  --amber-soft:rgba(227,169,62,.14);
-  --amber-line:rgba(227,169,62,.35);
-  --sage:#79A18C;
-  --sage-soft:rgba(121,161,140,.14);
-  --sage-line:rgba(121,161,140,.4);
-  --clay:#B06B4F;
-  --clay-soft:rgba(176,107,79,.16);
-  --danger:#C0574C;
-  --danger-soft:rgba(192,87,76,.14);
+  --bg:#100D14;
+  --bg-alt:#17131E;
+  --surface:#1D1826;
+  --surface-2:#241E2F;
+  --surface-3:#2B2438;
+  --border:#372E45;
+  --border-soft:#241E2F;
+  --text:#F1ECF7;
+  --text-dim:#C3B8D2;
+  --text-mute:#8B7F9C;
+  --amber:#B9A6E8;
+  --amber-strong:#CBB9F2;
+  --amber-soft:rgba(185,166,232,.14);
+  --amber-line:rgba(185,166,232,.35);
+  --sage:#6FB7A8;
+  --sage-soft:rgba(111,183,168,.14);
+  --sage-line:rgba(111,183,168,.4);
+  --clay:#E8927A;
+  --clay-soft:rgba(232,146,122,.16);
+  --danger:#D9695C;
+  --danger-soft:rgba(217,105,92,.14);
   --radius-s:8px;
   --radius-m:14px;
   --radius-l:22px;
@@ -51,8 +56,8 @@ html{-webkit-text-size-adjust:100%;}
 body{
   margin:0;
   background:
-    radial-gradient(ellipse 900px 500px at 85% -10%, rgba(227,169,62,.07), transparent 60%),
-    radial-gradient(ellipse 700px 500px at -10% 20%, rgba(121,161,140,.05), transparent 60%),
+    radial-gradient(ellipse 900px 500px at 85% -10%, rgba(185,166,232,.08), transparent 60%),
+    radial-gradient(ellipse 700px 500px at -10% 20%, rgba(111,183,168,.05), transparent 60%),
     var(--bg);
   color:var(--text);
   font-family:var(--font-body);
@@ -123,7 +128,7 @@ img{max-width:100%;display:block;}
   width:34px;height:34px;border-radius:10px;
   background:linear-gradient(155deg, var(--amber), var(--clay));
   display:flex;align-items:center;justify-content:center;flex:none;
-  box-shadow:0 4px 14px -4px rgba(227,169,62,.5);
+  box-shadow:0 4px 14px -4px rgba(185,166,232,.5);
 }
 .brand-mark svg{width:18px;height:18px;stroke:#171310;}
 .brand-name{font-family:var(--font-display);font-size:17px;line-height:1.15;}
@@ -162,7 +167,7 @@ img{max-width:100%;display:block;}
 .main-col{flex:1;min-width:0;display:flex;flex-direction:column;}
 .topbar{
   position:sticky;top:0;z-index:20;
-  background:rgba(16,13,11,.86);backdrop-filter:blur(10px);
+  background:rgba(16,13,20,.86);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--border-soft);
   padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:12px;
 }
@@ -205,7 +210,7 @@ main{padding:26px 28px 90px;max-width:1180px;}
 }
 .btn:active{transform:scale(.97);}
 .btn svg{width:15px;height:15px;stroke:currentColor;fill:none;}
-.btn-primary{background:var(--amber);color:#211705;}
+.btn-primary{background:var(--amber);color:#1c1530;}
 .btn-primary:hover{background:var(--amber-strong);}
 .btn-outline{background:transparent;border-color:var(--border);color:var(--text);}
 .btn-outline:hover{border-color:var(--amber-line);color:var(--amber-strong);}
@@ -222,7 +227,7 @@ main{padding:26px 28px 90px;max-width:1180px;}
 }
 .tag.amber{background:var(--amber-soft);color:var(--amber-strong);border-color:var(--amber-line);}
 .tag.sage{background:var(--sage-soft);color:var(--sage);border-color:var(--sage-line);}
-.tag.clay{background:var(--clay-soft);color:var(--clay);border-color:rgba(176,107,79,.4);}
+.tag.clay{background:var(--clay-soft);color:var(--clay);border-color:rgba(232,146,122,.4);}
 
 .divider{height:1px;background:var(--border-soft);margin:20px 0;border:none;}
 
@@ -244,7 +249,7 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
 }
 .hero::after{
   content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;
-  background:radial-gradient(circle, rgba(227,169,62,.16), transparent 70%);
+  background:radial-gradient(circle, rgba(185,166,232,.18), transparent 70%);
 }
 .hero-txt{position:relative;z-index:1;max-width:560px;}
 .hero h1{font-size:32px;line-height:1.15;margin-bottom:12px;}
@@ -279,14 +284,23 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
   border:none;background:transparent;color:var(--text-mute);font-size:12px;font-weight:700;
   padding:7px 16px;border-radius:99px;cursor:pointer;font-family:var(--font-mono);letter-spacing:.05em;
 }
-.view-toggle button.active{background:var(--amber);color:#211705;}
+.view-toggle button.active{background:var(--amber);color:#1c1530;}
 .bodymap-svg{width:230px;height:auto;}
+/* Contorno real do corpo (linha fina) — antes o "boneco" era só uma
+   cabeça circular + retângulos soltos flutuando, sem nenhum contorno
+   ligando ombros, cintura, quadril e pernas. Isso é o bug do "boneco"
+   que o pedido menciona: agora existe um caminho (.body-outline)
+   desenhando a silhueta completa por trás das zonas clicáveis. */
+.body-outline{
+  fill:none; stroke:var(--border); stroke-width:1.6; stroke-linejoin:round;
+}
 .zone{
   fill:url(#skin-dots); stroke:var(--border); stroke-width:1.4;
-  cursor:pointer; transition:stroke .2s ease, filter .2s ease;
+  cursor:pointer; transition:stroke .2s ease, filter .2s ease, fill-opacity .2s ease;
+  fill-opacity:.9;
 }
-.zone:hover{stroke:var(--amber);filter:drop-shadow(0 0 8px rgba(227,169,62,.35));}
-.zone.selected{stroke:var(--amber-strong);stroke-width:2.2;filter:drop-shadow(0 0 10px rgba(227,169,62,.5));}
+.zone:hover{stroke:var(--amber);filter:drop-shadow(0 0 8px rgba(185,166,232,.35));}
+.zone.selected{stroke:var(--amber-strong);stroke-width:2.2;filter:drop-shadow(0 0 10px rgba(185,166,232,.5));}
 .zone-label{font-family:var(--font-mono);font-size:9px;fill:var(--text-mute);pointer-events:none;}
 .zone-dot{fill:var(--clay);opacity:.85;pointer-events:none;}
 
@@ -314,6 +328,14 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
 .routine-step:last-child{border-bottom:none;}
 .routine-step .num{font-family:var(--font-mono);font-size:11px;color:var(--text-mute);flex:none;width:16px;}
 .causes-list{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 4px;}
+
+/* NOVO: caixa de anotações por área — antes o indicador visual
+   "has-notes" (bolinha âmbar na lista) existia mas não tinha
+   nenhuma nota de verdade por trás, só contava fotos/marcações.
+   Agora existe um campo de texto real por área. */
+.notes-box{margin-top:16px;}
+.notes-box textarea{min-height:64px;}
+.notes-saved-hint{font-size:11px;color:var(--text-mute);margin-top:4px;font-family:var(--font-mono);}
 
 /* ---------- questionnaire ---------- */
 .quiz-wrap{max-width:640px;margin:0 auto;}
@@ -376,6 +398,12 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
   color:var(--text-mute);font-size:10.5px;font-family:var(--font-mono);cursor:pointer;
 }
 .days-picker button.on{background:var(--sage);border-color:var(--sage);color:#0f1a15;}
+.reminder-suggest-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.reminder-suggest{
+  border:1px dashed var(--border);background:transparent;color:var(--text-mute);font-size:11.5px;
+  padding:6px 11px;border-radius:99px;cursor:pointer;font-family:var(--font-mono);
+}
+.reminder-suggest:hover{border-color:var(--amber-line);color:var(--amber-strong);}
 
 /* ---------- products ---------- */
 .filter-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
@@ -383,7 +411,7 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
   border:1px solid var(--border);background:var(--surface);color:var(--text-dim);font-size:12px;
   padding:7px 13px;border-radius:99px;cursor:pointer;font-family:var(--font-mono);
 }
-.filter-chip.active{background:var(--amber);border-color:var(--amber);color:#211705;font-weight:700;}
+.filter-chip.active{background:var(--amber);border-color:var(--amber);color:#1c1530;font-weight:700;}
 .product-card{display:flex;flex-direction:column;gap:8px;}
 .product-card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
 .product-card h3{font-size:15.5px;}
@@ -400,7 +428,7 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
 .accordion-head svg{width:16px;height:16px;stroke:var(--text-mute);flex:none;transition:transform .2s ease;}
 .accordion-item.open .accordion-head svg{transform:rotate(45deg);}
 .accordion-body{max-height:0;overflow:hidden;transition:max-height .25s ease;}
-.accordion-item.open .accordion-body{max-height:260px;}
+.accordion-item.open .accordion-body{max-height:320px;}
 .accordion-body-in{padding:0 18px 17px;font-size:13.5px;color:var(--text-dim);}
 .verdict{
   display:inline-block;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
@@ -424,12 +452,21 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
 @media (max-width:640px){.safe-grid{grid-template-columns:1fr;}}
 .safe-col{border-radius:var(--radius-m);padding:18px;border:1px solid var(--border);}
 .safe-col.ok{background:var(--sage-soft);border-color:var(--sage-line);}
-.safe-col.avoid{background:var(--danger-soft);border-color:rgba(192,87,76,.4);}
+.safe-col.avoid{background:var(--danger-soft);border-color:rgba(217,105,92,.4);}
 .safe-col h4{font-size:13px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.05em;}
 .safe-col.ok h4{color:var(--sage);}
 .safe-col.avoid h4{color:var(--danger);}
 .safe-col li{padding:6px 0;font-size:13.5px;border-bottom:1px dashed rgba(255,255,255,.06);}
-.safe-col li:last-child{border:none;}
+.safe-col li:last-child{border-bottom:none;}
+
+/* ---------- fases da estria (NOVO) ---------- */
+.fase-timeline{position:relative;padding-left:28px;margin-top:20px;}
+.fase-timeline::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--amber),transparent);}
+.fase-item{position:relative;padding-bottom:26px;}
+.fase-item:last-child{padding-bottom:0;}
+.fase-item::before{content:"";position:absolute;left:-28px;top:3px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--amber);}
+.fase-item h4{font-size:15px;margin-bottom:4px;}
+.fase-item p{font-size:13.5px;}
 
 /* ---------- install ---------- */
 .install-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px;}
@@ -459,7 +496,7 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
   .topbar{padding:12px 16px;}
   .bottomnav{
     display:flex;position:fixed;bottom:0;left:0;right:0;z-index:30;
-    background:rgba(23,19,15,.94);backdrop-filter:blur(10px);border-top:1px solid var(--border-soft);
+    background:rgba(23,19,30,.94);backdrop-filter:blur(10px);border-top:1px solid var(--border-soft);
     padding:8px 4px calc(8px + env(safe-area-inset-bottom));overflow-x:auto;gap:2px;
   }
   .bottomnav button{
@@ -525,6 +562,10 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
       <button class="navbtn" data-view="mitos">
         <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.8.3-1.4.9-1.4 1.7v.3"/><circle cx="12" cy="16.5" r=".4" fill="currentColor" stroke="none"/></svg>
         Mitos e verdades
+      </button>
+      <button class="navbtn" data-view="fases">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16M8 15l3-4 3 3 4-6"/></svg>
+        Fases da estria
       </button>
       <button class="navbtn" data-view="receitas">
         <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v18M5 3c3 0 3 3 3 5s0 5-3 5"/><path d="M14 3v18M19 3c-2.5 1-2.5 3.5-2.5 6s.7 3 2.5 3"/></svg>
@@ -608,9 +649,9 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
 
       <!-- ============ MAPA DO CORPO ============ -->
       <section class="view" id="view-mapa">
-        <div class="eyebrow">seis áreas comuns</div>
+        <div class="eyebrow">oito áreas comuns</div>
         <h1>Toque em uma área para ver causas e rotina</h1>
-        <p>Estrias no bumbum, no peito, na perna, na barriga, no quadril e nos braços têm origens parecidas — estiramento rápido da pele — mas respondem melhor a rotinas ligeiramente diferentes.</p>
+        <p>Estrias no abdômen, seios, quadril, coxas, glúteos, costas, lombar e braços têm origens parecidas — estiramento rápido da pele — mas respondem melhor a rotinas ligeiramente diferentes.</p>
 
         <div class="map-layout">
           <div class="map-stage">
@@ -618,16 +659,24 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
               <button data-bodyview="frente" class="active">Frente</button>
               <button data-bodyview="costas">Costas</button>
             </div>
-            <svg id="bodySvg" class="bodymap-svg" viewBox="0 0 200 420">
+            <svg id="bodySvg" class="bodymap-svg" viewBox="0 0 200 440">
               <defs>
                 <pattern id="skin-dots" width="6" height="6" patternUnits="userSpaceOnUse">
-                  <rect width="6" height="6" fill="#241D15"/>
-                  <circle cx="1.2" cy="1.2" r="0.7" fill="#332A1F"/>
+                  <rect width="6" height="6" fill="#241E2F"/>
+                  <circle cx="1.2" cy="1.2" r="0.7" fill="#372E45"/>
                 </pattern>
               </defs>
-              <!-- head/neck decorative, not clickable -->
-              <circle cx="100" cy="34" r="22" fill="url(#skin-dots)" stroke="#332A1F" stroke-width="1.4"/>
-              <rect x="90" y="52" width="20" height="16" fill="url(#skin-dots)" stroke="#332A1F" stroke-width="1.4"/>
+              <!--
+                BUG CORRIGIDO: antes só existia um círculo (cabeça) + um
+                retângulo (pescoço) soltos no topo do SVG — nenhum contorno
+                real ligava ombros, cintura, quadril e pernas, então os
+                "zonas" clicáveis (retângulos genéricos) flutuavam soltas
+                sem parecer um corpo. Agora existe um <path> de silhueta
+                completo (.body-outline) atrás das zonas, e as zonas foram
+                redesenhadas para acompanhar essa silhueta de verdade.
+              -->
+              <path class="body-outline" d="M100.0,10.0 L121.0,18.0 L124.0,36.0 L117.0,50.0 L108.0,62.0 L131.0,70.0 L146.0,98.0 L144.0,138.0 L136.0,174.0 L132.0,197.0 L136.0,216.0 L124.0,219.0 L119.0,199.0 L123.0,175.0 L129.0,140.0 L128.0,100.0 L120.0,108.0 L116.0,132.0 L108.0,168.0 L117.0,193.0 L129.0,222.0 L134.0,258.0 L130.0,302.0 L124.0,350.0 L120.0,392.0 L116.0,420.0 L114.0,430.0 L130.0,436.0 L112.0,438.0 L108.0,420.0 L105.0,392.0 L103.0,350.0 L101.0,302.0 L100.0,262.0 L99.0,302.0 L97.0,350.0 L95.0,392.0 L92.0,420.0 L88.0,438.0 L70.0,436.0 L86.0,430.0 L84.0,420.0 L80.0,392.0 L76.0,350.0 L70.0,302.0 L66.0,258.0 L71.0,222.0 L83.0,193.0 L92.0,168.0 L84.0,132.0 L80.0,108.0 L72.0,100.0 L71.0,140.0 L77.0,175.0 L81.0,199.0 L76.0,219.0 L64.0,216.0 L68.0,197.0 L64.0,174.0 L56.0,138.0 L54.0,98.0 L69.0,70.0 L92.0,62.0 L83.0,50.0 L76.0,36.0 L79.0,18.0 Z" />
+              <circle cx="100" cy="34" r="21" fill="url(#skin-dots)" stroke="#372E45" stroke-width="1.4"/>
               <g id="zonesGroup"></g>
             </svg>
             <div class="area-list" id="areaList"></div>
@@ -785,7 +834,9 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
             <label class="field-label">Dias da semana</label>
             <div class="days-picker" id="daysPicker"></div>
           </div>
-          <button class="btn btn-outline btn-sm" id="notifPermBtn" style="margin-top:6px;">Ativar notificações do navegador</button>
+          <!-- NOVO: atalhos de sugestão — antes era preciso digitar tudo na mão -->
+          <div class="reminder-suggest-row" id="reminderSuggestRow"></div>
+          <button class="btn btn-outline btn-sm" id="notifPermBtn" style="margin-top:10px;">Ativar notificações do navegador</button>
         </div>
 
         <div id="reminderList"></div>
@@ -805,6 +856,14 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
         <div class="eyebrow">separando fato de crença</div>
         <h1>Mitos e verdades sobre estrias</h1>
         <div id="accordionList"></div>
+      </section>
+
+      <!-- ============ FASES DA ESTRIA (NOVO) ============ -->
+      <section class="view" id="view-fases">
+        <div class="eyebrow">entender antes de tratar</div>
+        <h1>As fases de uma estria</h1>
+        <p>Saber em qual fase a estria está ajuda a calibrar a expectativa — e explica por que a mesma rotina rende resultados diferentes em áreas diferentes do corpo.</p>
+        <div class="fase-timeline" id="faseTimeline"></div>
       </section>
 
       <!-- ============ RECEITAS CASEIRAS ============ -->
@@ -871,7 +930,13 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
           </div>
         </div>
 
-        <div class="card" style="margin-top:18px;" id="alreadyInstalledCard" style="display:none;">
+        <!-- BUG CORRIGIDO: este cartão tinha DOIS atributos style="" no
+             mesmo elemento (um com margin-top, outro com display:none).
+             HTML não permite atributos duplicados — o navegador usa
+             apenas o primeiro e ignora o "display:none", então o card
+             "já instalado" ficava visível para todo mundo, o tempo todo,
+             mesmo sem o app instalado. Agora há um único atributo style. -->
+        <div class="card" style="margin-top:18px; display:none;" id="alreadyInstalledCard">
           <b>✓ Você já está usando o app instalado.</b>
         </div>
       </section>
@@ -879,7 +944,7 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
     </main>
 
     <div class="disclaimer-foot">
-      Este site tem propósito educativo e de organização pessoal. Não substitui consulta com dermatologista, especialmente em caso de estrias inflamadas, dor, ou durante a gestação. Seus dados (fotos, respostas e lembretes) ficam salvos apenas durante esta sessão do navegador.
+      Este site tem propósito educativo e de organização pessoal. Não substitui consulta com dermatologista, especialmente em caso de estrias inflamadas, dor, ou durante a gestação. Seus dados (fotos, respostas, marcações, anotações e lembretes) ficam salvos apenas durante esta sessão do navegador.
     </div>
   </div>
 </div>
@@ -900,17 +965,25 @@ var ICONS = {
   belly:'<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg>',
   hip:'<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14l-2 8-3 9-2-7-2 7-3-9-2-8z"/></svg>',
   butt:'<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5a4 4 0 0 1 8 0v3a6 6 0 0 1 3 9 5 5 0 0 1-6-1 5 5 0 0 1-6 1 6 6 0 0 1 3-9V5z"/></svg>',
-  leg:'<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 9-1 9h-3l-1-8-1 8H7l1-9L9 3z"/></svg>'
+  leg:'<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 9-1 9h-3l-1-8-1 8H7l1-9L9 3z"/></svg>',
+  back:'<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4c0 2-2 2-2 5v11M15 4c0 2 2 2 2 5v11M9 4a3 3 0 0 1 6 0M7 12h10"/></svg>',
+  lombar:'<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20c0-6 2-9 6-9s6 3 6 9M8 11V6M16 11V6M9 4h6"/></svg>'
 };
 
+/* Áreas alinhadas ao pedido original do produto: Abdômen, Seios, Coxas,
+   Glúteos, Braços, Costas e Lombar — mais Quadril como área extra útil.
+   (Antes o app usava "peito" e "bumbum", que não batiam com o texto do
+   restante do site nem com os nomes que aparecem nas telas de
+   exportação; e não existia nenhuma área de costas/lombar, então metade
+   da vista "Costas" do mapa não tinha nada clicável de verdade.) */
 var AREAS = [
   {
-    id:'braços', nome:'Braços', view:'frente', icon:'arm',
+    id:'bracos', nome:'Braços', view:'frente', icon:'arm',
     causas:['Crescimento na adolescência','Ganho ou perda rápida de massa muscular','Uso prolongado de corticoide tópico'],
     obs:'Pele mais fina que a do tronco — prefira texturas leves para não obstruir os poros.'
   },
   {
-    id:'peito', nome:'Peito', view:'frente', icon:'chest',
+    id:'seios', nome:'Seios', view:'frente', icon:'chest',
     causas:['Crescimento durante a puberdade','Aumento de peso ou de volume mamário','Gestação e amamentação'],
     obs:'Área sensível: evite esfoliação mecânica forte, priorize massagem circular leve.'
   },
@@ -925,14 +998,24 @@ var AREAS = [
     obs:'Pele com boa espessura — tolera ativos esfoliantes com mais frequência que o peito.'
   },
   {
-    id:'bumbum', nome:'Bumbum', view:'costas', icon:'butt',
+    id:'coxas', nome:'Coxas', view:'frente', icon:'leg',
+    causas:['Estirão de crescimento na adolescência','Treino de perna intenso','Gestação (parte interna da coxa)'],
+    obs:'Coxas internas puxam mais durante o dia — reforce a hidratação após depilação.'
+  },
+  {
+    id:'gluteos', nome:'Glúteos', view:'costas', icon:'butt',
     causas:['Treino de hipertrofia (agachamento, avanço)','Ganho rápido de massa muscular ou gordura','Puberdade'],
     obs:'Área de fricção com roupas — dê preferência a óleos e cremes sem perfume forte.'
   },
   {
-    id:'pernas', nome:'Pernas', view:'costas', icon:'leg',
-    causas:['Estirão de crescimento na adolescência','Treino de perna intenso','Gestação (parte interna da coxa)'],
-    obs:'Coxas internas puxam mais durante o dia — reforce a hidratação após depilação.'
+    id:'costas', nome:'Costas', view:'costas', icon:'back',
+    causas:['Estirão de crescimento na adolescência','Ganho rápido de massa muscular nas costas (treino)','Uso prolongado de corticoide'],
+    obs:'Área de difícil alcance — peça ajuda para aplicar o produto ou use um aplicador de cabo longo.'
+  },
+  {
+    id:'lombar', nome:'Lombar', view:'costas', icon:'lombar',
+    causas:['Gestação (parte baixa das costas acompanha o abdômen)','Oscilação de peso','Postura e compressão prolongada'],
+    obs:'Costuma acompanhar as estrias do abdômen e quadril — trate as três áreas em conjunto.'
   }
 ];
 
@@ -946,7 +1029,13 @@ var PRODUCTS = [
   {id:'manteiga-cacau', nome:'Manteiga de cacau', ativo:'ácidos graxos', goals:['hidratar','gestante'], gestanteSafe:true, uso:'Noite, camada espessa em áreas de maior estiramento.', preco:1},
   {id:'oleo-amendoas', nome:'Óleo de amêndoas doces', ativo:'vitamina E + ácidos graxos', goals:['hidratar','massagem','gestante'], gestanteSafe:true, uso:'Base para massagem diária, sozinho ou misturado a outro ativo.', preco:1},
   {id:'niacinamida', nome:'Sérum de niacinamida', ativo:'niacinamida', goals:['uniformizar','antioxidante','gestante'], gestanteSafe:true, uso:'Manhã ou noite, ajuda a uniformizar o tom ao redor da estria.', preco:2},
-  {id:'alantoina', nome:'Creme com alantoína', ativo:'alantoína', goals:['cicatrizar','estria-rubra','gestante'], gestanteSafe:true, uso:'Em estrias recentes ainda sensíveis, manhã e noite.', preco:1}
+  {id:'alantoina', nome:'Creme com alantoína', ativo:'alantoína', goals:['cicatrizar','estria-rubra','gestante'], gestanteSafe:true, uso:'Em estrias recentes ainda sensíveis, manhã e noite.', preco:1},
+  {id:'acido-glicolico', nome:'Loção com ácido glicólico', ativo:'AHA (ácido glicólico)', goals:['estimular-colageno','estria-alba'], gestanteSafe:false, uso:'Noite, 2 a 3x por semana, sempre seguido de protetor solar no dia seguinte.', preco:2},
+  {id:'peptideos', nome:'Sérum com peptídeos de colágeno', ativo:'peptídeos biomiméticos', goals:['estimular-colageno','gestante'], gestanteSafe:true, uso:'Manhã ou noite, antes do óleo ou hidratante final.', preco:3},
+  {id:'oleo-semente-uva', nome:'Óleo de semente de uva', ativo:'ácido linoleico', goals:['hidratar','massagem','gestante'], gestanteSafe:true, uso:'Textura leve, ótimo para áreas maiores como coxas e costas.', preco:1},
+  {id:'manteiga-murumuru', nome:'Manteiga de murumuru', ativo:'ácidos graxos de cadeia longa', goals:['hidratar','gestante'], gestanteSafe:true, uso:'Noite, em áreas muito ressecadas como cotovelos e joelhos.', preco:1},
+  {id:'protetor-corporal', nome:'Protetor solar corporal FPS 50', ativo:'filtros físicos e químicos', goals:['uniformizar','gestante'], gestanteSafe:true, uso:'Todas as manhãs em áreas expostas ao sol, reaplicando a cada 2h.', preco:2},
+  {id:'oleo-rosehip-avancado', nome:'Sérum de óleo de rosehip concentrado', ativo:'trans-retinoico natural + vitamina C', goals:['estimular-colageno','estria-alba','gestante'], gestanteSafe:true, uso:'Alternativa mais suave ao retinoico sintético, manhã ou noite.', preco:2}
 ];
 
 var PRODUCT_FILTERS = [
@@ -956,6 +1045,9 @@ var PRODUCT_FILTERS = [
   {id:'cicatrizar', label:'Cicatrizar'},
   {id:'estria-rubra', label:'Estria recente (rubra)'},
   {id:'estria-alba', label:'Estria antiga (alba)'},
+  {id:'uniformizar', label:'Uniformizar tom'},
+  {id:'antioxidante', label:'Antioxidante'},
+  {id:'massagem', label:'Massagem'},
   {id:'gestante', label:'Seguro na gestação'}
 ];
 
@@ -967,7 +1059,11 @@ var MYTHS = [
   {q:'Ácido retinoico não deve ser usado na gestação nem na amamentação.', v:'verdade', r:'É um dos ativos com recomendação de evitar nesses períodos. O modo gestante deste app substitui automaticamente por alternativas como centella asiática e ácido hialurônico.'},
   {q:'Beber muita água sozinho já previne estrias.', v:'mito', r:'A hidratação interna ajuda a saúde geral da pele, mas o principal fator de proteção é evitar estiramento rápido e manter a pele hidratada por fora, com cremes e óleos, de forma constante.'},
   {q:'Genética influencia a chance de ter estrias.', v:'verdade', r:'Histórico familiar de estrias é um dos fatores de risco mais consistentes — a estrutura de colágeno da pele tem componente hereditário.'},
-  {q:'Esfoliar todo dia acelera o resultado.', v:'mito', r:'Esfoliação em excesso pode irritar e sensibilizar a pele, atrapalhando a barreira cutânea. O recomendado costuma ser de uma a duas vezes por semana, dependendo da sensibilidade da área.'}
+  {q:'Esfoliar todo dia acelera o resultado.', v:'mito', r:'Esfoliação em excesso pode irritar e sensibilizar a pele, atrapalhando a barreira cutânea. O recomendado costuma ser de uma a duas vezes por semana, dependendo da sensibilidade da área.'},
+  {q:'Estrias na lombar e no abdômen costumam aparecer juntas na gestação.', v:'verdade', r:'Como a pele da região lombar acompanha a expansão do abdômen durante a gestação, é comum que as duas áreas sejam afetadas ao mesmo tempo — por isso vale tratar as duas em conjunto.'},
+  {q:'Cremes caros sempre funcionam melhor que os baratos.', v:'mito', r:'O que determina a eficácia é a concentração do ativo testado clinicamente (como retinoico, vitamina C ou ácido hialurônico), não o preço da embalagem. Muitos produtos acessíveis têm boas concentrações desses ativos.'},
+  {q:'Homens também podem ter estrias, principalmente nas costas e nos braços.', v:'verdade', r:'O ganho rápido de massa muscular no treino de hipertrofia é uma causa comum de estrias em homens, especialmente em costas, braços e coxas.'},
+  {q:'Depois que a estria vira alba (branca), não há mais nada a fazer.', v:'mito', r:'Estrias albas respondem mais devagar, mas procedimentos como microagulhamento, laser e uso contínuo de retinoico ainda podem melhorar textura e uniformidade, com acompanhamento dermatológico.'}
 ];
 
 var RECIPES = [
@@ -976,7 +1072,7 @@ var RECIPES = [
     gestanteSafe:true,
     ing:['2 colheres de sopa de borra de café','1 colher de sopa de óleo de coco','algumas gotas de mel (opcional)'],
     passos:['Misture os ingredientes até formar uma pasta.','Aplique com movimentos circulares na área seca, por 2 a 3 minutos.','Enxágue com água morna e finalize com hidratante.'],
-    indicacao:'Esfoliação suave semanal em quadril, pernas e bumbum.'
+    indicacao:'Esfoliação suave semanal em quadril, coxas e glúteos.'
   },
   {
     nome:'Gel calmante de babosa (aloe vera)',
@@ -990,7 +1086,7 @@ var RECIPES = [
     gestanteSafe:true,
     ing:['2 colheres de sopa de manteiga de karité','1 colher de sopa de manteiga de cacau','1 colher de chá de óleo de rosa mosqueta'],
     passos:['Derreta as manteigas em banho-maria em fogo baixo.','Retire do fogo e misture o óleo de rosa mosqueta.','Deixe esfriar até virar creme e guarde em pote fechado.'],
-    indicacao:'Hidratação profunda noturna para abdômen e quadril.'
+    indicacao:'Hidratação profunda noturna para abdômen, quadril e lombar.'
   },
   {
     nome:'Esfoliante de aveia e mel',
@@ -1000,23 +1096,44 @@ var RECIPES = [
     indicacao:'Boa opção para pele sensível que não tolera café.'
   },
   {
-    nome:'Óleo de massagem para pernas cansadas',
+    nome:'Óleo de massagem para coxas cansadas',
     gestanteSafe:true,
     ing:['3 colheres de sopa de óleo de amêndoas','5 gotas de óleo essencial de lavanda (opcional, fora da gestação)'],
-    passos:['Misture os óleos em um vidro escuro.','Massageie as pernas de baixo para cima antes de dormir.','Guarde ao abrigo da luz por até 30 dias.'],
-    indicacao:'Relaxa e hidrata coxas e panturrilhas.'
+    passos:['Misture os óleos em um vidro escuro.','Massageie as coxas de baixo para cima antes de dormir.','Guarde ao abrigo da luz por até 30 dias.'],
+    indicacao:'Relaxa e hidrata coxas e a parte de trás dos joelhos.'
   },
   {
-    nome:'Compressa de chá verde para o peito',
+    nome:'Compressa de chá verde para os seios',
     gestanteSafe:true,
     ing:['1 saquinho de chá verde','água quente'],
     passos:['Prepare o chá e deixe esfriar até ficar morno.','Encoste o saquinho úmido sobre a área por 5 minutos.','Finalize com o hidratante de costume.'],
     indicacao:'Efeito calmante antioxidante em estrias recentes no peito.'
+  },
+  {
+    nome:'Óleo seco para costas (aplicador de cabo longo)',
+    gestanteSafe:true,
+    ing:['3 colheres de sopa de óleo de semente de uva','2 gotas de vitamina E líquida'],
+    passos:['Misture os ingredientes em um vidro com conta-gotas.','Aplique com um aplicador de costas ou peça ajuda de alguém.','Espalhe até a pele absorver, sem deixar oleosidade excessiva.'],
+    indicacao:'Facilita alcançar as costas, área normalmente esquecida na rotina.'
+  },
+  {
+    nome:'Compressa morna para a lombar',
+    gestanteSafe:true,
+    ing:['1 toalha pequena','água morna'],
+    passos:['Molhe a toalha em água morna e torça bem.','Encoste na lombar por 5 a 8 minutos antes da massagem com óleo.','Finalize aplicando o óleo ou creme de rotina na região ainda quente.'],
+    indicacao:'Relaxa a musculatura e prepara a pele lombar para absorver melhor o ativo.'
   }
 ];
 
-var GEST_SAFE = ['Óleo de rosa mosqueta','Manteiga de karité e de cacau','Ácido hialurônico','Centella asiática','Niacinamida','Óleo de amêndoas doces','Vitamina C em concentração cosmética','Protetor solar mineral'];
-var GEST_AVOID = ['Ácido retinoico e derivados de vitamina A em alta dose','Ácido salicílico em alta concentração','Óleos essenciais concentrados sem diluição','Procedimentos a laser sem liberação médica','Peelings químicos profissionais fortes'];
+var GEST_SAFE = ['Óleo de rosa mosqueta','Manteiga de karité e de cacau','Ácido hialurônico','Centella asiática','Niacinamida','Óleo de amêndoas doces','Óleo de semente de uva','Vitamina C em concentração cosmética','Protetor solar mineral','Peptídeos de colágeno'];
+var GEST_AVOID = ['Ácido retinoico e derivados de vitamina A em alta dose','Ácido salicílico em alta concentração','Ácido glicólico em alta concentração','Óleos essenciais concentrados sem diluição','Procedimentos a laser sem liberação médica','Peelings químicos profissionais fortes'];
+
+var FASES = [
+  {tag:'Fase 1 · Pré-estria', titulo:'Coceira e sensação de repuxo', texto:'Antes mesmo da linha aparecer, a pele pode coçar e ficar mais fina e sensível na área que está se esticando rapidamente — é o sinal de que vale reforçar a hidratação agora, de forma preventiva.'},
+  {tag:'Fase 2 · Estria rubra', titulo:'Linhas avermelhadas ou arroxeadas', texto:'A estria aparece como uma linha rosada, vermelha ou arroxeada, às vezes ligeiramente elevada. É a fase com maior vascularização e, por isso, a que costuma responder melhor a ativos e tratamentos.'},
+  {tag:'Fase 3 · Transição', titulo:'Clareando aos poucos', texto:'Ao longo de meses, a cor vai perdendo intensidade, passando por tons rosados mais claros. A textura pode continuar levemente diferente da pele ao redor.'},
+  {tag:'Fase 4 · Estria alba', titulo:'Esbranquiçada e mais fina', texto:'Depois de aproximadamente 1 a 2 anos, a estria tende a ficar esbranquiçada e com textura mais fina que a pele ao redor — a fase mais estável, e a que exige mais paciência no tratamento.'}
+];
 
 var WEEKDAYS = ['D','S','T','Q','Q','S','S'];
 
@@ -1032,6 +1149,7 @@ var state = {
   quiz:{ tipoPele:null, tempoEstria:null, gestante:null, areas:[], tempoDisponivel:null },
   photos:[],       // {id, areaId, dataUrl, date}
   scans:{},        // areaId -> [{id,date,dataUrl,score}]
+  notes:{},        // areaId -> texto livre (NOVO)
   scannerCurrentArea: null,
   scannerPendingImage: null,
   reminders:[],    // {id,time,text,days:[0..6]}
@@ -1073,6 +1191,7 @@ var VIEW_TITLES = {
   lembretes:['Lembretes','a hora certa de passar o creme'],
   produtos:['Produtos','catálogo por ativo e objetivo'],
   mitos:['Mitos e verdades','o que realmente funciona'],
+  fases:['Fases da estria','entender antes de tratar'],
   receitas:['Receitas caseiras','complementos naturais'],
   gestante:['Modo gestante','segurança em primeiro lugar'],
   instalar:['Instalar app','tela inicial, Android e iOS']
@@ -1093,6 +1212,7 @@ function navigate(view){
   if(view==='lembretes') renderReminders();
   if(view==='produtos') renderProdutos();
   if(view==='mitos') renderMitos();
+  if(view==='fases') renderFases();
   if(view==='receitas') renderReceitas();
   if(view==='gestante') renderGestante();
   if(view==='plano') renderPlano();
@@ -1114,7 +1234,6 @@ function renderDashboard(){
   document.getElementById('qlDiario').textContent = lastPhoto ? ('última: '+fmtDate(lastPhoto.date)) : 'nenhuma foto ainda';
   document.getElementById('qlLembretes').textContent = state.reminders.length ? (state.reminders.length+' cadastrado(s)') : 'nenhum cadastrado';
 
-  // streak: count consecutive weeks with at least one photo
   var streak = computeStreak();
   document.getElementById('streakChip').innerHTML = '🔥 <b>'+streak+'</b>&nbsp;semanas seguidas';
 }
@@ -1134,18 +1253,28 @@ function computeStreak(){
 
 /* ============================================================
    MAPA DO CORPO
+   As zonas abaixo foram redesenhadas para acompanhar o contorno real
+   do corpo (.body-outline) desenhado no SVG, em vez de retângulos
+   soltos com posições arbitrárias. Cada zona agora é um <path>
+   arredondado que "veste" a região correspondente da silhueta.
    ============================================================ */
 var ZONES_FRENTE = [
-  {id:'braços', x:20, y:100, w:26, h:110, rx:12, side:'left'},
-  {id:'braços', x:154, y:100, w:26, h:110, rx:12, side:'right'},
-  {id:'peito', x:66, y:82, w:68, h:56, rx:16},
-  {id:'abdomen', x:70, y:140, w:60, h:70, rx:14},
-  {id:'quadril', x:62, y:212, w:76, h:46, rx:16}
+  { id:'bracos', side:'right', d:'M133,66 C144,80 148,110 146,138 C144,160 140,182 136,197 L124,193 C128,175 131,155 132,135 C133,112 129,90 122,74 Z' },
+  { id:'bracos', side:'left',  d:'M67,66 C56,80 52,110 54,138 C56,160 60,182 64,197 L76,193 C72,175 69,155 68,135 C67,112 71,90 78,74 Z' },
+  { id:'seios',  d:'M70,66 C66,82 66,98 72,110 C82,118 118,118 128,110 C134,98 134,82 130,66 C118,74 82,74 70,66 Z' },
+  { id:'abdomen',d:'M67,112 C64,132 64,152 68,168 L132,168 C136,152 136,132 133,112 C118,118 82,118 67,112 Z' },
+  { id:'quadril',d:'M63,170 C60,182 62,196 68,208 L132,208 C138,196 140,182 137,170 C118,176 82,176 63,170 Z' },
+  { id:'coxas', side:'right', d:'M100,210 C112,210 122,214 128,222 C132,248 130,276 124,300 L102,300 L101,222 Z' },
+  { id:'coxas', side:'left',  d:'M100,210 C88,210 78,214 72,222 C68,248 70,276 76,300 L98,300 L99,222 Z' }
 ];
 var ZONES_COSTAS = [
-  {id:'bumbum', x:66, y:150, w:68, h:66, rx:22},
-  {id:'pernas', x:64, y:220, w:34, h:150, rx:16},
-  {id:'pernas', x:102, y:220, w:34, h:150, rx:16}
+  { id:'bracos', side:'right', d:'M133,66 C144,80 148,110 146,138 C144,160 140,182 136,197 L124,193 C128,175 131,155 132,135 C133,112 129,90 122,74 Z' },
+  { id:'bracos', side:'left',  d:'M67,66 C56,80 52,110 54,138 C56,160 60,182 64,197 L76,193 C72,175 69,155 68,135 C67,112 71,90 78,74 Z' },
+  { id:'costas',  d:'M68,66 C64,84 64,104 70,124 C82,132 118,132 130,124 C136,104 136,84 132,66 C118,74 82,74 68,66 Z' },
+  { id:'lombar', d:'M70,126 C66,142 66,158 70,172 L130,172 C134,158 134,142 130,126 C118,132 82,132 70,126 Z' },
+  { id:'gluteos',d:'M63,174 C58,190 60,206 68,220 C82,228 118,228 132,220 C140,206 142,190 137,174 C118,180 82,180 63,174 Z' },
+  { id:'coxas', side:'right', d:'M100,222 C112,222 122,226 128,234 C132,258 130,280 124,300 L102,300 L101,234 Z' },
+  { id:'coxas', side:'left',  d:'M100,222 C88,222 78,226 72,234 C68,258 70,280 76,300 L98,300 L99,234 Z' }
 ];
 
 function renderMapa(){
@@ -1156,26 +1285,18 @@ function renderMapa(){
   group.innerHTML = '';
   var zones = state.bodyView==='frente' ? ZONES_FRENTE : ZONES_COSTAS;
   zones.forEach(function(z){
-    var rect = document.createElementNS('http://www.w3.org/2000/svg','rect');
-    rect.setAttribute('x', z.x); rect.setAttribute('y', z.y);
-    rect.setAttribute('width', z.w); rect.setAttribute('height', z.h);
-    rect.setAttribute('rx', z.rx);
-    rect.setAttribute('class','zone'+(state.selectedArea===z.id?' selected':''));
-    rect.dataset.area = z.id;
-    rect.addEventListener('click', function(){ selectArea(z.id); });
-    group.appendChild(rect);
-
-    if(hasNotes(z.id)){
-      var dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
-      dot.setAttribute('cx', z.x + z.w - 6);
-      dot.setAttribute('cy', z.y + 6);
-      dot.setAttribute('r', 4);
-      dot.setAttribute('class','zone-dot');
-      group.appendChild(dot);
-    }
+    var path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d', z.d);
+    path.setAttribute('class','zone'+(state.selectedArea===z.id?' selected':''));
+    path.dataset.area = z.id;
+    path.setAttribute('role','button');
+    path.setAttribute('tabindex','0');
+    path.setAttribute('aria-label', areaById(z.id) ? areaById(z.id).nome : z.id);
+    path.addEventListener('click', function(){ selectArea(z.id); });
+    path.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectArea(z.id); } });
+    group.appendChild(path);
   });
 
-  // torso outline decorative (once, both views) — simple connecting shape
   var listedAreas = AREAS.filter(function(a){ return a.view===state.bodyView; });
   var listEl = document.getElementById('areaList');
   listEl.innerHTML = listedAreas.map(function(a){
@@ -1192,7 +1313,9 @@ function renderMapa(){
 }
 
 function hasNotes(areaId){
-  return state.photos.some(function(p){return p.areaId===areaId;}) || (state.scans[areaId]&&state.scans[areaId].length);
+  return state.photos.some(function(p){return p.areaId===areaId;})
+    || (state.scans[areaId]&&state.scans[areaId].length)
+    || (state.notes[areaId] && state.notes[areaId].trim().length>0);
 }
 function photoCountFor(areaId){
   return state.photos.filter(function(p){return p.areaId===areaId;}).length;
@@ -1265,6 +1388,11 @@ function renderAreaDetail(id){
       +'<div class="routine-col am"><h4>☀️ Manhã</h4>'+rot.manha.map(function(s,i){return '<div class="routine-step"><span class="num">'+(i+1)+'</span>'+s+'</div>';}).join('')+'</div>'
       +'<div class="routine-col pm"><h4>🌙 Noite</h4>'+rot.noite.map(function(s,i){return '<div class="routine-step"><span class="num">'+(i+1)+'</span>'+s+'</div>';}).join('')+'</div>'
     +'</div>'
+    +'<div class="notes-box">'
+      +'<label class="field-label" for="areaNotesInput">Anotações desta área</label>'
+      +'<textarea id="areaNotesInput" placeholder="Ex: comecei o retinoico dia 10, sem irritação até agora...">'+(state.notes[id]||'')+'</textarea>'
+      +'<div class="notes-saved-hint" id="notesSavedHint">as anotações ficam salvas só nesta sessão</div>'
+    +'</div>'
     +'<div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;">'
       +'<button class="btn btn-primary" data-nav="diario" data-preset-area="'+id+'">Registrar foto desta área</button>'
       +'<button class="btn btn-outline" data-nav="scanner" data-preset-area="'+id+'">Marcar estria no scanner</button>'
@@ -1276,6 +1404,17 @@ function renderAreaDetail(id){
       if(btn.dataset.nav==='diario'){ state.diaryPresetArea = preset; }
       if(btn.dataset.nav==='scanner'){ state.scannerCurrentArea = preset; }
     });
+  });
+
+  var notesInput = document.getElementById('areaNotesInput');
+  var saveTimer = null;
+  notesInput.addEventListener('input', function(){
+    state.notes[id] = notesInput.value;
+    document.getElementById('notesSavedHint').textContent = 'salvando…';
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function(){
+      document.getElementById('notesSavedHint').textContent = 'anotação salva nesta sessão ✓';
+    }, 500);
   });
 }
 
@@ -1366,6 +1505,7 @@ function renderPlano(){
   var html = '<div class="grid grid-2">';
   state.quiz.areas.forEach(function(id){
     var a = areaById(id);
+    if(!a) return;
     var rot = buildRotina(id, state.quiz);
     html += '<div class="card">'
       +'<div class="card-title"><h3>'+a.nome+'</h3>'+(state.pregnant?'<span class="tag sage">gestante</span>':'')+'</div>'
@@ -1451,12 +1591,11 @@ function renderCompare(){
   area.innerHTML =
     '<div class="compare-wrap" id="compareWrap">'
       +'<img src="'+first.dataUrl+'" alt="Foto mais antiga">'
-      +'<div class="after-wrap" id="compareAfterWrap" style="width:50%;"><img src="'+last.dataUrl+'" alt="Foto mais recente" style="width:'+ (2) +'00%;max-width:none;"></div>'
+      +'<div class="after-wrap" id="compareAfterWrap" style="width:50%;"><img src="'+last.dataUrl+'" alt="Foto mais recente" style="width:200%;max-width:none;"></div>'
     +'</div>'
     +'<input type="range" class="compare-range" min="0" max="100" value="50" id="compareRange">'
     +'<div class="compare-labels"><span>'+fmtDate(first.date)+'</span><span>'+fmtDate(last.date)+'</span></div>';
 
-  // fix width scaling for the "after" image so it fills the wrap and only its container clips
   var afterWrap = document.getElementById('compareAfterWrap');
   var afterImg = afterWrap.querySelector('img');
   function sizeAfterImg(){
@@ -1491,9 +1630,9 @@ function clearCanvas(){
   var cv = document.getElementById('scannerCanvas');
   var ctx = cv.getContext('2d');
   ctx.clearRect(0,0,cv.width,cv.height);
-  ctx.fillStyle = '#1D1710';
+  ctx.fillStyle = '#1D1826';
   ctx.fillRect(0,0,cv.width,cv.height);
-  ctx.fillStyle = '#8E7E6D';
+  ctx.fillStyle = '#8B7F9C';
   ctx.font = '14px Manrope, sans-serif';
   ctx.textAlign = 'center';
   ctx.fillText('Envie uma foto para marcar a estria', cv.width/2, cv.height/2);
@@ -1529,14 +1668,14 @@ function drawScannerBase(ellipse){
     ctx.drawImage(scannerImg, ox, oy, w, h);
   }
   if(ellipse){
-    ctx.strokeStyle = '#E3A93E';
+    ctx.strokeStyle = '#B9A6E8';
     ctx.lineWidth = 2.5;
     ctx.setLineDash([5,4]);
     ctx.beginPath();
     ctx.ellipse((ellipse.x0+ellipse.x1)/2, (ellipse.y0+ellipse.y1)/2, Math.abs(ellipse.x1-ellipse.x0)/2, Math.abs(ellipse.y1-ellipse.y0)/2, 0, 0, Math.PI*2);
     ctx.stroke();
     ctx.setLineDash([]);
-    ctx.fillStyle = 'rgba(227,169,62,.15)';
+    ctx.fillStyle = 'rgba(185,166,232,.15)';
     ctx.fill();
   }
 }
@@ -1632,10 +1771,10 @@ function renderScannerChart(){
   });
   var circles = records.map(function(r,i){
     var coords = pts[i].split(',');
-    return '<circle cx="'+coords[0]+'" cy="'+coords[1]+'" r="4" fill="#E3A93E"/>';
+    return '<circle cx="'+coords[0]+'" cy="'+coords[1]+'" r="4" fill="#B9A6E8"/>';
   }).join('');
   chartEl.innerHTML = '<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none">'
-    +'<polyline points="'+pts.join(' ')+'" fill="none" stroke="#E3A93E" stroke-width="2.5"/>'
+    +'<polyline points="'+pts.join(' ')+'" fill="none" stroke="#B9A6E8" stroke-width="2.5"/>'
     +circles
     +'</svg>'
     +'<div style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px;color:var(--text-mute);margin-top:4px;">'
@@ -1661,6 +1800,29 @@ function renderDaysPicker(){
   });
 }
 renderDaysPicker();
+
+/* NOVO: atalhos rápidos — antes era preciso digitar horário e texto na
+   mão toda vez, mesmo para lembretes óbvios como "manhã" e "noite". */
+var REMINDER_SUGGESTIONS = [
+  {time:'08:00', text:'Manhã: hidratante + protetor solar nas áreas marcadas'},
+  {time:'13:00', text:'Meio-dia: reaplicar protetor solar se exposta ao sol'},
+  {time:'21:30', text:'Noite: óleo de massagem + creme das áreas marcadas'},
+  {time:'21:45', text:'Noite: esfoliação suave (2x por semana)'}
+];
+function renderReminderSuggestions(){
+  var wrap = document.getElementById('reminderSuggestRow');
+  wrap.innerHTML = REMINDER_SUGGESTIONS.map(function(s,i){
+    return '<button class="reminder-suggest" data-i="'+i+'">+ '+s.time+' · '+s.text.split(':')[0]+'</button>';
+  }).join('');
+  wrap.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var s = REMINDER_SUGGESTIONS[+btn.dataset.i];
+      document.getElementById('reminderTime').value = s.time;
+      document.getElementById('reminderText').value = s.text;
+    });
+  });
+}
+renderReminderSuggestions();
 
 document.getElementById('addReminderBtn').addEventListener('click', function(){
   var time = document.getElementById('reminderTime').value;
@@ -1772,6 +1934,16 @@ function renderMitos(){
   wrap.querySelectorAll('.accordion-head').forEach(function(h){
     h.addEventListener('click', function(){ h.closest('.accordion-item').classList.toggle('open'); });
   });
+}
+
+/* ============================================================
+   FASES DA ESTRIA (NOVO)
+   ============================================================ */
+function renderFases(){
+  var wrap = document.getElementById('faseTimeline');
+  wrap.innerHTML = FASES.map(function(f){
+    return '<div class="fase-item"><span class="tag amber">'+f.tag+'</span><h4>'+f.titulo+'</h4><p>'+f.texto+'</p></div>';
+  }).join('');
 }
 
 /* ============================================================
