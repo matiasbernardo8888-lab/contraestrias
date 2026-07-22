@@ -279,6 +279,17 @@ label.field-label{display:block;font-size:12px;color:var(--text-mute);margin-bot
   border:1px solid var(--border);border-radius:var(--radius-l);padding:22px;
   display:flex;flex-direction:column;align-items:center;gap:16px;position:sticky;top:78px;
 }
+/* BUG CORRIGIDO: em telas largas o mapa fica "sticky" (grudado) de
+   propósito, para acompanhar a rolagem ao lado da lista de áreas. Mas
+   em telas estreitas o layout vira uma coluna só (regra acima), e esse
+   mesmo "sticky" fazia o mapa do corpo grudar no topo e tampar a
+   rotina/anotações ao arrastar para baixo, em vez de rolar embora
+   normalmente junto com o resto da página. Esta regra vem DEPOIS da
+   declaração base de propósito, para vencer o empate de especificidade
+   e realmente desativar o sticky no celular. */
+@media (max-width:900px){
+  .map-stage{position:static; top:auto;}
+}
 .view-toggle{display:flex;gap:4px;background:var(--surface-2);border-radius:99px;padding:4px;border:1px solid var(--border);}
 .view-toggle button{
   border:none;background:transparent;color:var(--text-mute);font-size:12px;font-weight:700;
