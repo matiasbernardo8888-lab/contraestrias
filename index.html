@@ -338,6 +338,99 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
 .toast.ok{background:var(--success);}
 .toast.warn{background:#B85D4C;}
 @keyframes toastIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+
+/* ============================================================
+   LANDING DE VENDAS — Estrias / Celulite / Varizes
+   Paleta de destaque: rosa #e91e63 + roxo #9c27b0, coexistindo
+   com os tokens originais do EvoluaPele (coral/terracota).
+   ============================================================ */
+:root{
+  --sale-pink:#e91e63;
+  --sale-pink-strong:#c2185b;
+  --sale-pink-soft:#FDE3ED;
+  --sale-purple:#9c27b0;
+  --sale-purple-soft:#F3E1F7;
+  --sale-grad:linear-gradient(135deg,var(--sale-pink) 0%,var(--sale-purple) 100%);
+}
+.sales-landing{padding:0 20px;}
+.sales-hero{padding:22px 0 6px;text-align:center;}
+.sales-hero .eyebrow-sale{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--sale-pink-strong);background:var(--sale-pink-soft);padding:6px 13px;border-radius:99px;margin-bottom:14px;}
+.sales-hero h1{font-size:26px;line-height:1.28;margin-bottom:12px;}
+.sales-hero h1 span{background:var(--sale-grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.sales-hero p{font-size:14.5px;max-width:38ch;margin:0 auto 6px;}
+
+.treatment-picker{display:flex;flex-direction:column;gap:12px;margin:22px 0 16px;}
+.treatment-card{position:relative;display:flex;align-items:center;gap:14px;background:var(--surface);border:2px solid var(--border);border-radius:var(--radius-l);padding:18px;text-align:left;box-shadow:var(--shadow);transition:border-color .15s ease,background .15s ease,transform .1s ease;}
+.treatment-card:active{transform:scale(.98);}
+.treatment-card.checked{border-color:var(--sale-pink);background:var(--sale-pink-soft);}
+.treatment-card .tc-box{width:26px;height:26px;border-radius:8px;border:2px solid var(--border);flex:none;display:flex;align-items:center;justify-content:center;background:var(--surface);}
+.treatment-card.checked .tc-box{background:var(--sale-pink);border-color:var(--sale-pink);}
+.treatment-card .tc-box svg{width:15px;height:15px;stroke:#fff;opacity:0;transition:opacity .12s ease;}
+.treatment-card.checked .tc-box svg{opacity:1;}
+.treatment-card .tc-ic{width:46px;height:46px;border-radius:14px;flex:none;display:flex;align-items:center;justify-content:center;font-size:22px;background:var(--surface-2);}
+.treatment-card.checked .tc-ic{background:#fff;}
+.treatment-card .tc-txt{flex:1;min-width:0;}
+.treatment-card .tc-txt b{font-size:16px;display:block;color:var(--text);}
+.treatment-card .tc-txt span{font-size:12px;color:var(--text-mute);}
+.treatment-card.checked .tc-txt span{color:var(--sale-pink-strong);}
+
+.btn-sale{background:var(--sale-grad);color:#fff;box-shadow:0 10px 24px -10px rgba(156,39,176,.45);}
+.btn-sale-outline{background:#fff;border:2px solid var(--sale-pink);color:var(--sale-pink-strong);}
+
+.sale-section{padding:34px 0 6px;}
+.sale-section .section-kicker{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--sale-pink-strong);margin-bottom:8px;}
+.sale-section h2{font-size:22px;line-height:1.3;margin-bottom:16px;}
+.sale-section h2 em{font-style:normal;color:var(--sale-pink-strong);}
+
+.pain-block{margin-bottom:16px;}
+.pain-block .pb-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.pain-block .pb-ic{width:36px;height:36px;border-radius:11px;background:var(--sale-pink-soft);display:flex;align-items:center;justify-content:center;font-size:18px;flex:none;}
+.pain-block b{font-size:15px;}
+.pain-block p{font-size:14px;margin-bottom:8px;}
+.pain-block p:last-child{margin-bottom:0;}
+
+.testi-card{border-left:4px solid var(--sale-pink);}
+.testi-card .testi-head{display:flex;align-items:center;gap:10px;margin-bottom:9px;}
+.testi-card .testi-stars{display:flex;gap:2px;margin-bottom:8px;}
+.testi-card .testi-stars svg{width:13px;height:13px;fill:var(--sale-pink);}
+.testi-card p{font-size:13.8px;color:var(--text);}
+.testi-card .testi-name{font-size:12.5px;font-weight:800;display:block;}
+.testi-card .testi-tag{font-size:10.5px;color:var(--text-mute);}
+
+/* ---------- cronograma / linha do tempo de 12 semanas ---------- */
+.cronograma-group{margin-bottom:24px;}
+.cronograma-group .cg-label{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--sale-purple);background:var(--sale-purple-soft);padding:5px 12px;border-radius:99px;margin-bottom:14px;}
+.timeline{position:relative;padding-left:44px;}
+.timeline::before{content:'';position:absolute;left:19px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--sale-pink),var(--sale-purple));}
+.timeline-item{position:relative;margin-bottom:20px;}
+.timeline-item:last-child{margin-bottom:0;}
+.timeline-dot{position:absolute;left:-44px;top:0;width:40px;height:40px;border-radius:50%;background:var(--sale-grad);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 6px 14px -6px rgba(156,39,176,.5);}
+.timeline-content{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-m);padding:14px 16px;box-shadow:var(--shadow);}
+.timeline-content .tl-week{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--sale-pink-strong);display:block;margin-bottom:4px;}
+.timeline-content p{font-size:13.8px;color:var(--text);margin:0;}
+
+/* ---------- itens do plano (cards estilo "receita", fundo verde claro) ---------- */
+.fase-subtitulo{font-size:12.8px;color:var(--text-mute);margin-bottom:12px;}
+.recipe-card{background:#fff;border:1px solid #cfe8d1;border-radius:var(--radius-m);padding:15px 16px;margin-bottom:12px;}
+.recipe-card:last-child{margin-bottom:0;}
+.recipe-card .rc-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.recipe-card .rc-ic{width:36px;height:36px;border-radius:10px;background:#e8f5e9;display:flex;align-items:center;justify-content:center;font-size:16px;flex:none;}
+.recipe-card b{font-size:14px;}
+.recipe-card .rc-label{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#2e7d32;display:block;margin:9px 0 3px;}
+.recipe-card p{font-size:13px;color:var(--text-dim);margin:0;}
+.recipe-card .rc-onde{display:inline-flex;margin-top:9px;font-size:11px;font-weight:700;color:#2e7d32;background:#e8f5e9;padding:4px 10px;border-radius:99px;}
+
+.checklist-box,.erros-box{border-radius:var(--radius-m);padding:15px 16px;margin-top:12px;}
+.checklist-box{background:#e8f5e9;border:1px solid #cfe8d1;}
+.erros-box{background:var(--surface-2);border:1px solid var(--border);}
+.checklist-box b,.erros-box b{font-size:13px;display:block;margin-bottom:8px;}
+.checklist-box ul,.erros-box ul{margin:0;padding-left:18px;}
+.checklist-box li,.erros-box li{font-size:12.8px;color:var(--text-dim);margin-bottom:4px;}
+.checklist-box li:last-child,.erros-box li:last-child{margin-bottom:0;}
+
+@media (min-width:480px){
+  .treatment-picker{gap:14px;}
+}
 </style>
 </head>
 <body>
@@ -402,6 +495,65 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
       <span id="topbarNome">Perfil</span>
     </button>
   </header>
+
+  <!-- ============================================================
+       LANDING DE VENDAS — Estrias / Celulite / Varizes
+       ============================================================ -->
+  <section class="sales-landing" id="salesLanding">
+
+    <div class="sales-hero">
+      <span class="eyebrow-sale">💗 Protocolo exclusivo EvoluaPele</span>
+      <h1>Sua pele merece um <span>tratamento sob medida</span> — não um creme genérico</h1>
+      <p>Marque abaixo o que mais incomoda você hoje. Em segundos, montamos o protocolo certo pra sua pele.</p>
+    </div>
+
+    <div class="treatment-picker" id="treatmentPicker">
+      <button class="treatment-card" data-treat="estrias">
+        <span class="tc-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <span class="tc-ic">〰️</span>
+        <span class="tc-txt"><b>Tratamento de Estrias</b><span>Marcas brancas ou vermelhas no corpo</span></span>
+      </button>
+      <button class="treatment-card" data-treat="celulite">
+        <span class="tc-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <span class="tc-ic">🍑</span>
+        <span class="tc-txt"><b>Tratamento de Celulite</b><span>Pele com aspecto de "casca de laranja"</span></span>
+      </button>
+      <button class="treatment-card" data-treat="varizes">
+        <span class="tc-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <span class="tc-ic">🦵</span>
+        <span class="tc-txt"><b>Tratamento de Varizes</b><span>Vasinhos, peso e dor nas pernas</span></span>
+      </button>
+    </div>
+
+    <button class="btn btn-sale btn-block" id="btnVerCronograma" style="display:none;">
+      Ver meu cronograma personalizado
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+    </button>
+
+    <!-- ---------- SEÇÃO DE DOR (adaptativa) ---------- -->
+    <div class="sale-section" id="dorSection" style="display:none;">
+      <div class="section-kicker">A gente entende</div>
+      <h2 id="dorTitulo">Entendemos a sua dor</h2>
+      <div id="dorConteudo"></div>
+    </div>
+
+    <!-- ---------- SEU PLANO DE 12 SEMANAS (100% pra fazer em casa) ---------- -->
+    <div class="sale-section" id="cronogramaSection" style="display:none;">
+      <div class="section-kicker">Seu plano de tratamento caseiro</div>
+      <h2 id="cronogramaTitulo">Seu Plano de 12 Semanas</h2>
+      <p style="font-size:13.5px;margin-bottom:18px;">Tudo aqui você faz em casa, com o que encontra no mercado e na farmácia. Semana a semana, com o passo a passo, o porquê de cada coisa e onde encontrar.</p>
+      <div id="cronogramaConteudo"></div>
+      <p style="font-size:11px;color:var(--text-mute);margin-top:6px;">*Conteúdo educativo e de bem-estar. Resultados variam de pessoa pra pessoa. Se tiver alguma condição de saúde, estiver grávida, amamentando ou usando outros medicamentos, converse com seu médico antes de iniciar qualquer chá ou suplemento.</p>
+    </div>
+
+    <!-- ---------- SEÇÃO DE PROVA SOCIAL (adaptativa) ---------- -->
+    <div class="sale-section" id="provaSocialSection" style="display:none;">
+      <div class="section-kicker">Quem já viveu isso</div>
+      <h2>Resultados de quem seguiu o plano</h2>
+      <div id="provaSocialConteudo"></div>
+    </div>
+
+  </section>
 
   <!-- ============================================================
        TELA 1 — INÍCIO
@@ -1993,12 +2145,271 @@ function renderProdutos(){
 }
 
 /* ============================================================
+   LANDING DE VENDAS — Estrias / Celulite / Varizes
+   Fluxo: seletor → dor → cronograma de 12 semanas (100% caseiro,
+   com o que fazer / como fazer / por que funciona / onde encontrar)
+   → prova social. Sem nenhum direcionamento pra WhatsApp ou clínica.
+   ============================================================ */
+
+var selectedTreatments = []; // ['estrias','celulite','varizes']
+
+var TREATMENT_META = {
+  estrias:{
+    label:'Estrias',
+    emoji:'〰️',
+    dorIcon:'😔',
+    dorParagrafos:[
+      'Você já passou horas na frente do espelho tentando entender por que aquelas linhas apareceram na sua barriga, no seu quadril, nos seus braços — e sentiu um aperto no peito só de olhar.',
+      'É a vergonha de trocar de roupa perto de alguém, de evitar o biquíni na praia, de escolher a roupa "que disfarça" em vez da roupa que você realmente queria usar.',
+      'E o pior: você já tentou de tudo. Óleo, creme caro, receita de internet — e as marquinhas continuam lá, te lembrando todos os dias de um incômodo que parecia não ter solução.'
+    ]
+  },
+  celulite:{
+    label:'Celulite',
+    emoji:'🍑',
+    dorIcon:'😩',
+    dorParagrafos:[
+      'Aquele "efeito casca de laranja" que aparece assim que você senta, se abaixa ou tira a roupa na frente do espelho — e o coração aperta antes mesmo de você processar o que está vendo.',
+      'É o bumbum que parece mole, a coxa que "balança" de um jeito que te incomoda, a sensação de que seu corpo não te representa mais do jeito que você gostaria.',
+      'Na praia ou na piscina, é sempre aquele cálculo mental: qual ângulo esconde mais, qual canga cobre melhor, quem vai reparar. Sua autoestima não devia depender disso.'
+    ]
+  },
+  varizes:{
+    label:'Varizes',
+    emoji:'🦵',
+    dorIcon:'😖',
+    dorParagrafos:[
+      'A perna pesada no fim do dia, aquele cansaço que sobe da panturrilha e não passa nem depois de deitar com os pés pra cima.',
+      'É a dor que aparece à noite, bem na hora de descansar, e os vasinhos roxos e avermelhados que foram aumentando devagar, ano após ano, sem você conseguir frear.',
+      'E existe o medo — de que piore, de que vire varizes maiores, de precisar de uma cirurgia mais complexa lá na frente. Esse medo não precisa continuar te acompanhando sozinho.'
+    ]
+  }
+};
+
+/* ============================================================
+   PLANOS DE 12 SEMANAS — 100% pra fazer em casa (mercado,
+   farmácia e cozinha). Cada item traz: o que fazer, como fazer,
+   por que funciona e onde encontrar / preço aproximado.
+   ============================================================ */
+var CRONOGRAMAS = {
+
+  estrias:{
+    titulo:'Plano Completo Anti-Estrias 12 Semanas',
+    checklist:['Estria mais fina', 'Estria mais clara', 'Pele mais lisa ao toque'],
+    erros:['Não usar protetor solar', 'Não hidratar todo dia', 'Emagrecer muito rápido', 'Usar roupa apertada na área', 'Não beber água suficiente'],
+    fases:[
+      { faixa:'Semana 1-2', nome:'Ataque Inicial', subtitulo:'Destravar a pele e parar de piorar', ic:'🎯', itens:[
+        { titulo:'Esfoliação Poderosa — 3x na semana', como:'Misture 3 colheres de sopa de pó de café + 2 colheres de açúcar + 3 colheres de óleo de coco. Esfregue na pele por 3 minutos, fazendo movimentos circulares.', porque:'Tira a pele morta e ativa a circulação local, preparando a pele pra absorver melhor o resto do plano.', onde:'Ingredientes de cozinha — custo baixo.' },
+        { titulo:'Hidratação de Choque — 2x ao dia', como:'Misture 1 pote de Nivea azul + 1 tubo de Bepantol Derma + 1 colher de óleo de rosa mosqueta. Aplique de manhã e à noite.', porque:'O Bepantol ajuda a regenerar, o Nivea sela a hidratação e a rosa mosqueta auxilia na cicatrização da pele.', onde:'Farmácia e supermercado.' },
+        { titulo:'Corte 2 vilões da alimentação', como:'Reduza açúcar e farinha branca. Troque por 2 litros de água por dia e 3 castanhas-do-pará por dia.', porque:'Açúcar e farinha branca em excesso favorecem processos inflamatórios que pioram a aparência da estria.', onde:'Mercado — custo baixo.' }
+      ]},
+      { faixa:'Semana 3-4', nome:'Estimular o Colágeno', subtitulo:'Forçar a pele a se regenerar', ic:'💪', itens:[
+        { titulo:'Automassagem com colher gelada — 5min por dia', como:'Deixe 2 colheres de sopa na geladeira. Deslize fazendo 10 movimentos de baixo pra cima em cada estria.', porque:'A pressão e o frio ajudam a estimular a circulação na região, sem gastar nada.', onde:'Já tem em casa.' },
+        { titulo:'Tônico de Babosa', como:'Bata 1 folha de babosa (aloe vera) + 5 gotas de vitamina E + 50ml de água. Guarde na geladeira e passe todos os dias.', porque:'A babosa tem propriedades calmantes e ajuda na hidratação natural da pele.', onde:'Vitamina E em cápsula: farmácia, poucos reais.' },
+        { titulo:'Suplemento de farmácia (opcional)', como:'Colágeno hidrolisado 10g + Vitamina C 500mg por dia, seguindo a orientação da embalagem.', porque:'O colágeno é a proteína estrutural da pele; a vitamina C ajuda o corpo a produzi-lo.', onde:'Marcas populares: Vitafor ou Maxinutri, na farmácia.' }
+      ]},
+      { faixa:'Semana 5-8', nome:'Nivelar o Tom', subtitulo:'Clarear e uniformizar a pele', ic:'✨', itens:[
+        { titulo:'Máscara Clareadora — 2x na semana', como:'Misture 2 colheres de argila branca + 1 colher de mel + 5 gotas de limão. Deixe agir 15 minutos e lave.', porque:'A argila ajuda a esfoliar suavemente e o limão tem ação clareadora leve sobre a pele.', onde:'Argila branca: loja de produtos naturais ou farmácia.' },
+        { titulo:'Protetor solar todos os dias', como:'Aplique FPS 50 na área das estrias sempre que for se expor ao sol.', porque:'O sol escurece a pele ao redor da estria e aumenta o contraste, deixando a marca mais visível.', onde:'Sundown ou Anasol, até R$35 na farmácia.' },
+        { titulo:'Chá anti-inflamatório — 2 xícaras por dia', como:'Misture 1 colher de chá de cavalinha + 1 colher de chá de hibisco em 500ml de água quente. Coe e tome ao longo do dia.', porque:'São plantas tradicionalmente usadas para ajudar a reduzir a retenção de líquido e o processo inflamatório.', onde:'Farmácia ou loja de produtos naturais.' }
+      ]},
+      { faixa:'Semana 9-12', nome:'Manutenção', subtitulo:'Travar o resultado', ic:'🔒', itens:[
+        { titulo:'Rotina de manutenção', como:'Continue a esfoliação 2x na semana e a hidratação 3x na semana.', porque:'A pele precisa de constância pra manter o resultado alcançado nas semanas anteriores.', onde:'Mesmos produtos já usados no plano.' }
+      ]}
+    ]
+  },
+
+  celulite:{
+    titulo:'Plano Completo Anti-Celulite 12 Semanas',
+    checklist:['Pele mais lisa', 'Menos "furinhos" visíveis', 'Bumbum mais firme'],
+    erros:['Ficar sentada muito tempo sem se mexer', 'Usar calça muito apertada', 'Não tomar água suficiente', 'Sedentarismo'],
+    fases:[
+      { faixa:'Semana 1-2', nome:'Desinchar', subtitulo:'Tirar o líquido retido e desinchar', ic:'💧', itens:[
+        { titulo:'Escovação a seco — 5min por dia', como:'Use uma escova de cerdas naturais na pele seca, antes do banho, sempre em movimentos de baixo pra cima.', porque:'Ajuda a estimular a circulação e o sistema linfático, que é responsável por drenar o excesso de líquido.', onde:'Loja de cosméticos ou farmácia.' },
+        { titulo:'Chá diurético — ao longo do dia', como:'Prepare 1 litro de chá de hibisco + cavalinha + salsinha e vá tomando aos poucos ao longo do dia.', porque:'Ajuda a reduzir a retenção de líquido, um dos fatores que acentuam o aspecto de "casca de laranja".', onde:'Mercado e farmácia — custo baixo.' },
+        { titulo:'Creme caseiro — 3x na semana', como:'Misture 3 colheres de café + 2 colheres de pasta de dente + 1 colher de óleo de coco. Aplique, envolva com filme plástico por 20 minutos e enxágue.', porque:'A combinação é usada tradicionalmente por seu efeito de aquecimento local, que ajuda a ativar a circulação da área.', onde:'Já tem em casa.' }
+      ]},
+      { faixa:'Semana 3-4', nome:'Quebrar a Gordura Localizada', subtitulo:'Alisar a pele', ic:'🔥', itens:[
+        { titulo:'Exercício de 7 minutos — todo dia', como:'Agachamento 15x + Avanço 10x pra cada perna + Elevação de glúteo 15x.', porque:'O fortalecimento muscular ajuda a firmar a região e melhorar a aparência da pele por cima do músculo.', onde:'Sem custo — faça em casa.' },
+        { titulo:'Máscara firmadora — 2x na semana', como:'Misture 4 colheres de argila verde + água até formar uma pasta + 5 gotas de óleo de alecrim. Deixe agir 20 minutos.', porque:'A argila verde é tradicionalmente usada por sua ação adstringente, que ajuda a dar sensação de firmeza à pele.', onde:'Loja de produtos naturais.' },
+        { titulo:'Alimentação anti-inchaço', como:'Reduza sal e refrigerante. Priorize abacaxi, melancia e pepino ao longo do dia.', porque:'O excesso de sódio favorece a retenção de líquido, enquanto esses alimentos têm efeito diurético natural.', onde:'Mercado — custo baixo.' }
+      ]},
+      { faixa:'Semana 5-8', nome:'Firmar', subtitulo:'Deixar a pele mais lisa', ic:'💪', itens:[
+        { titulo:'Automassagem com creme — 5min por dia', como:'Misture o creme hidratante (Nivea) + 10 gotas de óleo de toranja. Faça movimento de pinça na coxa por 5 minutos.', porque:'A massagem de pinça ajuda a estimular a circulação local e a drenagem da região tratada.', onde:'Farmácia e supermercado.' },
+        { titulo:'Banho gelado nas pernas — 30 segundos no final do banho', como:'Termine o banho passando água fria nas pernas por 30 segundos.', porque:'A troca de temperatura ajuda a estimular a circulação e dá sensação de firmeza à pele.', onde:'Sem custo.' },
+        { titulo:'Suplemento anti-inflamatório (opcional)', como:'Cúrcuma + pimenta-do-reino em cápsulas, seguindo a orientação da embalagem.', porque:'A combinação é tradicionalmente usada por seu potencial efeito anti-inflamatório.', onde:'Farmácia ou loja de suplementos.' }
+      ]},
+      { faixa:'Semana 9-12', nome:'Manutenção', subtitulo:'Travar o resultado', ic:'🔒', itens:[
+        { titulo:'Rotina de manutenção', como:'Escovação a seco 3x na semana + exercícios 4x na semana.', porque:'A constância é o que mantém o resultado alcançado nas semanas anteriores.', onde:'Mesma rotina já usada no plano.' }
+      ]}
+    ]
+  },
+
+  varizes:{
+    titulo:'Plano Completo Pernas Leves 12 Semanas',
+    checklist:['Perna mais leve', 'Menos vasinhos aparentes', 'Sem dor à noite'],
+    erros:['Ficar muito tempo em pé ou sentada sem se mexer', 'Usar salto alto todos os dias', 'Excesso de peso corporal', 'Se expor ao sol sem protetor'],
+    fases:[
+      { faixa:'Semana 1-2', nome:'Aliviar a Dor', subtitulo:'Tirar o peso e a queimação', ic:'🦵', itens:[
+        { titulo:'Elevação de perna — 15min, 2x ao dia', como:'Deite e apoie as pernas na parede, formando um ângulo, por 15 minutos.', porque:'A elevação ajuda o sangue a retornar mais facilmente das pernas até o coração, aliviando a sensação de peso.', onde:'Sem custo.' },
+        { titulo:'Compressa gelada — à noite', como:'Molhe uma toalha em água gelada com 3 gotas de óleo essencial de cipreste. Aplique na perna por 10 minutos.', porque:'O frio ajuda a aliviar a sensação de queimação e desconforto no fim do dia.', onde:'Óleo essencial: loja de produtos naturais.' },
+        { titulo:'Chá vascular — moderado, 1x ao dia', como:'Misture 1 colher de chá de castanha-da-índia + 1 colher de chá de hamamélis em 500ml de água quente. Coe e tome uma xícara.', porque:'São plantas tradicionalmente associadas ao bem-estar da circulação nas pernas.', onde:'Farmácia ou loja de produtos naturais.' }
+      ]},
+      { faixa:'Semana 5-8', nome:'Fortalecer a Circulação', subtitulo:'Ajudar a não piorar', ic:'💪', itens:[
+        { titulo:'Caminhada — 20 minutos por dia', como:'Caminhe em ritmo leve a moderado todos os dias, se possível no mesmo horário.', porque:'A contração da panturrilha funciona como uma bomba que ajuda a empurrar o sangue de volta pro coração.', onde:'Sem custo.' },
+        { titulo:'Meia de compressão', como:'Compre uma meia de compressão 20-30mmHg na farmácia e use durante o dia, principalmente se for ficar muito tempo em pé ou sentada.', porque:'A compressão graduada ajuda o retorno venoso e reduz a sensação de peso.', onde:'Farmácia, a partir de ~R$40.' },
+        { titulo:'Alimentação vascular', como:'Inclua beterraba, romã e uva roxa na alimentação ao longo da semana.', porque:'São alimentos ricos em compostos associados à saúde dos vasos sanguíneos.', onde:'Mercado — custo baixo.' }
+      ]},
+      { faixa:'Semana 9-12', nome:'Manutenção', subtitulo:'Perna leve no dia a dia', ic:'🔒', itens:[
+        { titulo:'Rotina de manutenção', como:'Elevação de perna + caminhada todo dia, chá vascular 3x na semana.', porque:'A constância é o que sustenta o alívio conquistado nas semanas anteriores.', onde:'Mesma rotina já usada no plano.' }
+      ]}
+    ]
+  }
+};
+
+var TESTIMONIALS = {
+  estrias:[
+    { nome:'Camila, 29 anos', texto:'Segui o plano de 12 semanas certinho, com a esfoliação e a hidratação de choque. Hoje eu uso biquíni sem pensar duas vezes.' },
+    { nome:'Juliana, 34 anos', texto:'As estrias da minha gestação me incomodavam demais. Seguindo o passo a passo semana a semana, a diferença ficou visível na pele.' },
+    { nome:'Renata, 41 anos', texto:'Já tinha tentado de tudo sozinha em casa, sem organização. Com o cronograma certo pra cada semana, finalmente vi resultado de verdade.' }
+  ],
+  celulite:[
+    { nome:'Bianca, 27 anos', texto:'Segui o plano de 12 semanas certinho, semana a semana, com a escovação e os exercícios. Minha pele ficou visivelmente mais lisa.' },
+    { nome:'Patrícia, 38 anos', texto:'Fui pra praia esse verão sem aquela insegurança de sempre. O plano completo, feito em casa, valeu cada semana de dedicação.' },
+    { nome:'Larissa, 31 anos', texto:'Achava que celulite era coisa que só melhorava emagrecendo. O cronograma me mostrou que constância importa muito mais.' }
+  ],
+  varizes:[
+    { nome:'Fernanda, 45 anos', texto:'Não aguentava mais a dor na perna no fim do dia. Com a elevação de perna e a meia de compressão, hoje durmo sem aquele peso incomodando.' },
+    { nome:'Débora, 52 anos', texto:'Os vasinhos que me incomodavam há anos praticamente pararam de aumentar depois que comecei a seguir o plano de 12 semanas.' },
+    { nome:'Vanessa, 48 anos', texto:'Tinha muito medo de que piorasse. Seguir o cronograma me deu mais tranquilidade e uma rotina de cuidado real.' }
+  ]
+};
+
+var TREAT_ORDER = ['estrias','celulite','varizes'];
+
+function renderTreatmentPicker(){
+  document.querySelectorAll('.treatment-card').forEach(function(card){
+    var t = card.dataset.treat;
+    card.classList.toggle('checked', selectedTreatments.indexOf(t)>-1);
+  });
+  var btn = document.getElementById('btnVerCronograma');
+  btn.style.display = selectedTreatments.length>0 ? 'inline-flex' : 'none';
+}
+
+document.getElementById('treatmentPicker').addEventListener('click', function(e){
+  var card = e.target.closest('.treatment-card');
+  if(!card) return;
+  var t = card.dataset.treat;
+  var idx = selectedTreatments.indexOf(t);
+  if(idx>-1) selectedTreatments.splice(idx,1);
+  else selectedTreatments.push(t);
+  renderTreatmentPicker();
+});
+
+document.getElementById('btnVerCronograma').addEventListener('click', function(){
+  if(!selectedTreatments.length) return;
+  renderDorSection();
+  renderCronogramaSection();
+  renderProvaSocialSection();
+  ['dorSection','cronogramaSection','provaSocialSection'].forEach(function(id){
+    document.getElementById(id).style.display = 'block';
+  });
+  document.getElementById('cronogramaSection').scrollIntoView({behavior:'smooth', block:'start'});
+});
+
+function treatmentsOrdenados(){
+  return TREAT_ORDER.filter(function(t){ return selectedTreatments.indexOf(t)>-1; });
+}
+
+function renderDorSection(){
+  var ordered = treatmentsOrdenados();
+  var labels = ordered.map(function(t){ return TREATMENT_META[t].label; });
+  var titulo = 'Entendemos a sua dor com <em>'+labels.join(' + ')+'</em>';
+  document.getElementById('dorTitulo').innerHTML = titulo;
+
+  document.getElementById('dorConteudo').innerHTML = ordered.map(function(t){
+    var meta = TREATMENT_META[t];
+    return '<div class="card pain-block">'
+      + '<div class="pb-head"><span class="pb-ic">'+meta.dorIcon+'</span><b>'+meta.label+'</b></div>'
+      + meta.dorParagrafos.map(function(p){ return '<p>'+p+'</p>'; }).join('')
+    + '</div>';
+  }).join('');
+}
+
+/* ---- "Seu Plano de 12 Semanas" — linha do tempo 100% caseira,
+   com o que fazer / como fazer / por que funciona / onde encontrar.
+   Se marcar 2 ou 3 tratamentos, os planos são juntados num "Plano
+   Combinado". Nenhum botão de contato aparece nesta seção. ---- */
+function renderCronogramaSection(){
+  var ordered = treatmentsOrdenados();
+  var labels = ordered.map(function(t){ return TREATMENT_META[t].label; });
+
+  if(ordered.length>1){
+    document.getElementById('cronogramaTitulo').textContent = 'Plano Combinado 12 Semanas — '+labels.join(' + ');
+  } else {
+    document.getElementById('cronogramaTitulo').textContent = CRONOGRAMAS[ordered[0]].titulo;
+  }
+
+  document.getElementById('cronogramaConteudo').innerHTML = ordered.map(function(t){
+    var plano = CRONOGRAMAS[t];
+    var groupLabel = ordered.length>1
+      ? '<span class="cg-label">'+TREATMENT_META[t].emoji+' '+plano.titulo+'</span>'
+      : '';
+    var timelineHtml = '<div class="timeline">' + plano.fases.map(function(f){
+      var itensHtml = f.itens.map(function(item, i){
+        return '<div class="recipe-card">'
+          + '<div class="rc-head"><span class="rc-ic">'+(i+1)+'</span><b>'+item.titulo+'</b></div>'
+          + '<span class="rc-label">Como fazer</span><p>'+item.como+'</p>'
+          + '<span class="rc-label">Por que funciona</span><p>'+item.porque+'</p>'
+          + '<span class="rc-onde">📍 '+item.onde+'</span>'
+        + '</div>';
+      }).join('');
+      return '<div class="timeline-item">'
+        + '<div class="timeline-dot">'+f.ic+'</div>'
+        + '<div class="timeline-content">'
+          + '<span class="tl-week">'+f.faixa+' · '+f.nome+'</span>'
+          + '<div class="fase-subtitulo">"'+f.subtitulo+'"</div>'
+          + itensHtml
+        + '</div>'
+      + '</div>';
+    }).join('') + '</div>';
+
+    var checklistHtml = '<div class="checklist-box"><b>✅ Checklist — o que esperar</b><ul>'
+      + plano.checklist.map(function(c){ return '<li>'+c+'</li>'; }).join('') + '</ul></div>';
+    var errosHtml = '<div class="erros-box"><b>⚠️ 5 erros que fazem voltar</b><ul>'
+      + plano.erros.map(function(e){ return '<li>'+e+'</li>'; }).join('') + '</ul></div>';
+
+    return '<div class="cronograma-group">' + groupLabel + timelineHtml + checklistHtml + errosHtml + '</div>';
+  }).join('');
+}
+
+function renderProvaSocialSection(){
+  var ordered = treatmentsOrdenados();
+  var perTreatment = ordered.length===1 ? 3 : 2;
+  var cards = [];
+  ordered.forEach(function(t){
+    TESTIMONIALS[t].slice(0, perTreatment).forEach(function(dep){
+      cards.push({ treat:t, dep:dep });
+    });
+  });
+  var starSvg = '<svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 1-5 5 1.5 7-6.5-3.5L5 21.5 6.5 14.5l-5-5 7-1z"/></svg>';
+  document.getElementById('provaSocialConteudo').innerHTML = cards.map(function(c){
+    return '<div class="card testi-card">'
+      + '<div class="testi-stars">'+starSvg+starSvg+starSvg+starSvg+starSvg+'</div>'
+      + '<p>"'+c.dep.texto+'"</p>'
+      + '<div style="margin-top:10px;"><span class="testi-name">'+c.dep.nome+'</span><span class="testi-tag">Tratamento de '+TREATMENT_META[c.treat].label+'</span></div>'
+    + '</div>';
+  }).join('');
+}
+
+/* ============================================================
    INICIALIZAÇÃO
    ============================================================ */
 checkOnboarding();
 renderTopbar();
 initCommunityInteractions();
 navegarAbas('inicio');
+renderTreatmentPicker();
 
 })();
 </script>
