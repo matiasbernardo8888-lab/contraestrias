@@ -1638,6 +1638,10 @@ function navegarAbas(nome){
   document.querySelectorAll('.bottomnav button[data-nav]').forEach(function(b){
     b.classList.toggle('active', b.dataset.nav===nome);
   });
+  // a landing de vendas (seletor de tratamento + dor + cronograma) só
+  // aparece na aba Início — nas outras abas ela fica escondida, senão
+  // a pessoa tem que rolar a página inteira toda vez que troca de aba.
+  document.getElementById('salesLanding').style.display = (nome==='inicio') ? 'block' : 'none';
   window.scrollTo({top:0, behavior:'auto'});
   if(nome==='inicio') renderInicio();
   if(nome==='evolucao') renderEvolucao();
@@ -3358,7 +3362,10 @@ document.getElementById('r90Tabs').addEventListener('click', function(e){
 /* ---- começar / ir pro seletor / reiniciar ---- */
 document.getElementById('btnComecar90').addEventListener('click', iniciarRotina90);
 document.getElementById('btnIrParaSeletor').addEventListener('click', function(){
-  document.getElementById('treatmentPicker').scrollIntoView({behavior:'smooth', block:'center'});
+  navegarAbas('inicio');
+  setTimeout(function(){
+    document.getElementById('treatmentPicker').scrollIntoView({behavior:'smooth', block:'center'});
+  }, 50);
 });
 document.getElementById('btnReiniciar90').addEventListener('click', function(){
   var ok = window.confirm('Tem certeza que quer reiniciar seus 90 dias? Todo o progresso salvo vai ser apagado.');
