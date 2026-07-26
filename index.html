@@ -12,27 +12,34 @@
    TOKENS DE DESIGN
    ============================================================ */
 :root{
-  --bg:#FEFCFB;
-  --surface:#FFFFFF;
-  --surface-2:#FFF1EC;
-  --border:#F3E1D9;
-  --text:#242020;
-  --text-dim:#5C534E;
-  --text-mute:#9C918A;
-  --primary:#FF6F5E;
-  --primary-strong:#E24F3D;
-  --primary-soft:#FFE0D6;
-  --success:#3FA383;
-  --success-soft:#DEF2EA;
+  --bg:#08070d;
+  --surface:#15101f;
+  --surface-2:#1c1530;
+  --border:rgba(255,77,148,.20);
+  --text:#f5f0ff;
+  --text-dim:#b6a9d6;
+  --text-mute:#8a7fa8;
+  --primary:#ff4d94;
+  --primary-strong:#8a2be2;
+  --primary-soft:rgba(255,77,148,.16);
+  --success:#2fe6a6;
+  --success-soft:rgba(47,230,166,.14);
   --radius-s:10px;
   --radius-m:16px;
   --radius-l:24px;
-  --shadow:0 8px 22px -14px rgba(36,32,32,.16);
+  --shadow:0 14px 32px -18px rgba(255,77,148,.35);
   --font-display:'Fraunces', serif;
   --font-body:'Manrope', -apple-system, sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;}
-body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;letter-spacing:.01em;}
+body{
+  margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;letter-spacing:.01em;
+  background-image:
+    radial-gradient(circle at 15% 8%, rgba(255,77,148,.10), transparent 42%),
+    radial-gradient(circle at 85% 18%, rgba(138,43,226,.12), transparent 45%),
+    radial-gradient(circle at 50% 95%, rgba(255,77,148,.06), transparent 50%);
+  background-attachment:fixed;
+}
 h1,h2,h3{font-family:var(--font-display);font-weight:500;margin:0;color:var(--text);}
 p{margin:0;color:var(--text-dim);}
 button{font-family:inherit;cursor:pointer;border:none;background:none;}
@@ -171,7 +178,7 @@ img{max-width:100%;display:block;}
 .progress-item.done span{color:var(--text-mute);text-decoration:line-through;}
 
 /* ---------- frase da semana ---------- */
-#quoteCard{background:linear-gradient(155deg,var(--primary-soft),var(--surface));border-color:#EAC3B8;text-align:center;}
+#quoteCard{background:linear-gradient(155deg,var(--primary-soft),var(--surface));border-color:rgba(255,77,148,.3);text-align:center;}
 
 /* ---------- destaques da comunidade (preview) ---------- */
 .highlight-card{display:flex;gap:11px;align-items:flex-start;padding:13px 15px;}
@@ -183,46 +190,9 @@ img{max-width:100%;display:block;}
 /* ---------- avatar em gradiente (sem fotos fictícias) ---------- */
 .avatar-grad{width:36px;height:36px;border-radius:50%;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
 
-/* ---------- mapa do corpo ---------- */
-.body-toggle{display:flex;gap:4px;background:var(--surface-2);border-radius:99px;padding:4px;border:1px solid var(--border);width:max-content;margin:0 auto 14px;}
-.body-toggle button{border:none;background:transparent;color:var(--text-mute);font-size:12px;font-weight:800;padding:7px 16px;border-radius:99px;}
-.body-toggle button.active{background:var(--primary-strong);color:#fff;}
-.body-map-wrap{display:flex;flex-direction:column;align-items:center;}
+/* ---------- mapa do corpo (silhueta reaproveitada pela Início e Evolução) ---------- */
 .bodymap-svg{width:170px;height:auto;}
 .body-outline{fill:none;stroke:var(--border);stroke-width:1.6;stroke-linejoin:round;}
-.zone{fill:var(--surface-2);stroke:var(--border);stroke-width:1.4;cursor:pointer;transition:fill .2s ease,stroke .2s ease;}
-.zone:hover{stroke:var(--primary-strong);}
-.zone.marked-vermelha{fill:#F3C6BE;stroke:#D49A89;}
-.zone.marked-branca{fill:#EDE7E2;stroke:#C9BEB4;}
-.zone-list{width:100%;margin-top:16px;display:flex;flex-direction:column;gap:8px;}
-.zone-row{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-s);padding:11px 13px;cursor:pointer;}
-.zone-row .dot{width:9px;height:9px;border-radius:50%;background:var(--border);flex:none;}
-.zone-row .dot.vermelha{background:#D49A89;}
-.zone-row .dot.branca{background:#C9BEB4;}
-.zone-row .info{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;}
-.zone-row .pct{font-size:12.5px;color:var(--success);font-weight:800;}
-.zone-row .pct.empty{color:var(--text-mute);font-weight:600;font-size:12px;}
-
-/* ---------- gráfico de evolução ---------- */
-.chart-wrap svg{width:100%;height:120px;}
-
-/* ---------- calendário 90 dias ---------- */
-.challenge-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;margin:14px 0;}
-.challenge-cell{aspect-ratio:1/1;border-radius:5px;background:var(--surface-2);border:1px solid var(--border);font-size:8px;color:var(--text-mute);display:flex;align-items:center;justify-content:center;}
-.challenge-cell.done{background:var(--success);border-color:var(--success);color:#fff;}
-.challenge-cell.today{border-color:var(--primary-strong);border-width:2px;}
-.challenge-cell.future{opacity:.4;}
-.badges-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
-.badge{display:flex;flex-direction:column;align-items:center;gap:4px;width:54px;opacity:.35;}
-.badge.earned{opacity:1;}
-.badge .ic{width:38px;height:38px;border-radius:50%;background:var(--surface-2);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;}
-.badge.earned .ic{border-color:var(--primary-strong);background:var(--primary-soft);}
-.badge span{font-size:9px;color:var(--text-mute);text-align:center;}
-
-/* ---------- diário de fotos ---------- */
-.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px;}
-.photo-thumb{border-radius:var(--radius-s);overflow:hidden;border:1px solid var(--border);aspect-ratio:1/1;background:var(--surface-2);}
-.photo-thumb img{width:100%;height:100%;object-fit:cover;}
 
 /* ---------- Jornada / feed ---------- */
 .feed-toggle{display:flex;gap:4px;background:var(--surface-2);border-radius:99px;padding:4px;border:1px solid var(--border);margin:14px 0;}
@@ -259,7 +229,7 @@ img{max-width:100%;display:block;}
 .product-rating svg{width:12px;height:12px;fill:var(--primary);stroke:none;}
 
 /* ---------- produtos ---------- */
-.kit-banner{background:linear-gradient(155deg,var(--primary-soft),var(--surface));border:1px solid var(--primary);border-color:#EAC3B8;border-radius:var(--radius-l);padding:20px;margin-top:14px;}
+.kit-banner{background:linear-gradient(155deg,var(--primary-soft),var(--surface));border:1px solid var(--primary);border-color:rgba(255,77,148,.3);border-radius:var(--radius-l);padding:20px;margin-top:14px;}
 .kit-banner b{font-family:var(--font-display);font-size:17px;display:block;margin-bottom:4px;}
 .kit-banner p{font-size:12.5px;margin-bottom:12px;}
 .kit-items{display:flex;gap:8px;flex-wrap:wrap;}
@@ -272,14 +242,14 @@ img{max-width:100%;display:block;}
 .buy-link{display:inline-flex;align-items:center;gap:6px;}
 
 /* ---------- disclaimer / autoridade ---------- */
-.authority{margin-top:16px;background:var(--success-soft);border:1px solid #DDE7D4;border-radius:var(--radius-m);padding:15px 16px;display:flex;gap:10px;}
+.authority{margin-top:16px;background:var(--success-soft);border:1px solid rgba(47,230,166,.3);border-radius:var(--radius-m);padding:15px 16px;display:flex;gap:10px;}
 .authority svg{width:18px;height:18px;stroke:var(--success);flex:none;margin-top:1px;}
 .authority b{font-size:13px;display:block;}
 .authority p{font-size:12px;margin-top:2px;}
 footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size:11px;color:var(--text-mute);border-top:1px solid var(--border);}
 
 /* ---------- bottom nav (5 abas) ---------- */
-.bottomnav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-top:1px solid var(--border);display:flex;justify-content:center;}
+.bottomnav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(10,8,16,.88);backdrop-filter:blur(14px);border-top:1px solid var(--border);display:flex;justify-content:center;}
 .bottomnav-in{width:100%;max-width:520px;display:flex;padding:7px 4px calc(7px + env(safe-area-inset-bottom));}
 .bottomnav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 2px;color:var(--text-mute);font-size:9.5px;font-weight:700;border-radius:12px;}
 .bottomnav button svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;}
@@ -299,16 +269,14 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
 .quiz-done{text-align:center;padding:16px 0;}
 .quiz-done .ic{width:56px;height:56px;border-radius:50%;background:var(--success-soft);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
 .quiz-done .ic svg{width:26px;height:26px;stroke:var(--success);}
-.zone-modal-opts{display:flex;gap:10px;margin-top:16px;}
-.zone-modal-opts button{flex:1;border:1px solid var(--border);border-radius:var(--radius-m);padding:16px 10px;text-align:center;background:var(--surface);}
-.zone-modal-opts button b{display:block;font-size:13.5px;margin-bottom:4px;}
-.zone-modal-opts button span{font-size:11px;color:var(--text-mute);}
-.zone-modal-opts button.vermelha b{color:#B85D4C;}
-.zone-modal-opts button.branca b{color:#8A7D74;}
+.evo-rating-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
+.evo-rating-opts button{border:1.5px solid var(--border);border-radius:var(--radius-m);padding:16px 10px;text-align:center;background:var(--surface);font-size:13px;font-weight:700;color:var(--text);transition:.15s ease;}
+.evo-rating-opts button span{display:block;font-size:26px;margin-bottom:6px;}
+.evo-rating-opts button:active{transform:scale(.96);}
 
 /* ---------- toasts ---------- */
 #toastWrap{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:200;display:flex;flex-direction:column;gap:8px;width:min(92vw,380px);}
-.toast{background:var(--text);color:#fff;padding:12px 16px;border-radius:var(--radius-s);font-size:13.5px;box-shadow:var(--shadow);animation:toastIn .2s ease;}
+.toast{background:#1c1530;border:1px solid var(--border);color:#fff;padding:12px 16px;border-radius:var(--radius-s);font-size:13.5px;box-shadow:var(--shadow);animation:toastIn .2s ease;}
 .toast.ok{background:var(--success);}
 .toast.warn{background:#B85D4C;}
 @keyframes toastIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
@@ -319,11 +287,11 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
    com os tokens originais do EvoluaPele (coral/terracota).
    ============================================================ */
 :root{
-  --sale-pink:#e91e63;
-  --sale-pink-strong:#c2185b;
-  --sale-pink-soft:#FDE3ED;
-  --sale-purple:#9c27b0;
-  --sale-purple-soft:#F3E1F7;
+  --sale-pink:#ff4d94;
+  --sale-pink-strong:#ff4d94;
+  --sale-pink-soft:rgba(255,77,148,.14);
+  --sale-purple:#8a2be2;
+  --sale-purple-soft:rgba(138,43,226,.16);
   --sale-grad:linear-gradient(135deg,var(--sale-pink) 0%,var(--sale-purple) 100%);
 }
 .sales-landing{padding:0 20px;}
@@ -342,14 +310,14 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
 .treatment-card .tc-box svg{width:15px;height:15px;stroke:#fff;opacity:0;transition:opacity .12s ease;}
 .treatment-card.checked .tc-box svg{opacity:1;}
 .treatment-card .tc-ic{width:46px;height:46px;border-radius:14px;flex:none;display:flex;align-items:center;justify-content:center;font-size:22px;background:var(--surface-2);}
-.treatment-card.checked .tc-ic{background:#fff;}
+.treatment-card.checked .tc-ic{background:rgba(255,255,255,.10);}
 .treatment-card .tc-txt{flex:1;min-width:0;}
 .treatment-card .tc-txt b{font-size:16px;display:block;color:var(--text);}
 .treatment-card .tc-txt span{font-size:12px;color:var(--text-mute);}
 .treatment-card.checked .tc-txt span{color:var(--sale-pink-strong);}
 
 .btn-sale{background:var(--sale-grad);color:#fff;box-shadow:0 10px 24px -10px rgba(156,39,176,.45);}
-.btn-sale-outline{background:#fff;border:2px solid var(--sale-pink);color:var(--sale-pink-strong);}
+.btn-sale-outline{background:transparent;border:2px solid var(--sale-pink);color:var(--sale-pink);}
 
 .sale-section{padding:34px 0 6px;}
 .sale-section .section-kicker{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--sale-pink-strong);margin-bottom:8px;}
@@ -383,19 +351,19 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
 .timeline-content .tl-week{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--sale-pink-strong);display:block;margin-bottom:4px;}
 .timeline-content p{font-size:13.8px;color:var(--text);margin:0;}
 
-/* ---------- itens do plano (cards estilo "receita", fundo verde claro) ---------- */
+/* ---------- itens do plano (cards estilo "receita", verde-neon = "natural") ---------- */
 .fase-subtitulo{font-size:12.8px;color:var(--text-mute);margin-bottom:12px;}
-.recipe-card{background:#fff;border:1px solid #cfe8d1;border-radius:var(--radius-m);padding:15px 16px;margin-bottom:12px;}
+.recipe-card{background:#0f2419;border:1px solid rgba(47,230,166,.28);border-radius:var(--radius-m);padding:15px 16px;margin-bottom:12px;}
 .recipe-card:last-child{margin-bottom:0;}
 .recipe-card .rc-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
-.recipe-card .rc-ic{width:36px;height:36px;border-radius:10px;background:#e8f5e9;display:flex;align-items:center;justify-content:center;font-size:16px;flex:none;}
-.recipe-card b{font-size:14px;}
-.recipe-card .rc-label{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#2e7d32;display:block;margin:9px 0 3px;}
+.recipe-card .rc-ic{width:36px;height:36px;border-radius:10px;background:rgba(47,230,166,.14);display:flex;align-items:center;justify-content:center;font-size:16px;flex:none;color:#6fe3a0;font-weight:800;}
+.recipe-card b{font-size:14px;color:#fff;}
+.recipe-card .rc-label{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#5fd996;display:block;margin:9px 0 3px;}
 .recipe-card p{font-size:13px;color:var(--text-dim);margin:0;}
-.recipe-card .rc-onde{display:inline-flex;margin-top:9px;font-size:11px;font-weight:700;color:#2e7d32;background:#e8f5e9;padding:4px 10px;border-radius:99px;}
+.recipe-card .rc-onde{display:inline-flex;margin-top:9px;font-size:11px;font-weight:700;color:#5fd996;background:rgba(47,230,166,.14);padding:4px 10px;border-radius:99px;}
 
 .checklist-box,.erros-box{border-radius:var(--radius-m);padding:15px 16px;margin-top:12px;}
-.checklist-box{background:#e8f5e9;border:1px solid #cfe8d1;}
+.checklist-box{background:rgba(47,230,166,.08);border:1px solid rgba(47,230,166,.28);}
 .erros-box{background:var(--surface-2);border:1px solid var(--border);}
 .checklist-box b,.erros-box b{font-size:13px;display:block;margin-bottom:8px;}
 .checklist-box ul,.erros-box ul{margin:0;padding-left:18px;}
@@ -545,6 +513,190 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
 .r90-detail-note{margin-top:12px;font-size:13px;color:#b6a9d6;background:#1c1530;border-radius:12px;padding:12px 13px;}
 .r90-detail-note b{color:#fff;display:block;margin-bottom:4px;font-size:12px;}
 
+/* ============================================================
+   ABA EVOLUÇÃO — "Sua Transformação"
+   Fundo branco, degradê rosa -> roxo como cor de destaque,
+   cards com sombra e cantos arredondados, tema de "subir de
+   nível" numa escada de evolução.
+   ============================================================ */
+.evo{
+  --evo-pink:#ff4d94;
+  --evo-purple:#8a2be2;
+  --evo-grad:linear-gradient(135deg,var(--evo-pink) 0%,var(--evo-purple) 100%);
+  --evo-grad-soft:linear-gradient(135deg,rgba(255,77,148,.10) 0%,rgba(138,43,226,.10) 100%);
+  padding-top:20px;
+}
+.evo-card{background:var(--surface);border:1px solid var(--border);border-radius:26px;padding:22px;margin-bottom:16px;box-shadow:0 16px 36px -22px rgba(138,43,226,.45);}
+.evo-eyebrow{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;background:var(--evo-grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:6px;}
+.evo-card h1{font-size:22px;line-height:1.28;margin-bottom:4px;}
+.evo-card h2{font-size:18px;line-height:1.3;margin-bottom:4px;}
+.evo-sub{font-size:13px;color:var(--text-mute);margin-bottom:16px;}
+
+.evo-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;font-weight:800;font-size:14px;padding:14px 18px;border-radius:99px;border:none;cursor:pointer;transition:transform .12s ease;}
+.evo-btn:active{transform:scale(.97);}
+.evo-btn-primary{background:var(--evo-grad);color:#fff;box-shadow:0 10px 24px -10px rgba(138,43,226,.5);}
+
+/* ---- estado "ainda não começou" ---- */
+.evo-gate{text-align:center;}
+.evo-gate-ic{font-size:34px;margin-bottom:10px;}
+.evo-gate b{font-size:16px;display:block;margin-bottom:6px;}
+.evo-gate p{font-size:13.5px;margin-bottom:18px;}
+
+/* ---- fotos antes / agora ---- */
+.evo-photos-compare{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.evo-photo-before,.evo-photo-depois{border-radius:18px;overflow:hidden;background:var(--surface-2);flex:none;}
+.evo-photo-before{width:64px;height:80px;}
+.evo-photo-depois{flex:1;height:150px;}
+.evo-photo-before img,.evo-photo-depois img{width:100%;height:100%;object-fit:cover;display:block;}
+.evo-photo-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--text-mute);}
+.evo-arrow{width:22px;height:22px;flex:none;}
+.evo-photos-labels{display:flex;justify-content:space-between;font-size:10.5px;color:var(--text-mute);text-transform:uppercase;letter-spacing:.04em;margin-bottom:18px;padding:0 2px;}
+
+/* ---- nível + progresso ---- */
+.evo-level-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+.evo-level-badge{background:var(--evo-grad);color:#fff;font-size:11px;font-weight:800;padding:5px 12px;border-radius:99px;letter-spacing:.03em;}
+.evo-level-name{font-family:var(--font-display);font-size:15px;color:var(--text);}
+.evo-progress-bar{height:12px;border-radius:99px;background:var(--surface-2);overflow:hidden;}
+.evo-progress-fill{height:100%;width:0%;background:var(--evo-grad);border-radius:99px;transition:width .6s ease;}
+.evo-progress-label{font-size:11.5px;color:var(--text-mute);margin-top:6px;font-weight:700;}
+.evo-motivacional{font-size:13.5px;color:var(--text);margin-top:12px;background:var(--evo-grad-soft);border-radius:14px;padding:12px 14px;}
+
+/* ---- escada de evolução ---- */
+.evo-staircase{display:flex;align-items:flex-end;gap:6px;margin-top:20px;padding-top:6px;}
+.evo-step{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.evo-step-n{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;background:var(--surface-2);color:var(--text-mute);border:2px solid var(--border);}
+.evo-step-label{font-size:8.5px;text-align:center;color:var(--text-mute);line-height:1.25;min-height:22px;}
+.evo-step-done .evo-step-n{background:var(--evo-grad);color:#fff;border-color:transparent;}
+.evo-step-current .evo-step-n{background:#fff;color:var(--evo-purple);border-color:var(--evo-purple);box-shadow:0 0 0 4px rgba(138,43,226,.15);transform:scale(1.15);}
+.evo-step-current .evo-step-label{color:var(--evo-purple);font-weight:800;}
+
+/* ---- mapa do corpo inteligente ---- */
+.evo-body-toggle{display:flex;gap:4px;background:var(--surface-2);border-radius:99px;padding:4px;border:1px solid var(--border);width:max-content;margin:0 auto 14px;}
+.evo-body-toggle button{border:none;background:transparent;color:var(--text-mute);font-size:12px;font-weight:800;padding:7px 16px;border-radius:99px;}
+.evo-body-toggle button.active{background:var(--evo-grad);color:#fff;}
+.evo-body-wrap{display:flex;justify-content:center;}
+.evo-zone{fill:var(--surface-2);stroke:var(--border);stroke-width:1.4;cursor:pointer;transition:fill .25s ease,opacity .25s ease;}
+.evo-zone:hover{stroke:var(--evo-purple);}
+.evo-zone-summary{width:100%;margin-top:16px;display:flex;flex-direction:column;gap:8px;}
+.evo-zone-row{display:flex;align-items:center;gap:10px;background:var(--surface-2);border-radius:var(--radius-s);padding:11px 13px;cursor:pointer;font-size:12.8px;}
+.evo-zone-row b{flex:none;}
+.evo-zone-row span{color:var(--text-dim);}
+.evo-zone-dot{width:11px;height:11px;border-radius:50%;flex:none;border:1px solid rgba(255,255,255,.18);}
+
+/* ---- foto da semana ---- */
+.evo-photo-carousel{display:flex;gap:10px;overflow-x:auto;margin-top:16px;padding-bottom:4px;}
+.evo-photo-thumb{flex:none;width:96px;}
+.evo-photo-thumb img{width:96px;height:120px;object-fit:cover;border-radius:14px;display:block;}
+.evo-photo-thumb span{display:block;font-size:10px;color:var(--text-mute);text-align:center;margin-top:4px;}
+.evo-photo-placeholder-lg{margin-top:16px;border:1.5px dashed var(--border);border-radius:16px;padding:26px;text-align:center;color:var(--text-mute);font-size:13px;}
+.evo-hint{font-size:11.5px;color:var(--text-mute);margin-top:14px;text-align:center;}
+
+.evo-slider-title{font-size:13px;display:block;margin:18px 0 10px;}
+.evo-slider-imgs-wrap{position:relative;width:100%;aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:var(--surface-2);}
+.evo-slider-imgs-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.evo-slider-clip{position:absolute;inset:0;width:50%;overflow:hidden;border-right:2px solid #fff;}
+.evo-slider-handle{position:absolute;top:50%;left:50%;width:34px;height:34px;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.25);transform:translate(-50%,-50%);pointer-events:none;display:flex;align-items:center;justify-content:center;}
+.evo-slider-handle::before{content:'↔';font-size:15px;color:var(--evo-purple);font-weight:800;}
+#evoSliderRange{width:100%;margin-top:12px;accent-color:var(--evo-purple);}
+
+/* ---- gráfico de evolução ---- */
+.evo-chart-wrap svg{width:100%;height:180px;}
+.evo-chart-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;}
+.evo-chart-legend .evo-legend-item{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--text-dim);font-weight:700;}
+.evo-chart-legend .evo-legend-item i{width:10px;height:10px;border-radius:50%;display:inline-block;}
+.evo-peak{font-size:12.5px;color:var(--text);background:var(--evo-grad-soft);border-radius:12px;padding:11px 13px;margin-top:12px;}
+
+/* ---- medalhas ---- */
+.evo-badges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:12px;margin-top:14px;}
+.evo-badge{text-align:center;opacity:.4;}
+.evo-badge.unlocked{opacity:1;}
+.evo-badge-ic{width:54px;height:54px;border-radius:50%;background:var(--surface-2);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 8px;}
+.evo-badge.unlocked .evo-badge-ic{background:var(--evo-grad);border-color:transparent;box-shadow:0 8px 18px -8px rgba(138,43,226,.6);}
+.evo-badge span{font-size:10.5px;color:var(--text-dim);font-weight:600;line-height:1.3;}
+
+/* ---- botão reiniciar (preto, conforme pedido) ---- */
+.evo-reset-btn{width:100%;background:#111;color:#fff;border:none;border-radius:99px;padding:15px 18px;font-weight:800;font-size:13.5px;margin-top:6px;cursor:pointer;}
+.evo-reset-btn:active{transform:scale(.98);}
+
+/* ============================================================
+   SPLASH — entrada futurista com partículas
+   ============================================================ */
+#splashOverlay{
+  position:fixed;inset:0;z-index:900;background:#07060c;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  cursor:pointer;
+}
+#splashOverlay.hidden{display:none;}
+#splashOverlay.fading{animation:splashFadeOut .5s ease forwards;}
+@keyframes splashFadeOut{to{opacity:0;visibility:hidden;}}
+#particlesCanvas{position:absolute;inset:0;width:100%;height:100%;}
+.splash-content{position:relative;z-index:2;text-align:center;padding:0 30px;animation:splashIn 1s ease both;}
+@keyframes splashIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.splash-mark{width:74px;height:74px;border-radius:22px;margin:0 auto 22px;background:linear-gradient(135deg,#ff4d94,#8a2be2);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(255,77,148,.55);}
+.splash-mark svg{width:36px;height:36px;stroke:#fff;}
+.splash-name{font-family:var(--font-display);font-size:30px;color:#fff;letter-spacing:.01em;margin-bottom:8px;}
+.splash-name span{background:linear-gradient(135deg,#ff4d94,#8a2be2);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.splash-tag{font-size:13px;color:#a89cc4;letter-spacing:.03em;margin-bottom:34px;}
+.splash-loader{display:flex;gap:7px;justify-content:center;margin-bottom:26px;}
+.splash-loader i{width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,#ff4d94,#8a2be2);animation:splashDot 1.1s ease-in-out infinite;}
+.splash-loader i:nth-child(2){animation-delay:.15s;}
+.splash-loader i:nth-child(3){animation-delay:.3s;}
+@keyframes splashDot{0%,80%,100%{transform:scale(.6);opacity:.4;}40%{transform:scale(1.15);opacity:1;}}
+.splash-skip{background:transparent;border:1px solid rgba(255,255,255,.18);color:#a89cc4;font-size:11.5px;padding:9px 18px;border-radius:99px;letter-spacing:.02em;}
+
+/* ============================================================
+   RETOQUES FUTURISTAS GLOBAIS — topbar e menu inferior ganham
+   um leve acento neon rosa/roxo, mantendo o restante do site.
+   ============================================================ */
+.brand-mark{background:linear-gradient(150deg,#ff4d94,#8a2be2)!important;box-shadow:0 4px 14px -4px rgba(138,43,226,.55);}
+.profile-btn{box-shadow:0 2px 10px -4px rgba(138,43,226,.25);}
+.bottomnav{background:rgba(10,8,16,.88);backdrop-filter:blur(14px);border-top:1px solid rgba(138,43,226,.25);}
+.bottomnav button.active{color:var(--evo-pink,#ff4d94);background:linear-gradient(135deg,rgba(255,77,148,.12),rgba(138,43,226,.12));}
+.bottomnav-in{gap:1px;}
+.bottomnav button{font-size:9px;}
+.bottomnav button svg{width:18px;height:18px;}
+
+/* ============================================================
+   ABA INSTALAR — passo a passo Android / iOS
+   Tema escuro futurista, coerente com o splash e a aba Rotina.
+   ============================================================ */
+.install-wrap{
+  --ins-bg:#0a0a0a;--ins-surface:#15101f;--ins-surface-2:#1c1530;
+  --ins-border:rgba(255,77,148,.28);--ins-pink:#ff4d94;--ins-purple:#8a2be2;
+  --ins-grad:linear-gradient(135deg,var(--ins-pink) 0%,var(--ins-purple) 100%);
+  --ins-text:#f5f0ff;--ins-text-dim:#b6a9d6;--ins-text-mute:#7c6f96;
+  margin:0 -20px;padding:26px 18px 46px;background:var(--ins-bg);
+  border-radius:0 0 32px 32px;color:var(--ins-text);
+}
+.ins-hero{text-align:center;padding:10px 0 22px;}
+.ins-hero .ins-ic{width:60px;height:60px;border-radius:20px;margin:0 auto 16px;background:var(--ins-grad);display:flex;align-items:center;justify-content:center;box-shadow:0 0 24px rgba(255,77,148,.45);}
+.ins-hero .ins-ic svg{width:28px;height:28px;stroke:#fff;}
+.ins-hero h1{font-family:var(--font-display);font-size:23px;color:#fff;margin-bottom:8px;}
+.ins-hero p{color:var(--ins-text-dim);font-size:13.5px;max-width:34ch;margin:0 auto;}
+
+.ins-os-toggle{display:flex;gap:6px;background:var(--ins-surface);border:1px solid var(--ins-border);border-radius:99px;padding:5px;margin:22px 0 18px;}
+.ins-os-toggle button{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;border:none;background:transparent;color:var(--ins-text-dim);font-size:12.5px;font-weight:800;padding:11px 8px;border-radius:99px;}
+.ins-os-toggle button svg{width:15px;height:15px;}
+.ins-os-toggle button.active{background:var(--ins-grad);color:#fff;box-shadow:0 0 16px rgba(255,77,148,.4);}
+
+.ins-panel{display:none;}
+.ins-panel.active{display:block;}
+.ins-step{display:flex;gap:14px;background:var(--ins-surface);border:1px solid var(--ins-border);border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 10px 24px -16px rgba(255,77,148,.3);}
+.ins-step-n{width:32px;height:32px;border-radius:50%;background:var(--ins-grad);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 0 14px rgba(255,77,148,.5);}
+.ins-step-body{flex:1;min-width:0;}
+.ins-step-body b{font-size:13.8px;color:#fff;display:block;margin-bottom:4px;}
+.ins-step-body p{font-size:12.8px;color:var(--ins-text-dim);}
+.ins-step-body .ins-icon-row{display:flex;align-items:center;gap:8px;margin-top:8px;}
+.ins-step-body .ins-icon-row svg{width:18px;height:18px;stroke:var(--ins-pink);}
+.ins-step-body .ins-icon-row span{font-size:11.5px;color:var(--ins-text-mute);}
+
+.ins-benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0 6px;}
+.ins-benefit{background:var(--ins-surface);border:1px solid var(--ins-border);border-radius:16px;padding:14px 8px;text-align:center;}
+.ins-benefit svg{width:20px;height:20px;stroke:var(--ins-pink);margin:0 auto 8px;}
+.ins-benefit span{font-size:10.5px;color:var(--ins-text-dim);font-weight:700;line-height:1.3;display:block;}
+
+.ins-note{margin-top:18px;font-size:11.5px;color:var(--ins-text-mute);text-align:center;line-height:1.6;}
+
 @media (min-width:480px){
   .treatment-picker{gap:14px;}
 }
@@ -553,6 +705,22 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
 <body>
 
 <div id="toastWrap"></div>
+
+<!-- ============================================================
+     SPLASH — entrada futurista com partículas animadas
+     ============================================================ -->
+<div id="splashOverlay">
+  <canvas id="particlesCanvas"></canvas>
+  <div class="splash-content">
+    <div class="splash-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M12 3c3 3 6 6.5 6 10.5A6 6 0 0 1 6 13.5C6 9.5 9 6 12 3z"/></svg>
+    </div>
+    <div class="splash-name">Evolua<span>Pele</span></div>
+    <p class="splash-tag">Sua evolução, em tempo real</p>
+    <div class="splash-loader"><i></i><i></i><i></i></div>
+    <button class="splash-skip" id="btnSplashSkip">Toque para continuar</button>
+  </div>
+</div>
 
 <!-- ============================================================
      ONBOARDING — 3 telas de boas-vindas + criação de perfil
@@ -686,7 +854,7 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
     <div class="stat-row">
       <div class="stat-card-v2">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="5" r="2.3"/><path d="M8 21l1.5-7L7 11l1-4.2c.4-1.3 1.3-1.8 2.6-1.8h2.8c1.3 0 2.2.5 2.6 1.8L17 11l-2.5 3 1.5 7"/></svg>
-        <b id="statFotos">0</b><span>marcas</span>
+        <b id="statFotos">0</b><span>áreas</span>
       </div>
       <div class="stat-card-v2">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>
@@ -718,11 +886,17 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
       <div class="section-label" style="padding:0 0 10px;">Resumo do meu mapa</div>
       <div class="map-summary-row">
         <svg class="map-mini-svg" viewBox="0 0 200 420">
-          <path class="body-outline" fill="url(#bodyGradient)" d="M100,14 C122,14 128,34 122,50 C142,58 152,86 150,118 C148,148 142,172 134,192 C140,210 138,230 128,246 C134,270 132,300 124,326 C130,348 128,372 120,394 L106,394 L104,326 L100,270 L96,326 L94,394 L80,394 C72,372 70,348 76,326 C68,300 66,270 72,246 C62,230 60,210 66,192 C58,172 52,148 50,118 C48,86 58,58 78,50 C72,34 78,14 100,14 Z"/>
-          <circle cx="100" cy="30" r="20" fill="url(#bodyGradient)" stroke="var(--border)" stroke-width="1.4"/>
+          <defs>
+            <linearGradient id="homeBodyGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" style="stop-color:var(--surface)"/>
+              <stop offset="100%" style="stop-color:var(--surface-2)"/>
+            </linearGradient>
+          </defs>
+          <path class="body-outline" fill="url(#homeBodyGradient)" d="M100,14 C122,14 128,34 122,50 C142,58 152,86 150,118 C148,148 142,172 134,192 C140,210 138,230 128,246 C134,270 132,300 124,326 C130,348 128,372 120,394 L106,394 L104,326 L100,270 L96,326 L94,394 L80,394 C72,372 70,348 76,326 C68,300 66,270 72,246 C62,230 60,210 66,192 C58,172 52,148 50,118 C48,86 58,58 78,50 C72,34 78,14 100,14 Z"/>
+          <circle cx="100" cy="30" r="20" fill="url(#homeBodyGradient)" stroke="var(--border)" stroke-width="1.4"/>
         </svg>
         <div class="map-summary-txt">
-          <p id="mapSummaryAreas"><b>Área monitorada:</b> nenhuma marca ainda</p>
+          <p id="mapSummaryAreas"><b>Área monitorada:</b> nenhuma avaliação ainda</p>
           <p id="mapSummaryUpdate"><b>Última atualização:</b> —</p>
           <p id="mapSummaryZonas"><b>Zonas:</b> —</p>
           <button class="btn btn-outline btn-sm" data-nav="evolucao" style="margin-top:10px;">Ver mapa completo</button>
@@ -768,56 +942,115 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
   </section>
 
   <!-- ============================================================
-       TELA 2 — MINHA EVOLUÇÃO (mapa do corpo + fotos + gráfico + desafio)
+       TELA 2 — EVOLUÇÃO ("Sua Transformação")
        ============================================================ -->
   <section class="screen" id="screen-evolucao">
-    <div class="section-label" style="padding-top:20px;">Mapa do corpo</div>
-    <p style="font-size:13px;">Toque em uma área para classificar e acompanhar sua evolução.</p>
+    <div class="evo">
 
-    <div class="card" style="margin-top:14px;">
-      <div class="body-toggle" id="bodyToggle">
-        <button data-view="frente" class="active">Frente</button>
-        <button data-view="costas">Costas</button>
+      <!-- estado: jornada de 90 dias ainda não começou -->
+      <div class="evo-card evo-gate" id="evoGateCard">
+        <div class="evo-gate-ic">🌱</div>
+        <b>Sua Evolução ainda não começou</b>
+        <p>Comece sua jornada de 90 dias na aba Rotina pra ativar seu painel de evolução completo.</p>
+        <button class="evo-btn evo-btn-primary" data-nav="rotina">Ir para a Rotina</button>
       </div>
-      <div class="body-map-wrap">
-        <svg id="bodySvg" class="bodymap-svg" viewBox="0 0 200 420">
-          <defs>
-            <linearGradient id="bodyGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" style="stop-color:var(--surface)"/>
-              <stop offset="100%" style="stop-color:var(--surface-2)"/>
-            </linearGradient>
-          </defs>
-          <path class="body-outline" fill="url(#bodyGradient)"
-            d="M100,14 C122,14 128,34 122,50 C142,58 152,86 150,118 C148,148 142,172 134,192 C140,210 138,230 128,246 C134,270 132,300 124,326 C130,348 128,372 120,394 L106,394 L104,326 L100,270 L96,326 L94,394 L80,394 C72,372 70,348 76,326 C68,300 66,270 72,246 C62,230 60,210 66,192 C58,172 52,148 50,118 C48,86 58,58 78,50 C72,34 78,14 100,14 Z"/>
-          <circle cx="100" cy="30" r="20" fill="url(#bodyGradient)" stroke="var(--border)" stroke-width="1.4"/>
-          <g id="zonesGroup"></g>
-        </svg>
+
+      <div id="evoMain" style="display:none;">
+
+        <!-- 1. SUA JORNADA -->
+        <div class="evo-card evo-journey-card">
+          <div class="evo-eyebrow">Sua Jornada</div>
+          <h1>Sua Evolução em Tempo Real</h1>
+          <p class="evo-sub">Cada dia te deixa mais perto da nova pele</p>
+
+          <div class="evo-photos-compare">
+            <div class="evo-photo-before" id="evoFotoAntesWrap"></div>
+            <svg class="evo-arrow" viewBox="0 0 24 24" fill="none" stroke="url(#evoArrowGrad)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <defs><linearGradient id="evoArrowGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ff4d94"/><stop offset="100%" stop-color="#8a2be2"/></linearGradient></defs>
+              <path d="M5 12h13M13 6l6 6-6 6"/>
+            </svg>
+            <div class="evo-photo-depois" id="evoFotoDepoisWrap"></div>
+          </div>
+          <div class="evo-photos-labels"><span>Antes</span><span>Agora</span></div>
+
+          <div class="evo-level-row">
+            <span class="evo-level-badge" id="evoLevelBadge">NÍVEL 1</span>
+            <span class="evo-level-name" id="evoLevelName">Início da Jornada</span>
+          </div>
+
+          <div class="evo-progress-bar"><div class="evo-progress-fill" id="evoProgressFill"></div></div>
+          <div class="evo-progress-label" id="evoProgressLabel">0% do seu objetivo alcançado</div>
+          <p class="evo-motivacional" id="evoMotivacional"></p>
+
+          <div class="evo-staircase" id="evoStaircase"></div>
+        </div>
+
+        <!-- 2. MAPA DO CORPO INTELIGENTE -->
+        <div class="evo-card">
+          <div class="evo-eyebrow">Mapa do Corpo Inteligente</div>
+          <h2>Onde você está melhorando?</h2>
+          <p class="evo-sub">Toque na área e avalie sua evolução</p>
+
+          <div class="evo-body-toggle" id="evoBodyToggle">
+            <button data-view="frente" class="active">Frente</button>
+            <button data-view="costas">Costas</button>
+          </div>
+          <div class="evo-body-wrap">
+            <svg id="evoBodySvg" class="bodymap-svg" viewBox="0 0 200 420">
+              <defs>
+                <linearGradient id="evoBodyGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2a1f42"/>
+                  <stop offset="100%" stop-color="#1c1530"/>
+                </linearGradient>
+              </defs>
+              <path class="body-outline" fill="url(#evoBodyGradient)"
+                d="M100,14 C122,14 128,34 122,50 C142,58 152,86 150,118 C148,148 142,172 134,192 C140,210 138,230 128,246 C134,270 132,300 124,326 C130,348 128,372 120,394 L106,394 L104,326 L100,270 L96,326 L94,394 L80,394 C72,372 70,348 76,326 C68,300 66,270 72,246 C62,230 60,210 66,192 C58,172 52,148 50,118 C48,86 58,58 78,50 C72,34 78,14 100,14 Z"/>
+              <circle cx="100" cy="30" r="20" fill="url(#evoBodyGradient)" stroke="var(--border)" stroke-width="1.4"/>
+              <g id="evoZonesGroup"></g>
+            </svg>
+          </div>
+          <div class="evo-zone-summary" id="evoZoneSummary"></div>
+        </div>
+
+        <!-- 3. FOTO DA SEMANA -->
+        <div class="evo-card">
+          <div class="evo-eyebrow">Prova Visual do seu Resultado</div>
+          <h2>Foto da Semana</h2>
+          <button class="evo-btn evo-btn-primary" id="btnTirarFotoEvolucao">📸 Tirar Foto da Semana</button>
+
+          <div class="evo-photo-carousel" id="evoPhotoCarousel"></div>
+
+          <div class="evo-slider-wrap" id="evoSliderWrap" style="display:none;">
+            <b class="evo-slider-title">Antes e depois</b>
+            <div class="evo-slider-imgs-wrap" id="evoSliderImgsWrap">
+              <img id="evoSliderBeforeImg" alt="Foto mais antiga">
+              <div class="evo-slider-clip" id="evoSliderClip"><img id="evoSliderAfterImg" alt="Foto mais recente"></div>
+              <div class="evo-slider-handle" id="evoSliderHandle"></div>
+            </div>
+            <input type="range" id="evoSliderRange" min="0" max="100" value="50">
+          </div>
+
+          <p class="evo-hint">Tire sempre no mesmo lugar e luz. Isso mostra sua evolução real.</p>
+        </div>
+
+        <!-- 4. GRÁFICO DE EVOLUÇÃO -->
+        <div class="evo-card">
+          <div class="evo-eyebrow">Seu Gráfico de Constância</div>
+          <h2>Seu Gráfico de Evolução</h2>
+          <div class="evo-chart-wrap" id="evoChartWrap"></div>
+          <div class="evo-chart-legend" id="evoChartLegend"></div>
+          <p class="evo-peak" id="evoPeakText"></p>
+        </div>
+
+        <!-- 5. MEDALHAS -->
+        <div class="evo-card">
+          <div class="evo-eyebrow">Suas Conquistas</div>
+          <h2>Medalhas Desbloqueadas</h2>
+          <div class="evo-badges-grid" id="evoBadgesGrid"></div>
+        </div>
+
+        <button class="evo-reset-btn" id="btnReiniciarEvolucao">Reiniciar Minha Jornada</button>
       </div>
-      <div class="zone-list" id="zoneList"></div>
-    </div>
-
-    <div class="card" style="margin-top:14px;">
-      <b style="font-size:14px;display:block;margin-bottom:8px;">Vermelha ou branca — qual a diferença?</b>
-      <p style="font-size:13px;">Marcas <b>vermelhas</b> ainda têm vasos ativos e costumam responder mais rápido a ativos e cuidados. Marcas <b>brancas</b> já cicatrizaram — o resultado ainda aparece, só que pede mais paciência e constância.</p>
-    </div>
-
-    <div class="section-label">Gráfico de evolução</div>
-    <div class="card chart-wrap" id="evoChartCard"></div>
-
-    <div class="section-label">Fotos semanais</div>
-    <div class="card">
-      <button class="btn btn-primary btn-block" id="btnTirarFotoEvolucao">
-        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.4"/></svg>
-        Tirar foto da semana
-      </button>
-      <div class="photo-grid" id="photoGrid"></div>
-    </div>
-
-    <div class="section-label">Desafio 90 dias</div>
-    <div class="card">
-      <p style="font-size:13px;margin-bottom:4px;" id="challengeSummary">Você ainda não começou o desafio.</p>
-      <div class="challenge-grid" id="challengeGrid"></div>
-      <div class="badges-row" id="badgesRow"></div>
     </div>
   </section>
 
@@ -948,6 +1181,102 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
     <div id="productList"></div>
   </section>
 
+  <!-- ============================================================
+       TELA 6 — INSTALAR (adicionar à tela de início, Android/iOS)
+       ============================================================ -->
+  <section class="screen" id="screen-instalar">
+    <div class="install-wrap">
+      <div class="ins-hero">
+        <div class="ins-ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5"/><path d="M12 8v6M9.5 11.5 12 14l2.5-2.5"/><path d="M10.5 18h3"/></svg></div>
+        <h1>Instale o EvoluaPele</h1>
+        <p>Tenha o app na tela do seu celular, com ícone próprio e abertura instantânea — sem precisar de loja de aplicativos.</p>
+      </div>
+
+      <div class="ins-os-toggle" id="insOsToggle">
+        <button data-os="android" class="active">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 9.5 19 7c.1-.2 0-.4-.2-.5-.2-.1-.4 0-.5.2l-1.4 2.5a7.9 7.9 0 0 0-6.8 0L8.7 6.7c-.1-.2-.3-.3-.5-.2-.2.1-.3.3-.2.5l1.4 2.5C6.7 10.8 5 13.4 5 16.3h14c0-2.9-1.7-5.5-4.4-6.8zM9 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm6 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+          Android
+        </button>
+        <button data-os="ios">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.5c0-2.6 2.1-3.9 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.1 2.5-1.8 3.1-.5 7.6 1.3 10.1.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.5 0 2 .8 3.3.8 1.4 0 2.3-1.2 3.1-2.5.7-1 1.1-2.1 1.4-3.2-.1 0-2.8-1.1-2.8-4.6zM14.6 5c.7-.8 1.2-2 1-3.2-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.3z"/></svg>
+          iPhone
+        </button>
+      </div>
+
+      <!-- ANDROID -->
+      <div class="ins-panel active" id="insPanelAndroid">
+        <div class="ins-step">
+          <span class="ins-step-n">1</span>
+          <div class="ins-step-body">
+            <b>Abra o EvoluaPele no Chrome</b>
+            <p>Certifique-se de estar navegando pelo Google Chrome no seu Android.</p>
+          </div>
+        </div>
+        <div class="ins-step">
+          <span class="ins-step-n">2</span>
+          <div class="ins-step-body">
+            <b>Toque no menu (⋮) no canto superior direito</b>
+            <div class="ins-icon-row"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg><span>três pontinhos verticais</span></div>
+          </div>
+        </div>
+        <div class="ins-step">
+          <span class="ins-step-n">3</span>
+          <div class="ins-step-body">
+            <b>Toque em "Instalar app" ou "Adicionar à tela inicial"</b>
+            <p>O nome pode variar um pouco conforme a versão do Chrome.</p>
+          </div>
+        </div>
+        <div class="ins-step">
+          <span class="ins-step-n">4</span>
+          <div class="ins-step-body">
+            <b>Confirme tocando em "Instalar"</b>
+            <p>Pronto! O ícone do EvoluaPele aparece na sua tela de início, como um app de verdade.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- IOS -->
+      <div class="ins-panel" id="insPanelIos">
+        <div class="ins-step">
+          <span class="ins-step-n">1</span>
+          <div class="ins-step-body">
+            <b>Abra o EvoluaPele no Safari</b>
+            <p>No iPhone, a instalação só funciona pelo navegador Safari (não funciona no Chrome do iOS).</p>
+          </div>
+        </div>
+        <div class="ins-step">
+          <span class="ins-step-n">2</span>
+          <div class="ins-step-body">
+            <b>Toque no ícone de Compartilhar</b>
+            <div class="ins-icon-row"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg><span>o quadrado com a seta pra cima, na barra inferior</span></div>
+          </div>
+        </div>
+        <div class="ins-step">
+          <span class="ins-step-n">3</span>
+          <div class="ins-step-body">
+            <b>Role e toque em "Adicionar à Tela de Início"</b>
+            <p>Se não aparecer de primeira, role a lista de opções pra baixo.</p>
+          </div>
+        </div>
+        <div class="ins-step">
+          <span class="ins-step-n">4</span>
+          <div class="ins-step-body">
+            <b>Toque em "Adicionar" no canto superior</b>
+            <p>Pronto! O ícone do EvoluaPele aparece na sua tela de início, como um app de verdade.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ins-benefits">
+        <div class="ins-benefit"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8z"/></svg><span>Abertura instantânea</span></div>
+        <div class="ins-benefit"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span>Seus dados continuam salvos</span></div>
+        <div class="ins-benefit"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 3 6 6.5 6 10.5A6 6 0 0 1 6 13.5C6 9.5 9 6 12 3z"/></svg><span>Ícone próprio na tela</span></div>
+      </div>
+
+      <p class="ins-note">Não é necessário nenhuma loja de aplicativos. A instalação é gratuita, direto pelo navegador, e não ocupa quase espaço no seu celular.</p>
+    </div>
+  </section>
+
   <footer class="disclaimer">
     Este site tem propósito educativo e não substitui consulta com dermatologista.
   </footer>
@@ -978,6 +1307,10 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
       <svg viewBox="0 0 24 24"><path d="M6 8V6a3.5 3.5 0 0 1 7 0v2"/><rect x="3" y="8" width="17" height="13" rx="2"/></svg>
       Produtos
     </button>
+    <button data-nav="instalar">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5"/><path d="M12 8v6M9.5 11.5 12 14l2.5-2.5"/><path d="M10.5 18h3"/></svg>
+      Instalar
+    </button>
   </div>
 </nav>
 
@@ -1003,7 +1336,7 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
 </div>
 
 <!-- ============================================================
-     MODAL — MAPA DO CORPO (classificar zona)
+     MODAL — MAPA DO CORPO (avaliar zona por emoji)
      ============================================================ -->
 <div class="modal-overlay" id="zoneOverlay">
   <div class="modal-sheet">
@@ -1011,10 +1344,12 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
       <b style="font-size:15px;" id="zoneModalTitle">Área</b>
       <button class="modal-close" id="zoneCloseBtn">✕</button>
     </div>
-    <p style="font-size:13.5px;">Qual o tipo da marca aqui?</p>
-    <div class="zone-modal-opts">
-      <button class="vermelha" data-tipo="vermelha"><b>Vermelha</b><span>recente / roxa</span></button>
-      <button class="branca" data-tipo="branca"><b>Branca</b><span>antiga / clara</span></button>
+    <p style="font-size:13.5px;">Como está essa área hoje?</p>
+    <div class="evo-rating-opts">
+      <button data-rating="muito_ruim"><span>😡</span>Muito Ruim</button>
+      <button data-rating="ruim"><span>😐</span>Ruim</button>
+      <button data-rating="melhorando"><span>😊</span>Melhorando</button>
+      <button data-rating="otima"><span>😍</span>Ótima</button>
     </div>
   </div>
 </div>
@@ -1094,6 +1429,7 @@ var defaultState = {
   posts:[],            // {id, fotoDataUrl, legenda, date, likedByMe, likes, comments:[]}
   communityInteractions:{}, // seedPostId -> {likedByMe, extraLikes, comments:[]}
   challenge:{ startDate:null, days:{} },
+  evolucaoMapa:{},           // zoneId -> {history:[{date,rating}]} — aba Evolução (mapa do corpo inteligente)
   tratamentosEscolhidos:[],  // ['estrias','celulite','varizes'] — seletor do topo da página
   rotina90:{                 // calendário gamificado de 90 dias (aba Rotina)
     started:false,
@@ -1311,7 +1647,7 @@ function renderInicio(){
   document.getElementById('inicioSaudacao').textContent = saudacaoPorHorario();
   document.getElementById('homeGreeting').textContent = 'Olá, '+primeiroNome;
 
-  var marcasCount = Object.keys(state.bodyMap).length;
+  var marcasCount = Object.keys(state.evolucaoMapa).length;
   document.getElementById('statFotos').textContent = marcasCount;
   document.getElementById('statDias').textContent = Object.keys(state.challenge.days).filter(function(d){return state.challenge.days[d];}).length;
   document.getElementById('statMelhora').textContent = computeAvgMelhora()+'%';
@@ -1362,20 +1698,20 @@ function renderTipNumbered(){
 
 /* ---- resumo do mapa do corpo (dados reais, não decorativo) ---- */
 function renderMapSummary(){
-  var ids = Object.keys(state.bodyMap);
+  var ids = Object.keys(state.evolucaoMapa);
   var areasEl = document.getElementById('mapSummaryAreas');
   var updateEl = document.getElementById('mapSummaryUpdate');
   var zonasEl = document.getElementById('mapSummaryZonas');
   if(!ids.length){
-    areasEl.innerHTML = '<b>Área monitorada:</b> nenhuma marca ainda';
+    areasEl.innerHTML = '<b>Área monitorada:</b> nenhuma avaliação ainda';
     updateEl.innerHTML = '<b>Última atualização:</b> —';
     zonasEl.innerHTML = '<b>Zonas:</b> toque em "Ver mapa completo" pra começar';
     return;
   }
-  var nomes = ids.map(function(id){ return ZONE_LABELS[id] || id; });
-  var datas = ids.map(function(id){ return state.bodyMap[id].startDate; }).sort();
+  var nomes = ids.map(function(id){ return ZONE_LABELS_EVO[id] || id; });
+  var datas = ids.map(function(id){ var h = state.evolucaoMapa[id].history; return h[h.length-1].date; }).sort();
   var maisRecente = datas[datas.length-1];
-  areasEl.innerHTML = '<b>Área monitorada:</b> '+ids.length+' marca(s) registrada(s)';
+  areasEl.innerHTML = '<b>Área monitorada:</b> '+ids.length+' área(s) avaliada(s)';
   updateEl.innerHTML = '<b>Última atualização:</b> '+(maisRecente===todayISO() ? 'hoje' : fmtDate(maisRecente));
   zonasEl.innerHTML = '<b>Zonas:</b> '+nomes.join(' · ');
 }
@@ -1403,7 +1739,7 @@ function renderProgressChecklist(){
     { done:!!state.profile.nome, label:'Perfil criado' },
     { done: state.photos.length>0, label:'Primeira foto enviada' },
     { done: !!state.quiz, label:'Questionário respondido' },
-    { done: Object.keys(state.bodyMap).length>0, label:'Mapa do corpo iniciado' },
+    { done: Object.keys(state.evolucaoMapa).length>0, label:'Mapa do corpo iniciado' },
     { done: state.posts.length>0, label:'Primeira postagem na Jornada' }
   ];
   var checkSvg = '<svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
@@ -1437,173 +1773,9 @@ function renderCommunityHighlights(){
 }
 
 /* ============================================================
-   MAPA DO CORPO — zonas clicáveis, classificação e % de melhora
-   ============================================================ */
-var ZONES_FRENTE = [
-  { id:'bracos', nome:'Braços', d:'M124,55 C138,64 146,86 145,112 C144,136 140,158 134,178 L120,172 C126,152 129,130 130,108 C131,86 128,68 118,58 Z' },
-  { id:'bracos2', alias:'bracos', nome:'Braços', d:'M76,55 C62,64 54,86 55,112 C56,136 60,158 66,178 L80,172 C74,152 71,130 70,108 C69,86 72,68 82,58 Z' },
-  { id:'barriga', nome:'Barriga', d:'M66,120 C64,140 64,160 68,180 C68,186 132,186 132,180 C136,160 136,140 134,120 C112,128 88,128 66,120 Z' },
-  { id:'coxas', nome:'Coxas', d:'M101,278 L127,278 C131,304 130,332 125,368 L103,368 L101,278 Z' },
-  { id:'coxas2', alias:'coxas', nome:'Coxas', d:'M99,278 L73,278 C69,304 70,332 75,368 L97,368 L99,278 Z' }
-];
-var ZONES_COSTAS = [
-  { id:'gluteos', nome:'Glúteos', d:'M64,248 C60,258 62,268 68,276 C82,282 118,282 132,276 C138,268 140,258 136,248 C118,254 82,254 64,248 Z' },
-  { id:'bracos-c', alias:'bracos', nome:'Braços', d:'M124,55 C138,64 146,86 145,112 C144,136 140,158 134,178 L120,172 C126,152 129,130 130,108 C131,86 128,68 118,58 Z' },
-  { id:'bracos-c2', alias:'bracos', nome:'Braços', d:'M76,55 C62,64 54,86 55,112 C56,136 60,158 66,178 L80,172 C74,152 71,130 70,108 C69,86 72,68 82,58 Z' }
-];
-var ZONE_LABELS = { barriga:'Barriga', coxas:'Coxas', gluteos:'Glúteos', bracos:'Braços' };
-var bodyView = 'frente';
-
-document.getElementById('bodyToggle').addEventListener('click', function(e){
-  var b = e.target.closest('button[data-view]');
-  if(!b) return;
-  bodyView = b.dataset.view;
-  document.querySelectorAll('#bodyToggle button').forEach(function(x){ x.classList.toggle('active', x===b); });
-  renderBodyMap();
-});
-
-function computeMelhora(zoneId){
-  var z = state.bodyMap[zoneId];
-  if(!z) return null;
-  var weeks = daysBetween(z.startDate, todayISO())/7;
-  var rate = z.tipo==='vermelha' ? 6 : 3;
-  return Math.max(0, Math.min(85, Math.round(weeks*rate)));
-}
-function computeAvgMelhora(){
-  var ids = Object.keys(state.bodyMap);
-  if(!ids.length) return 0;
-  var soma = ids.reduce(function(acc,id){ return acc + (computeMelhora(id)||0); },0);
-  return Math.round(soma/ids.length);
-}
-
-function renderBodyMap(){
-  var group = document.getElementById('zonesGroup');
-  var zones = bodyView==='frente' ? ZONES_FRENTE : ZONES_COSTAS;
-  group.innerHTML = '';
-  zones.forEach(function(z){
-    var key = z.alias || z.id;
-    var path = document.createElementNS('http://www.w3.org/2000/svg','path');
-    path.setAttribute('d', z.d);
-    var marked = state.bodyMap[key];
-    var cls = 'zone'+(marked ? ' marked-'+marked.tipo : '');
-    path.setAttribute('class', cls);
-    path.setAttribute('role','button');
-    path.setAttribute('tabindex','0');
-    path.dataset.zone = key;
-    path.addEventListener('click', function(){ openZoneModal(key); });
-    group.appendChild(path);
-  });
-  renderZoneList();
-}
-
-function renderZoneList(){
-  var ids = Object.keys(ZONE_LABELS);
-  var list = document.getElementById('zoneList');
-  list.innerHTML = ids.map(function(id){
-    var z = state.bodyMap[id];
-    var pct = computeMelhora(id);
-    return '<div class="zone-row" data-zone="'+id+'">'
-      + '<div class="info"><span class="dot'+(z?' '+z.tipo:'')+'"></span>'+ZONE_LABELS[id]+'</div>'
-      + (pct===null ? '<span class="pct empty">não marcada</span>' : '<span class="pct">'+pct+'% de melhora</span>')
-    + '</div>';
-  }).join('');
-  list.querySelectorAll('[data-zone]').forEach(function(row){
-    row.addEventListener('click', function(){ openZoneModal(row.dataset.zone); });
-  });
-}
-
-var zoneOverlay = document.getElementById('zoneOverlay');
-var currentZoneId = null;
-function openZoneModal(zoneId){
-  currentZoneId = zoneId;
-  document.getElementById('zoneModalTitle').textContent = ZONE_LABELS[zoneId] || zoneId;
-  zoneOverlay.classList.add('open');
-}
-document.getElementById('zoneCloseBtn').addEventListener('click', function(){ zoneOverlay.classList.remove('open'); });
-document.querySelectorAll('#zoneOverlay .zone-modal-opts button').forEach(function(btn){
-  btn.addEventListener('click', function(){
-    salvarMapaCorpo(currentZoneId, btn.dataset.tipo);
-    zoneOverlay.classList.remove('open');
-    renderBodyMap();
-    renderEvoChart();
-    toast('Área atualizada ✓','ok');
-  });
-});
-
-function salvarMapaCorpo(zoneId, tipo){
-  var existing = state.bodyMap[zoneId];
-  state.bodyMap[zoneId] = { tipo: tipo, startDate: existing ? existing.startDate : todayISO() };
-  saveState();
-}
-
-/* ---- gráfico de evolução (SVG simples, sem libs) ---- */
-function buildEvolutionSeries(){
-  var ids = Object.keys(state.bodyMap);
-  if(!ids.length) return [];
-  var starts = ids.map(function(id){ return state.bodyMap[id].startDate; });
-  var earliest = starts.sort()[0];
-  var totalWeeks = Math.max(1, Math.ceil(daysBetween(earliest, todayISO())/7));
-  var points = [];
-  for(var w=0; w<=totalWeeks; w++){
-    var date = addDaysISO(earliest, w*7);
-    var soma=0, n=0;
-    ids.forEach(function(id){
-      var z = state.bodyMap[id];
-      if(z.startDate <= date){
-        var weeksSince = daysBetween(z.startDate, date)/7;
-        var rate = z.tipo==='vermelha' ? 6 : 3;
-        soma += Math.max(0, Math.min(85, Math.round(weeksSince*rate)));
-        n++;
-      }
-    });
-    points.push({ date:date, val: n ? Math.round(soma/n) : 0 });
-  }
-  return points;
-}
-function renderEvoChart(){
-  var card = document.getElementById('evoChartCard');
-  var series = buildEvolutionSeries();
-  if(series.length<2){
-    card.innerHTML = '<div class="empty-state">Marque pelo menos uma área no mapa do corpo para ver seu gráfico de evolução.</div>';
-    return;
-  }
-  var w=460,h=100,pad=16;
-  var max=Math.max(10, Math.max.apply(null, series.map(function(p){return p.val;})));
-  var pts = series.map(function(p,i){
-    var x = pad + (i/(series.length-1))*(w-pad*2);
-    var y = h-pad - (p.val/max)*(h-pad*2);
-    return x+','+y;
-  });
-  card.innerHTML = '<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none">'
-    + '<polyline points="'+pts.join(' ')+'" fill="none" stroke="#B97C6B" stroke-width="2.5"/>'
-    + '</svg>'
-    + '<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-mute);margin-top:4px;">'
-      + '<span>'+fmtDate(series[0].date)+'</span><span>'+series[series.length-1].val+'% hoje</span>'
-    + '</div>';
-}
-
-/* ============================================================
-   FOTOS SEMANAIS (dentro de Minha Evolução)
-   ============================================================ */
-document.getElementById('btnTirarFotoEvolucao').addEventListener('click', function(){
-  abrirCamera(document.getElementById('cameraInputEvolucao'), function(dataUrl){
-    state.photos.push({ id:uid(), dataUrl:dataUrl, date:todayISO() });
-    saveState();
-    toast('Foto salva no seu diário 📸','ok');
-    renderEvolucao();
-  });
-});
-function renderPhotoGrid(){
-  var grid = document.getElementById('photoGrid');
-  var sorted = state.photos.slice().sort(function(a,b){return b.date>a.date?1:-1;});
-  if(!sorted.length){ grid.innerHTML=''; return; }
-  grid.innerHTML = sorted.map(function(p){
-    return '<div class="photo-thumb"><img src="'+p.dataUrl+'" alt="Foto de '+p.date+'"></div>';
-  }).join('');
-}
-
-/* ============================================================
-   DESAFIO 90 DIAS — calendário + selos
+   DESAFIO GERAL (Início) — mantido como está, usado pelo card
+   "Sua sequência" da tela Início. Não faz mais parte da aba
+   Evolução (que agora é 100% baseada na jornada de 90 dias).
    ============================================================ */
 var CHALLENGE_BADGES = [ {days:7,emoji:'🥉',label:'7 dias'}, {days:30,emoji:'🥈',label:'30 dias'}, {days:60,emoji:'🥇',label:'60 dias'}, {days:90,emoji:'🏆',label:'90 dias'} ];
 
@@ -1619,40 +1791,377 @@ function marcarChallengeHoje(){
   }
 }
 
-function renderChallenge(){
-  var grid = document.getElementById('challengeGrid');
-  var summary = document.getElementById('challengeSummary');
-  var completed = Object.keys(state.challenge.days).filter(function(k){return state.challenge.days[k];}).length;
+/* ============================================================
+   ABA EVOLUÇÃO — "Sua Transformação"
+   ============================================================
+   100% personalizada e alimentada pela jornada de 90 dias criada
+   na aba Rotina (state.rotina90): nível, gráfico de constância e
+   estatísticas sobem sozinhos conforme ela marca as tarefas.
+   Dados próprios desta aba: mapa do corpo (avaliação por emoji)
+   e fotos semanais (reaproveita state.photos).
+   ============================================================ */
 
-  if(!state.challenge.startDate){
-    summary.textContent = 'Toque em "Fiz hoje" na tela Início para começar seu desafio de 90 dias.';
-    grid.innerHTML = '';
+/* ---- zonas do corpo (mesma silhueta de antes + zona "Pernas" nova) ---- */
+var ZONES_EVO_FRENTE = [
+  { id:'bracos', alias:'bracos', d:'M124,55 C138,64 146,86 145,112 C144,136 140,158 134,178 L120,172 C126,152 129,130 130,108 C131,86 128,68 118,58 Z' },
+  { id:'bracos2', alias:'bracos', d:'M76,55 C62,64 54,86 55,112 C56,136 60,158 66,178 L80,172 C74,152 71,130 70,108 C69,86 72,68 82,58 Z' },
+  { id:'barriga', alias:'barriga', d:'M66,120 C64,140 64,160 68,180 C68,186 132,186 132,180 C136,160 136,140 134,120 C112,128 88,128 66,120 Z' },
+  { id:'coxas', alias:'coxas', d:'M101,278 L127,278 C131,304 130,332 125,368 L103,368 L101,278 Z' },
+  { id:'coxas2', alias:'coxas', d:'M99,278 L73,278 C69,304 70,332 75,368 L97,368 L99,278 Z' },
+  { id:'pernas', alias:'pernas', d:'M103,368 L125,368 L120,394 L106,394 Z' },
+  { id:'pernas2', alias:'pernas', d:'M97,368 L75,368 L80,394 L94,394 Z' }
+];
+var ZONES_EVO_COSTAS = [
+  { id:'gluteos', alias:'gluteos', d:'M64,248 C60,258 62,268 68,276 C82,282 118,282 132,276 C138,268 140,258 136,248 C118,254 82,254 64,248 Z' },
+  { id:'bracos-c', alias:'bracos', d:'M124,55 C138,64 146,86 145,112 C144,136 140,158 134,178 L120,172 C126,152 129,130 130,108 C131,86 128,68 118,58 Z' },
+  { id:'bracos-c2', alias:'bracos', d:'M76,55 C62,64 54,86 55,112 C56,136 60,158 66,178 L80,172 C74,152 71,130 70,108 C69,86 72,68 82,58 Z' },
+  { id:'pernas-c', alias:'pernas', d:'M103,368 L125,368 L120,394 L106,394 Z' },
+  { id:'pernas-c2', alias:'pernas', d:'M97,368 L75,368 L80,394 L94,394 Z' }
+];
+var ZONE_LABELS_EVO = { barriga:'Barriga', coxas:'Coxas', gluteos:'Glúteos', bracos:'Braços', pernas:'Pernas' };
+var ZONE_ORDER_EVO = ['barriga','coxas','gluteos','bracos','pernas'];
+var evoBodyView = 'frente';
+
+/* ---- avaliação por emoji: vermelho -> amarelo -> verde claro -> verde forte ---- */
+var RATING_META = {
+  muito_ruim: { emoji:'😡', label:'Muito Ruim', score:0,   cor:'#ff4d6d' },
+  ruim:       { emoji:'😐', label:'Ruim',       score:33,  cor:'#ffb648' },
+  melhorando: { emoji:'😊', label:'Melhorando', score:66,  cor:'#8fe3a8' },
+  otima:      { emoji:'😍', label:'Ótima',      score:100, cor:'#2fbf71' }
+};
+var RATING_ORDER = ['muito_ruim','ruim','melhorando','otima'];
+
+/* ---- níveis da jornada (sobem a cada 18 dias, do dia 1 ao 90) ---- */
+var EVO_LEVELS = [
+  { n:1, nome:'Início da Jornada',        diaMin:1  },
+  { n:2, nome:'Despertar da Pele',        diaMin:19 },
+  { n:3, nome:'Transformação em Curso',   diaMin:37 },
+  { n:4, nome:'Resultados Visíveis',      diaMin:55 },
+  { n:5, nome:'Nova Pele',                diaMin:73 }
+];
+function evoNivelAtual(diaAtual){
+  var nivel = 1;
+  EVO_LEVELS.forEach(function(l){ if(diaAtual>=l.diaMin) nivel = l.n; });
+  return nivel;
+}
+
+/* ---- salva a avaliação de uma zona (sobrescreve se já avaliou hoje) ---- */
+function evoAvaliarZona(zoneId, ratingKey){
+  if(!state.evolucaoMapa[zoneId]) state.evolucaoMapa[zoneId] = { history:[] };
+  var hist = state.evolucaoMapa[zoneId].history;
+  var hoje = todayISO();
+  if(hist.length && hist[hist.length-1].date===hoje){
+    hist[hist.length-1].rating = ratingKey;
   } else {
-    summary.textContent = completed+' de 90 dias completos.';
-    var cells = '';
-    for(var i=0;i<90;i++){
-      var date = addDaysISO(state.challenge.startDate, i);
-      var cls = 'challenge-cell';
-      if(date === todayISO()) cls += ' today';
-      if(date > todayISO()) cls += ' future';
-      if(state.challenge.days[date]) cls += ' done';
-      cells += '<div class="'+cls+'">'+(i+1)+'</div>';
+    hist.push({ date:hoje, rating:ratingKey });
+  }
+  saveState();
+}
+
+/* ---- % de melhora de uma zona nas últimas 2 semanas ---- */
+function evoPctMelhoraZona(zoneId){
+  var reg = state.evolucaoMapa[zoneId];
+  if(!reg || !reg.history.length) return null;
+  var hist = reg.history;
+  var limite14 = addDaysISO(todayISO(), -14);
+  var base = hist.filter(function(h){ return h.date>=limite14; })[0] || hist[0];
+  var atual = hist[hist.length-1];
+  return { delta: RATING_META[atual.rating].score - RATING_META[base.rating].score, atual: atual.rating };
+}
+
+/* ---- média geral do mapa (usada também no resumo da Início) ---- */
+function computeAvgMelhora(){
+  var ids = Object.keys(state.evolucaoMapa);
+  if(!ids.length) return 0;
+  var soma = ids.reduce(function(acc,id){
+    var hist = state.evolucaoMapa[id].history;
+    var atual = hist[hist.length-1];
+    return acc + (RATING_META[atual.rating] ? RATING_META[atual.rating].score : 0);
+  },0);
+  return Math.round(soma/ids.length);
+}
+
+/* ---- ponto de entrada da aba ---- */
+function renderEvolucao(){
+  var gate = document.getElementById('evoGateCard');
+  var main = document.getElementById('evoMain');
+  if(!state.rotina90.started){
+    gate.style.display = 'block';
+    main.style.display = 'none';
+    return;
+  }
+  gate.style.display = 'none';
+  main.style.display = 'block';
+
+  renderEvoJourneyCard();
+  renderEvoBodyMap();
+  renderEvoPhotos();
+  renderEvoChart();
+  renderEvoBadges();
+}
+
+/* ---- 1. card "Sua Jornada" ---- */
+function renderEvoJourneyCard(){
+  var diaAtual = r90DiaAtual() || 1;
+  var nivel = evoNivelAtual(diaAtual);
+  var nivelInfo = EVO_LEVELS.filter(function(l){ return l.n===nivel; })[0];
+  var pct = Math.round((diaAtual/90)*100);
+
+  document.getElementById('evoLevelBadge').textContent = 'NÍVEL '+nivel;
+  document.getElementById('evoLevelName').textContent = nivelInfo.nome;
+  document.getElementById('evoProgressFill').style.width = pct+'%';
+  document.getElementById('evoProgressLabel').textContent = pct+'% do seu objetivo alcançado';
+
+  var motivacional;
+  if(nivel>=5){
+    motivacional = 'Você chegou ao nível máximo: Nova Pele 👑 Continue mantendo sua constância!';
+  } else {
+    var proximo = EVO_LEVELS.filter(function(l){ return l.n===nivel+1; })[0];
+    var faltam = Math.max(0, proximo.diaMin - diaAtual);
+    motivacional = 'Faltam '+faltam+' dias pra você atingir o Nível '+proximo.n+': '+proximo.nome;
+  }
+  document.getElementById('evoMotivacional').textContent = motivacional;
+
+  // escada de evolução (5 degraus)
+  document.getElementById('evoStaircase').innerHTML = EVO_LEVELS.map(function(l){
+    var estado = l.n<nivel ? 'done' : l.n===nivel ? 'current' : 'locked';
+    return '<div class="evo-step evo-step-'+estado+'"><span class="evo-step-n">'+(estado==='done'?'✓':l.n)+'</span><span class="evo-step-label">'+l.nome+'</span></div>';
+  }).join('');
+
+  // fotos antes/depois
+  var fotos = state.photos.slice().sort(function(a,b){ return a.date>b.date?1:-1; });
+  var antesWrap = document.getElementById('evoFotoAntesWrap');
+  var depoisWrap = document.getElementById('evoFotoDepoisWrap');
+  if(fotos.length){
+    antesWrap.innerHTML = '<img src="'+fotos[0].dataUrl+'" alt="Foto mais antiga">';
+    depoisWrap.innerHTML = '<img src="'+fotos[fotos.length-1].dataUrl+'" alt="Foto mais recente">';
+  } else {
+    antesWrap.innerHTML = '<div class="evo-photo-placeholder">📷</div>';
+    depoisWrap.innerHTML = '<div class="evo-photo-placeholder">📷</div>';
+  }
+}
+
+/* ---- 2. mapa do corpo inteligente ---- */
+document.getElementById('evoBodyToggle').addEventListener('click', function(e){
+  var b = e.target.closest('button[data-view]');
+  if(!b) return;
+  evoBodyView = b.dataset.view;
+  document.querySelectorAll('#evoBodyToggle button').forEach(function(x){ x.classList.toggle('active', x===b); });
+  renderEvoBodyMap();
+});
+
+function renderEvoBodyMap(){
+  var group = document.getElementById('evoZonesGroup');
+  var zones = evoBodyView==='frente' ? ZONES_EVO_FRENTE : ZONES_EVO_COSTAS;
+  group.innerHTML = '';
+  zones.forEach(function(z){
+    var reg = state.evolucaoMapa[z.alias];
+    var path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d', z.d);
+    path.setAttribute('class', 'evo-zone');
+    if(reg && reg.history.length){
+      var atual = reg.history[reg.history.length-1].rating;
+      path.style.fill = RATING_META[atual].cor;
+      path.style.opacity = '0.85';
     }
-    grid.innerHTML = cells;
+    path.dataset.zone = z.alias;
+    path.addEventListener('click', function(){ evoAbrirZoneModal(z.alias); });
+    group.appendChild(path);
+  });
+
+  document.getElementById('evoZoneSummary').innerHTML = ZONE_ORDER_EVO.map(function(id){
+    var melhora = evoPctMelhoraZona(id);
+    var texto;
+    if(!melhora){
+      texto = 'ainda não avaliada';
+    } else if(melhora.delta>0){
+      texto = '+'+melhora.delta+'% de melhora nas últimas 2 semanas';
+    } else if(melhora.delta<0){
+      texto = melhora.delta+'% nas últimas 2 semanas — vamos retomar o cuidado por aqui';
+    } else {
+      texto = 'estável nas últimas 2 semanas';
+    }
+    var dot = state.evolucaoMapa[id] ? RATING_META[state.evolucaoMapa[id].history.slice(-1)[0].rating].cor : '#3a3350';
+    return '<div class="evo-zone-row" data-zone="'+id+'"><span class="evo-zone-dot" style="background:'+dot+';"></span><b>'+ZONE_LABELS_EVO[id]+':</b> <span>'+texto+'</span></div>';
+  }).join('');
+  document.querySelectorAll('.evo-zone-row').forEach(function(row){
+    row.addEventListener('click', function(){ evoAbrirZoneModal(row.dataset.zone); });
+  });
+}
+
+var evoCurrentZone = null;
+function evoAbrirZoneModal(zoneId){
+  evoCurrentZone = zoneId;
+  document.getElementById('zoneModalTitle').textContent = ZONE_LABELS_EVO[zoneId] || zoneId;
+  document.getElementById('zoneOverlay').classList.add('open');
+}
+document.getElementById('zoneCloseBtn').addEventListener('click', function(){
+  document.getElementById('zoneOverlay').classList.remove('open');
+});
+document.querySelectorAll('#zoneOverlay .evo-rating-opts button').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    evoAvaliarZona(evoCurrentZone, btn.dataset.rating);
+    document.getElementById('zoneOverlay').classList.remove('open');
+    renderEvoBodyMap();
+    toast('Avaliação salva ✓','ok');
+  });
+});
+
+/* ---- 3. foto da semana (carrossel + slider antes/depois) ---- */
+document.getElementById('btnTirarFotoEvolucao').addEventListener('click', function(){
+  abrirCamera(document.getElementById('cameraInputEvolucao'), function(dataUrl){
+    state.photos.push({ id:uid(), dataUrl:dataUrl, date:todayISO() });
+    saveState();
+    toast('Foto salva no seu diário 📸','ok');
+    renderEvolucao();
+  });
+});
+
+function renderEvoPhotos(){
+  var sorted = state.photos.slice().sort(function(a,b){ return b.date>a.date?1:-1; }); // mais recente primeiro
+  var carrossel = document.getElementById('evoPhotoCarousel');
+  if(!sorted.length){
+    carrossel.innerHTML = '<div class="evo-photo-placeholder-lg">Suas fotos semanais vão aparecer aqui 📷</div>';
+    document.getElementById('evoSliderWrap').style.display = 'none';
+    return;
+  }
+  carrossel.innerHTML = sorted.slice(0,4).map(function(p){
+    return '<div class="evo-photo-thumb"><img src="'+p.dataUrl+'" alt="Foto de '+fmtDate(p.date)+'"><span>'+fmtDate(p.date)+'</span></div>';
+  }).join('');
+
+  var sliderWrap = document.getElementById('evoSliderWrap');
+  if(sorted.length>=2){
+    sliderWrap.style.display = 'block';
+    var antes = sorted[sorted.length-1]; // mais antiga entre as carregadas
+    var depois = sorted[0]; // mais recente
+    document.getElementById('evoSliderBeforeImg').src = antes.dataUrl;
+    document.getElementById('evoSliderAfterImg').src = depois.dataUrl;
+    evoUpdateSlider();
+  } else {
+    sliderWrap.style.display = 'none';
+  }
+}
+function evoUpdateSlider(){
+  var wrap = document.getElementById('evoSliderImgsWrap');
+  var range = document.getElementById('evoSliderRange');
+  var pct = +range.value;
+  var w = wrap.clientWidth;
+  document.getElementById('evoSliderClip').style.width = pct+'%';
+  document.getElementById('evoSliderAfterImg').style.width = w+'px';
+  document.getElementById('evoSliderHandle').style.left = pct+'%';
+}
+document.getElementById('evoSliderRange').addEventListener('input', evoUpdateSlider);
+window.addEventListener('resize', function(){
+  if(document.getElementById('evoSliderWrap').style.display!=='none') evoUpdateSlider();
+});
+
+/* ---- 4. gráfico de evolução (linhas por tratamento, a partir da constância real na Rotina) ---- */
+var EVO_CHART_RATE = { estrias:7, celulite:6, varizes:5 };
+var EVO_CHART_CORES = { estrias:'#ff4d94', celulite:'#8a2be2', varizes:'#2f9ee0' };
+
+function buildEvoChartSeries(){
+  var treinos = state.rotina90.treatments;
+  var diaAtual = r90DiaAtual() || 0;
+  var totalWeeks = Math.min(12, Math.ceil(diaAtual/7));
+  var series = {};
+  treinos.forEach(function(t){
+    var acumulado = 0;
+    var pontos = [];
+    for(var w=1; w<=totalWeeks; w++){
+      var diaIni = (w-1)*7+1;
+      var diaFim = Math.min(diaAtual, w*7);
+      var soma=0, n=0;
+      for(var d=diaIni; d<=diaFim; d++){
+        var st = r90StatusDoDia(r90DataDoDia(d));
+        if(st.total){ soma += st.pct; n++; }
+      }
+      var completude = n ? (soma/n)/100 : 0;
+      acumulado = Math.min(100, acumulado + (EVO_CHART_RATE[t]||6)*completude);
+      pontos.push({ week:w, val:Math.round(acumulado) });
+    }
+    series[t] = pontos;
+  });
+  return series;
+}
+
+function renderEvoChart(){
+  var series = buildEvoChartSeries();
+  var treinos = Object.keys(series);
+  var wrap = document.getElementById('evoChartWrap');
+
+  if(!treinos.length || !series[treinos[0]].length){
+    wrap.innerHTML = '<div class="empty-state">Complete suas tarefas diárias na aba Rotina pra começar a ver seu gráfico de evolução.</div>';
+    document.getElementById('evoChartLegend').innerHTML = '';
+    document.getElementById('evoPeakText').textContent = '';
+    return;
   }
 
-  document.getElementById('badgesRow').innerHTML = CHALLENGE_BADGES.map(function(b){
-    var earned = completed>=b.days;
-    return '<div class="badge'+(earned?' earned':'')+'"><div class="ic">'+b.emoji+'</div><span>'+b.label+'</span></div>';
+  var totalWeeks = series[treinos[0]].length;
+  var w=460, h=180, pad=24;
+  var maxX = Math.max(2, totalWeeks);
+
+  var linhas = treinos.map(function(t){
+    var pts = series[t].map(function(p){
+      var x = pad + ((p.week-1)/(maxX-1))*(w-pad*2);
+      var y = h-pad - (p.val/100)*(h-pad*2);
+      return x+','+y;
+    });
+    return '<polyline points="'+pts.join(' ')+'" fill="none" stroke="'+EVO_CHART_CORES[t]+'" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
+  }).join('');
+
+  var eixoX = '<line x1="'+pad+'" y1="'+(h-pad)+'" x2="'+(w-pad)+'" y2="'+(h-pad)+'" stroke="var(--border)" stroke-width="1"/>';
+
+  wrap.innerHTML = '<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none" style="width:100%;height:180px;">'+eixoX+linhas+'</svg>'
+    + '<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-mute);margin-top:4px;">'
+      + '<span>Semana 1</span><span>Semana '+totalWeeks+'</span>'
+    + '</div>';
+
+  document.getElementById('evoChartLegend').innerHTML = treinos.map(function(t){
+    return '<span class="evo-legend-item"><i style="background:'+EVO_CHART_CORES[t]+';"></i>'+TREATMENT_META[t].label+'</span>';
+  }).join('');
+
+  // maior pico de melhora (maior salto semana a semana, entre todas as linhas)
+  var melhorSemana=null, melhorDelta=-Infinity;
+  treinos.forEach(function(t){
+    var pts = series[t];
+    for(var i=1;i<pts.length;i++){
+      var delta = pts[i].val - pts[i-1].val;
+      if(delta>melhorDelta){ melhorDelta=delta; melhorSemana=pts[i].week; }
+    }
+  });
+  document.getElementById('evoPeakText').textContent = (melhorSemana && melhorDelta>0)
+    ? 'Na semana '+melhorSemana+' você teve seu maior pico de melhora: +'+melhorDelta+'%'
+    : 'Continue completando suas tarefas diárias pra ver seus picos de melhora aqui.';
+}
+
+/* ---- 5. medalhas desbloqueadas ---- */
+function renderEvoBadges(){
+  var stats = r90ComputeStats();
+  var aguaCount = 0;
+  Object.keys(state.rotina90.days).forEach(function(d){
+    var st = state.rotina90.days[d].statuses;
+    if(st && st.agua==='done') aguaCount++;
+  });
+  var badges = [
+    { emoji:'🥇', label:'Primeira Semana Completa', unlocked: stats.feitos>=7 },
+    { emoji:'📸', label:'Primeira Foto Enviada',     unlocked: state.photos.length>0 },
+    { emoji:'💧', label:'7 Dias Bebendo 2L',         unlocked: aguaCount>=7 }
+  ];
+  document.getElementById('evoBadgesGrid').innerHTML = badges.map(function(b){
+    return '<div class="evo-badge'+(b.unlocked?' unlocked':'')+'"><div class="evo-badge-ic">'+(b.unlocked?b.emoji:'🔒')+'</div><span>'+b.label+'</span></div>';
   }).join('');
 }
 
-function renderEvolucao(){
-  renderBodyMap();
-  renderEvoChart();
-  renderPhotoGrid();
-  renderChallenge();
-}
+/* ---- reiniciar jornada de evolução (fotos + mapa; a Rotina tem seu próprio reset) ---- */
+document.getElementById('btnReiniciarEvolucao').addEventListener('click', function(){
+  var ok = window.confirm('Isso vai apagar suas fotos e avaliações do mapa do corpo. Sua jornada de 90 dias na Rotina não é afetada. Continuar?');
+  if(!ok) return;
+  state.photos = [];
+  state.evolucaoMapa = {};
+  saveState();
+  renderEvolucao();
+  toast('Sua jornada de evolução foi reiniciada.','ok');
+});
 
 /* ============================================================
    JORNADA — feed estilo Instagram (meu feed + comunidade)
@@ -2452,6 +2961,25 @@ function renderCronogramaSection(){
   }).join('');
 }
 
+function renderProvaSocialSection(){
+  var ordered = treatmentsOrdenados();
+  var perTreatment = ordered.length===1 ? 3 : 2;
+  var cards = [];
+  ordered.forEach(function(t){
+    TESTIMONIALS[t].slice(0, perTreatment).forEach(function(dep){
+      cards.push({ treat:t, dep:dep });
+    });
+  });
+  var starSvg = '<svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 1-5 5 1.5 7-6.5-3.5L5 21.5 6.5 14.5l-5-5 7-1z"/></svg>';
+  document.getElementById('provaSocialConteudo').innerHTML = cards.map(function(c){
+    return '<div class="card testi-card">'
+      + '<div class="testi-stars">'+starSvg+starSvg+starSvg+starSvg+starSvg+'</div>'
+      + '<p>"'+c.dep.texto+'"</p>'
+      + '<div style="margin-top:10px;"><span class="testi-name">'+c.dep.nome+'</span><span class="testi-tag">Tratamento de '+TREATMENT_META[c.treat].label+'</span></div>'
+    + '</div>';
+  }).join('');
+}
+
 /* ============================================================
    ABA ROTINA — calendário futurista gamificado de 90 dias
    ============================================================
@@ -2830,8 +3358,99 @@ function atualizarEstadoInicialR90(){
 }
 
 /* ============================================================
+   SPLASH — partículas animadas + entrada da marca
+   ============================================================ */
+function initParticles(){
+  var canvas = document.getElementById('particlesCanvas');
+  var ctx = canvas.getContext('2d');
+  var w,h,particles;
+  var CORES = ['rgba(255,77,148,', 'rgba(138,43,226,', 'rgba(255,255,255,'];
+
+  function resize(){
+    w = canvas.width = canvas.offsetWidth;
+    h = canvas.height = canvas.offsetHeight;
+  }
+  function criarParticulas(){
+    var qtd = Math.min(70, Math.round((w*h)/16000));
+    particles = [];
+    for(var i=0;i<qtd;i++){
+      particles.push({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        vx: (Math.random()-0.5)*0.35,
+        vy: (Math.random()-0.5)*0.35,
+        r: Math.random()*1.6+0.6,
+        cor: CORES[Math.floor(Math.random()*CORES.length)]
+      });
+    }
+  }
+  function tick(){
+    ctx.clearRect(0,0,w,h);
+    particles.forEach(function(p){
+      p.x += p.vx; p.y += p.vy;
+      if(p.x<0||p.x>w) p.vx*=-1;
+      if(p.y<0||p.y>h) p.vy*=-1;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle = p.cor+'.8)';
+      ctx.fill();
+    });
+    for(var i=0;i<particles.length;i++){
+      for(var j=i+1;j<particles.length;j++){
+        var dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+        var dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<110){
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle = 'rgba(180,140,255,'+(1-dist/110)*0.25+')';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+    if(document.getElementById('splashOverlay') && !document.getElementById('splashOverlay').classList.contains('hidden')){
+      requestAnimationFrame(tick);
+    }
+  }
+  resize();
+  criarParticulas();
+  window.addEventListener('resize', function(){ resize(); criarParticulas(); });
+  tick();
+}
+
+function dismissSplash(){
+  var splash = document.getElementById('splashOverlay');
+  if(!splash || splash.classList.contains('hidden')) return;
+  splash.classList.add('fading');
+  setTimeout(function(){ splash.classList.add('hidden'); }, 500);
+}
+document.getElementById('splashOverlay').addEventListener('click', dismissSplash);
+setTimeout(dismissSplash, 2600); // entrada rápida, também some sozinha
+
+/* ============================================================
+   ABA INSTALAR — alterna Android / iOS (com detecção automática)
+   ============================================================ */
+document.getElementById('insOsToggle').addEventListener('click', function(e){
+  var btn = e.target.closest('button[data-os]');
+  if(!btn) return;
+  var os = btn.dataset.os;
+  document.querySelectorAll('#insOsToggle button').forEach(function(b){ b.classList.toggle('active', b===btn); });
+  document.getElementById('insPanelAndroid').classList.toggle('active', os==='android');
+  document.getElementById('insPanelIos').classList.toggle('active', os==='ios');
+});
+(function detectarOsInstalar(){
+  var ua = navigator.userAgent || '';
+  if(/iPhone|iPad|iPod/i.test(ua)){
+    var btnIos = document.querySelector('#insOsToggle button[data-os="ios"]');
+    if(btnIos) btnIos.click();
+  }
+})();
+
+/* ============================================================
    INICIALIZAÇÃO
    ============================================================ */
+initParticles();
 checkOnboarding();
 renderTopbar();
 initCommunityInteractions();
