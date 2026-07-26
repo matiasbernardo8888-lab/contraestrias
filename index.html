@@ -451,10 +451,11 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
 
 /* ---- aba hoje: card + tarefas ---- */
 .r90-today-date{font-family:var(--font-display);font-size:17px;margin-bottom:14px;color:#fff;}
-.r90-task-row{display:flex;align-items:center;gap:12px;background:var(--r90-surface-2);border:1px solid var(--r90-border);border-radius:16px;padding:13px 14px;margin-bottom:10px;transition:.2s ease;}
+.r90-task-row{display:flex;flex-direction:column;align-items:stretch;gap:0;background:var(--r90-surface-2);border:1px solid var(--r90-border);border-radius:16px;padding:13px 14px;margin-bottom:10px;transition:.2s ease;}
 .r90-task-row:last-child{margin-bottom:0;}
 .r90-task-row.done{border-color:var(--r90-green);background:rgba(47,230,166,.1);}
 .r90-task-row.fail{border-color:var(--r90-red);background:rgba(255,77,109,.1);}
+.r90-task-main{display:flex;align-items:center;gap:12px;}
 .r90-task-info{flex:1;min-width:0;}
 .r90-task-info b{font-size:13.8px;display:block;color:#fff;}
 .r90-task-info span{font-size:11.5px;color:var(--r90-text-mute);}
@@ -463,6 +464,14 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
 .r90-task-actions button.btn-ok:hover,.r90-task-row.done .btn-ok{background:var(--r90-green);border-color:var(--r90-green);color:#062;box-shadow:0 0 12px rgba(47,230,166,.6);}
 .r90-task-actions button.btn-fail:hover,.r90-task-row.fail .btn-fail{background:var(--r90-red);border-color:var(--r90-red);color:#fff;box-shadow:0 0 12px rgba(255,77,109,.6);}
 .r90-fail-msg{font-size:11.5px;color:var(--r90-text-dim);margin-top:10px;text-align:center;}
+
+/* ---- lembrete com notificação, dentro de cada tarefa ---- */
+.r90-reminder-row{display:flex;align-items:center;gap:8px;margin-top:11px;padding-top:11px;border-top:1px dashed rgba(255,77,148,.18);}
+.r90-reminder-row input[type="time"]{flex:none;background:var(--r90-surface);border:1.5px solid var(--r90-border);border-radius:10px;padding:7px 9px;font-size:12.5px;color:var(--r90-text);font-family:inherit;color-scheme:dark;}
+.r90-reminder-row .r90-reminder-btn{flex:1;background:transparent;border:1.5px solid var(--r90-pink);color:var(--r90-pink);font-size:11.5px;font-weight:800;padding:8px 10px;border-radius:10px;cursor:pointer;transition:.15s ease;white-space:nowrap;}
+.r90-reminder-row .r90-reminder-btn:active{transform:scale(.96);}
+.r90-reminder-row .r90-reminder-btn.ativo{background:var(--r90-grad);color:#fff;border-color:transparent;box-shadow:0 0 12px rgba(255,77,148,.5);}
+
 @keyframes r90pop{0%{transform:scale(1);}40%{transform:scale(1.06);}100%{transform:scale(1);}}
 .r90-task-row.just-marked{animation:r90pop .25s ease;}
 
@@ -1425,6 +1434,14 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
 <script>
 (function(){
 "use strict";
+
+/* ============================================================
+   NOTIFICAÇÕES — pede permissão assim que o site carrega, pra
+   poder disparar os lembretes de tarefa da aba Rotina.
+   ============================================================ */
+if('Notification' in window && Notification.permission!=='granted' && Notification.permission!=='denied'){
+  Notification.requestPermission();
+}
 
 /* ============================================================
    ESTADO — tudo em localStorage. OBS: dentro da pré-visualização
@@ -3203,27 +3220,140 @@ function renderR90Hoje(){
     return;
   }
 
+  var alarmesSalvos = carregarAlarmes();
+
   document.getElementById('r90TaskList').innerHTML = tarefas.map(function(t){
     var status = registro ? registro.statuses[t.id] : null;
     var cls = status==='done' ? 'done' : status==='fail' ? 'fail' : '';
+    var horarioSalvo = alarmesSalvos[t.label] || '';
     return '<div class="r90-task-row '+cls+'" data-task="'+t.id+'">'
-      + '<div class="r90-task-info"><b>'+(status==='done'?'✅ ':'')+t.label+'</b><span>'+t.detalhe+'</span></div>'
-      + '<div class="r90-task-actions">'
-        + '<button class="btn-ok" data-status="done" title="Concluí">✓</button>'
-        + '<button class="btn-fail" data-status="fail" title="Falhei">✕</button>'
+      + '<div class="r90-task-main">'
+        + '<div class="r90-task-info"><b>'+(status==='done'?'✅ ':'')+t.label+'</b><span>'+t.detalhe+'</span></div>'
+        + '<div class="r90-task-actions">'
+          + '<button class="btn-ok" data-status="done" title="Concluí">✓</button>'
+          + '<button class="btn-fail" data-status="fail" title="Falhei">✕</button>'
+        + '</div>'
+      + '</div>'
+      + '<div class="r90-reminder-row">'
+        + '<input type="time" class="r90-reminder-input" value="'+horarioSalvo+'">'
+        + '<button type="button" class="r90-reminder-btn'+(horarioSalvo?' ativo':'')+'" data-label="'+t.label+'">🔔 '+(horarioSalvo?'Lembrete '+horarioSalvo:'Ativar Lembrete')+'</button>'
       + '</div>'
     + '</div>';
   }).join('') + (registro && Object.keys(registro.statuses||{}).some(function(k){return registro.statuses[k]==='fail';})
       ? '<div class="r90-fail-msg">Amanhã a gente faz melhor 💪</div>' : '');
 
   document.querySelectorAll('#r90TaskList .r90-task-row').forEach(function(row){
-    row.querySelectorAll('button').forEach(function(btn){
+    // botões de concluí/falhei — só os de dentro de .r90-task-actions
+    row.querySelectorAll('.r90-task-actions button').forEach(function(btn){
       btn.addEventListener('click', function(){
         r90MarcarTarefa(row.dataset.task, btn.dataset.status);
         var freshRow = document.querySelector('#r90TaskList .r90-task-row[data-task="'+row.dataset.task+'"]');
         if(freshRow) freshRow.classList.add('just-marked');
       });
     });
+    // botão de lembrete — pega o horário do input ao lado e agenda a notificação
+    var btnLembrete = row.querySelector('.r90-reminder-btn');
+    var inputHora = row.querySelector('.r90-reminder-input');
+    btnLembrete.addEventListener('click', function(){
+      var horario = inputHora.value;
+      if(!horario){ toast('Escolha um horário antes de ativar o lembrete.','warn'); return; }
+      agendarNotificacao(btnLembrete.dataset.label, horario);
+      btnLembrete.classList.add('ativo');
+      btnLembrete.textContent = '🔔 Lembrete '+horario;
+    });
+  });
+}
+
+/* ============================================================
+   LEMBRETE COM NOTIFICAÇÃO — agenda um alarme por tarefa usando
+   setTimeout (funciona enquanto o site estiver aberto no
+   navegador) e guarda o horário escolhido no localStorage, na
+   chave 'alarmesEvolua', pra não perder a configuração quando
+   a página recarrega. Não são horários fixos sugeridos por
+   tarefa — é o horário que a própria pessoa escolhe no input.
+   ============================================================ */
+var alarmesTimeouts = {}; // nomeTarefa -> id do setTimeout ativo nesta sessão
+
+/* reaproveita o ícone (base64) que já está embutido no <head>, em vez de
+   duplicar o base64 inteiro de novo aqui dentro do script */
+function getIconeNotificacao(){
+  var link = document.querySelector('link[rel="icon"]');
+  return link ? link.getAttribute('href') : undefined;
+}
+
+function carregarAlarmes(){
+  try{
+    return JSON.parse(localStorage.getItem('alarmesEvolua') || '{}');
+  }catch(e){
+    return {};
+  }
+}
+function salvarAlarme(nomeTarefa, horario){
+  var alarmes = carregarAlarmes();
+  alarmes[nomeTarefa] = horario;
+  localStorage.setItem('alarmesEvolua', JSON.stringify(alarmes));
+}
+
+function agendarNotificacao(nomeTarefa, horario){
+  if(!horario) return;
+  salvarAlarme(nomeTarefa, horario);
+
+  // se já tinha um lembrete rodando pra essa tarefa nesta sessão, cancela antes de recriar
+  if(alarmesTimeouts[nomeTarefa]) clearTimeout(alarmesTimeouts[nomeTarefa]);
+
+  function disparar(){
+    var partes = horario.split(':');
+    var agora = new Date();
+    var alvo = new Date();
+    alvo.setHours(parseInt(partes[0],10), parseInt(partes[1],10), 0, 0);
+    if(alvo.getTime() <= agora.getTime()){
+      alvo.setDate(alvo.getDate()+1); // já passou hoje: reagenda pro mesmo horário amanhã
+    }
+    var delay = alvo.getTime() - agora.getTime();
+    alarmesTimeouts[nomeTarefa] = setTimeout(function(){
+      if('Notification' in window && Notification.permission==='granted'){
+        new Notification('EvoluaPele', { body:'Hora de: '+nomeTarefa, icon:getIconeNotificacao() });
+      } else {
+        toast('⏰ Hora de: '+nomeTarefa,'ok');
+      }
+      disparar(); // reagenda automaticamente pro dia seguinte, repetindo todo dia
+    }, delay);
+  }
+  disparar();
+
+  if('Notification' in window && Notification.permission!=='granted'){
+    Notification.requestPermission();
+  }
+  toast('Lembrete ativado: '+nomeTarefa+' às '+horario+' ✓','ok');
+}
+
+/* religa (nesta sessão) os lembretes que já estavam salvos no localStorage,
+   pra não perder o alarme sempre que a página é recarregada */
+function rearmarAlarmesSalvos(){
+  var alarmes = carregarAlarmes();
+  Object.keys(alarmes).forEach(function(nomeTarefa){
+    var horario = alarmes[nomeTarefa];
+    if(!horario) return;
+    if(alarmesTimeouts[nomeTarefa]) clearTimeout(alarmesTimeouts[nomeTarefa]);
+    (function(nome, hora){
+      function disparar(){
+        var partes = hora.split(':');
+        var agora = new Date();
+        var alvo = new Date();
+        alvo.setHours(parseInt(partes[0],10), parseInt(partes[1],10), 0, 0);
+        if(alvo.getTime() <= agora.getTime()) alvo.setDate(alvo.getDate()+1);
+        var delay = alvo.getTime() - agora.getTime();
+        alarmesTimeouts[nome] = setTimeout(function(){
+          if('Notification' in window && Notification.permission==='granted'){
+            new Notification('EvoluaPele', { body:'Hora de: '+nome, icon:getIconeNotificacao() });
+          } else {
+            toast('⏰ Hora de: '+nome,'ok');
+          }
+          disparar();
+        }, delay);
+      }
+      disparar();
+    })(nomeTarefa, horario);
   });
 }
 
@@ -3477,6 +3607,7 @@ renderTopbar();
 initCommunityInteractions();
 navegarAbas('inicio');
 renderTreatmentPicker();
+rearmarAlarmesSalvos();
 
 })();
 </script>
