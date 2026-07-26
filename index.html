@@ -251,32 +251,6 @@ img{max-width:100%;display:block;}
 .comment-form input{flex:1;background:var(--surface-2);border:1px solid var(--border);border-radius:99px;padding:9px 13px;font-size:12.5px;}
 .comment-form button{font-size:12.5px;font-weight:800;color:var(--primary-strong);flex:none;padding:0 6px;}
 
-/* ---------- rotina ---------- */
-.routine-badge{display:inline-flex;align-items:center;gap:6px;background:var(--primary-soft);color:var(--primary-strong);font-weight:800;font-size:12px;padding:6px 12px;border-radius:99px;margin-bottom:10px;}
-.routine-cols{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px;}
-.routine-col{border:1px solid var(--border);border-radius:var(--radius-m);padding:15px;background:var(--surface-2);}
-.routine-col h4{font-size:12px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;color:var(--primary-strong);}
-.routine-step{display:flex;gap:9px;padding:8px 0;border-bottom:1px dashed var(--border);font-size:13.5px;}
-.routine-step:last-child{border-bottom:none;}
-.routine-step .num{font-size:11px;color:var(--text-mute);flex:none;width:16px;}
-.reminder-row{display:flex;align-items:center;gap:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-s);padding:11px 13px;margin-top:8px;}
-.reminder-time{font-weight:800;font-size:15px;color:var(--primary-strong);flex:none;width:56px;}
-.reminder-info{flex:1;font-size:13px;}
-.reminder-del{color:var(--text-mute);font-size:12px;text-decoration:underline;flex:none;}
-
-/* ---------- mitos e verdades (accordion) ---------- */
-.myth-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-m);margin-bottom:9px;overflow:hidden;}
-.myth-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 15px;cursor:pointer;}
-.myth-head b{font-size:13.5px;font-weight:700;line-height:1.4;}
-.myth-verdict{display:inline-block;font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:3px 9px;border-radius:99px;margin-right:8px;flex:none;}
-.myth-verdict.mito{background:#F3DAD5;color:#B85D4C;}
-.myth-verdict.verdade{background:var(--success-soft);color:var(--success);}
-.myth-head svg{width:14px;height:14px;stroke:var(--text-mute);flex:none;transition:transform .2s ease;}
-.myth-item.open .myth-head svg{transform:rotate(45deg);}
-.myth-body{max-height:0;overflow:hidden;transition:max-height .25s ease;}
-.myth-item.open .myth-body{max-height:320px;}
-.myth-body-in{padding:0 15px 14px;font-size:13px;color:var(--text-dim);}
-
 /* ---------- filtro de produtos ---------- */
 .product-filters{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
 .pfilter-chip{border:1px solid var(--border);background:var(--surface);color:var(--text-dim);font-size:12px;padding:7px 13px;border-radius:99px;font-weight:700;}
@@ -427,6 +401,149 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
 .checklist-box ul,.erros-box ul{margin:0;padding-left:18px;}
 .checklist-box li,.erros-box li{font-size:12.8px;color:var(--text-dim);margin-bottom:4px;}
 .checklist-box li:last-child,.erros-box li:last-child{margin-bottom:0;}
+
+/* ============================================================
+   ABA ROTINA — calendário futurista gamificado de 90 dias
+   Tema escuro isolado (não herda os tokens claros do resto do
+   site), com neon rosa/roxo, glow e gamificação.
+   ============================================================ */
+.rotina90{
+  --r90-bg:#0a0a0a;
+  --r90-surface:#15101f;
+  --r90-surface-2:#1c1530;
+  --r90-border:rgba(255,77,148,.28);
+  --r90-pink:#ff4d94;
+  --r90-purple:#8a2be2;
+  --r90-grad:linear-gradient(135deg,var(--r90-pink) 0%,var(--r90-purple) 100%);
+  --r90-text:#f5f0ff;
+  --r90-text-dim:#b6a9d6;
+  --r90-text-mute:#7c6f96;
+  --r90-green:#2fe6a6;
+  --r90-red:#ff4d6d;
+  --r90-yellow:#ffd166;
+  --r90-glow:0 0 20px rgba(255,77,148,.5);
+  margin:0 -20px;
+  padding:26px 18px 40px;
+  background:var(--r90-bg);
+  border-radius:0 0 32px 32px;
+  color:var(--r90-text);
+  font-family:var(--font-body);
+}
+
+/* ---- hero ---- */
+.r90-hero{text-align:center;padding:10px 0 22px;}
+.r90-hero h1{font-family:var(--font-display);font-size:26px;line-height:1.25;background:var(--r90-grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px;}
+.r90-hero p{color:var(--r90-text-dim);font-size:13.5px;letter-spacing:.02em;}
+
+/* ---- cards base do tema escuro ---- */
+.r90-card{background:var(--r90-surface);border:1px solid var(--r90-border);border-radius:20px;padding:18px;margin-bottom:16px;box-shadow:0 12px 30px -18px rgba(255,77,148,.35);}
+.r90-section-title{font-size:14.5px;display:block;margin-bottom:12px;color:var(--r90-text);}
+
+/* ---- botões do tema escuro ---- */
+.r90-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;font-weight:800;font-size:14px;padding:14px 18px;border-radius:99px;border:none;cursor:pointer;transition:transform .12s ease,box-shadow .2s ease;}
+.r90-btn:active{transform:scale(.97);}
+.r90-btn-primary{background:var(--r90-grad);color:#fff;box-shadow:var(--r90-glow);}
+.r90-btn-ghost{background:transparent;color:var(--r90-pink);border:1.5px solid var(--r90-border);margin-top:10px;}
+
+/* ---- estado inicial (antes de começar) ---- */
+.r90-start-card{text-align:center;}
+.r90-start-card p{color:var(--r90-text-dim);font-size:13.5px;margin-bottom:16px;line-height:1.6;}
+
+/* ---- barra de progresso ---- */
+.r90-progress-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;}
+.r90-progress-top span:first-child{font-family:var(--font-display);font-size:17px;color:var(--r90-text);}
+.r90-progress-top span:last-child{font-size:13px;font-weight:800;color:var(--r90-pink);}
+.r90-progress-bar{height:14px;border-radius:99px;background:var(--r90-surface-2);overflow:hidden;border:1px solid var(--r90-border);}
+.r90-progress-fill{height:100%;width:0%;background:var(--r90-grad);border-radius:99px;box-shadow:var(--r90-glow);transition:width .5s ease;}
+.r90-stats-row{display:flex;gap:10px;margin-top:16px;}
+.r90-stat{flex:1;text-align:center;background:var(--r90-surface-2);border:1px solid var(--r90-border);border-radius:14px;padding:12px 6px;}
+.r90-stat b{display:block;font-family:var(--font-display);font-size:22px;color:#fff;}
+.r90-stat span{font-size:10px;color:var(--r90-text-mute);text-transform:uppercase;letter-spacing:.04em;}
+
+/* ---- abas Hoje / Semana / Mês ---- */
+.r90-tabs{display:flex;gap:6px;background:var(--r90-surface);border:1px solid var(--r90-border);border-radius:99px;padding:5px;margin-bottom:16px;}
+.r90-tabs button{flex:1;border:none;background:transparent;color:var(--r90-text-dim);font-size:12.5px;font-weight:800;padding:10px 8px;border-radius:99px;cursor:pointer;transition:.15s ease;}
+.r90-tabs button.active{background:var(--r90-grad);color:#fff;box-shadow:var(--r90-glow);}
+.r90-tab-panel{display:none;}
+.r90-tab-panel.active{display:block;}
+
+/* ---- aba hoje: card + tarefas ---- */
+.r90-today-date{font-family:var(--font-display);font-size:17px;margin-bottom:14px;color:#fff;}
+.r90-task-row{display:flex;align-items:center;gap:12px;background:var(--r90-surface-2);border:1px solid var(--r90-border);border-radius:16px;padding:13px 14px;margin-bottom:10px;transition:.2s ease;}
+.r90-task-row:last-child{margin-bottom:0;}
+.r90-task-row.done{border-color:var(--r90-green);background:rgba(47,230,166,.1);}
+.r90-task-row.fail{border-color:var(--r90-red);background:rgba(255,77,109,.1);}
+.r90-task-info{flex:1;min-width:0;}
+.r90-task-info b{font-size:13.8px;display:block;color:#fff;}
+.r90-task-info span{font-size:11.5px;color:var(--r90-text-mute);}
+.r90-task-actions{display:flex;gap:6px;flex:none;}
+.r90-task-actions button{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--r90-border);background:var(--r90-surface);font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--r90-text-dim);cursor:pointer;transition:.15s ease;}
+.r90-task-actions button.btn-ok:hover,.r90-task-row.done .btn-ok{background:var(--r90-green);border-color:var(--r90-green);color:#062;box-shadow:0 0 12px rgba(47,230,166,.6);}
+.r90-task-actions button.btn-fail:hover,.r90-task-row.fail .btn-fail{background:var(--r90-red);border-color:var(--r90-red);color:#fff;box-shadow:0 0 12px rgba(255,77,109,.6);}
+.r90-fail-msg{font-size:11.5px;color:var(--r90-text-dim);margin-top:10px;text-align:center;}
+@keyframes r90pop{0%{transform:scale(1);}40%{transform:scale(1.06);}100%{transform:scale(1);}}
+.r90-task-row.just-marked{animation:r90pop .25s ease;}
+
+/* ---- aba semana ---- */
+.r90-week-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;}
+.r90-day-card{background:var(--r90-surface);border:1.5px solid var(--r90-border);border-radius:16px;padding:13px 10px;text-align:center;}
+.r90-day-card.full{border-color:var(--r90-green);box-shadow:0 0 14px rgba(47,230,166,.4);}
+.r90-day-card.fail{border-color:var(--r90-red);box-shadow:0 0 14px rgba(255,77,109,.35);}
+.r90-day-card.locked{opacity:.4;}
+.r90-day-card .dname{font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--r90-text-mute);}
+.r90-day-card .ddate{font-size:12px;color:var(--r90-text-dim);margin-bottom:8px;}
+.r90-day-card .dpct{font-family:var(--font-display);font-size:19px;color:#fff;}
+.r90-day-card .dfrac{font-size:10.5px;color:var(--r90-text-mute);}
+
+/* ---- aba mês ---- */
+.r90-month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.r90-month-nav button{width:34px;height:34px;border-radius:50%;background:var(--r90-surface-2);border:1px solid var(--r90-border);color:#fff;font-size:16px;cursor:pointer;}
+.r90-month-nav span{font-size:13px;font-weight:800;color:var(--r90-text-dim);}
+.r90-month-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-bottom:14px;}
+.r90-month-cell{aspect-ratio:1/1;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;cursor:pointer;border:1px solid transparent;color:#0a0a0a;}
+.r90-month-cell.gray{background:var(--r90-surface-2);color:var(--r90-text-mute);border-color:var(--r90-border);cursor:default;}
+.r90-month-cell.green{background:var(--r90-green);box-shadow:0 0 10px rgba(47,230,166,.55);}
+.r90-month-cell.yellow{background:var(--r90-yellow);box-shadow:0 0 10px rgba(255,209,102,.5);}
+.r90-month-cell.red{background:var(--r90-red);color:#fff;box-shadow:0 0 10px rgba(255,77,109,.5);}
+.r90-legend{display:flex;flex-wrap:wrap;gap:10px 14px;font-size:11px;color:var(--r90-text-mute);}
+.r90-legend span{display:inline-flex;align-items:center;gap:5px;}
+.r90-legend .dot{width:9px;height:9px;border-radius:50%;flex:none;}
+.r90-legend .dot.green{background:var(--r90-green);}
+.r90-legend .dot.yellow{background:var(--r90-yellow);}
+.r90-legend .dot.red{background:var(--r90-red);}
+.r90-legend .dot.gray{background:var(--r90-surface-2);border:1px solid var(--r90-border);}
+
+/* ---- anotações ---- */
+.r90-field{margin-bottom:14px;}
+.r90-field label{display:block;font-size:12px;color:var(--r90-text-dim);margin-bottom:7px;font-weight:700;}
+.r90-field textarea{width:100%;min-height:64px;background:var(--r90-surface-2);border:1px solid var(--r90-border);border-radius:14px;padding:12px 13px;font-size:14px;color:var(--r90-text);resize:vertical;font-family:inherit;}
+.r90-field textarea::placeholder{color:var(--r90-text-mute);}
+
+/* ---- selos / gamificação ---- */
+.r90-badges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:12px;}
+.r90-badge{text-align:center;opacity:.35;}
+.r90-badge.unlocked{opacity:1;}
+.r90-badge .bic{width:56px;height:56px;border-radius:50%;background:var(--r90-surface-2);border:2px solid var(--r90-border);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 8px;}
+.r90-badge.unlocked .bic{border-color:var(--r90-pink);background:var(--r90-grad);box-shadow:var(--r90-glow);}
+.r90-badge b{font-size:11px;display:block;color:#fff;}
+.r90-badge span{font-size:9.5px;color:var(--r90-text-mute);}
+@keyframes r90unlock{0%{transform:scale(.6) rotate(-10deg);opacity:0;}60%{transform:scale(1.15) rotate(4deg);opacity:1;}100%{transform:scale(1) rotate(0);}}
+.r90-badge.just-unlocked .bic{animation:r90unlock .5s cubic-bezier(.34,1.56,.64,1);}
+
+/* ---- botão flutuante: reiniciar ---- */
+.r90-fab{position:fixed;right:16px;bottom:86px;z-index:35;background:var(--r90-surface,#15101f);color:var(--r90-pink,#ff4d94);border:1.5px solid rgba(255,77,148,.5);border-radius:99px;padding:11px 16px;font-size:12px;font-weight:800;box-shadow:0 8px 22px -10px rgba(255,77,148,.6);cursor:pointer;}
+
+/* ---- modal de detalhe do dia (reaproveita .modal-sheet, mas com tema escuro) ---- */
+.r90-modal-sheet{background:#15101f;color:#f5f0ff;}
+.r90-modal-sheet .modal-head b{color:#fff;}
+.r90-modal-sheet .modal-close{background:#1c1530;color:#b6a9d6;}
+.r90-detail-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px dashed rgba(255,77,148,.2);font-size:13.5px;}
+.r90-detail-row:last-child{border-bottom:none;}
+.r90-detail-row .tag-done{color:#2fe6a6;font-weight:800;font-size:11px;}
+.r90-detail-row .tag-fail{color:#ff4d6d;font-weight:800;font-size:11px;}
+.r90-detail-row .tag-pending{color:#7c6f96;font-weight:700;font-size:11px;}
+.r90-detail-note{margin-top:12px;font-size:13px;color:#b6a9d6;background:#1c1530;border-radius:12px;padding:12px 13px;}
+.r90-detail-note b{color:#fff;display:block;margin-bottom:4px;font-size:12px;}
 
 @media (min-width:480px){
   .treatment-picker{gap:14px;}
@@ -721,49 +838,103 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
   </section>
 
   <!-- ============================================================
-       TELA 4 — ROTINA (questionário + protocolo + lembretes)
+       TELA 4 — ROTINA (calendário futurista gamificado de 90 dias)
        ============================================================ -->
   <section class="screen" id="screen-rotina">
-    <div class="section-label" style="padding-top:20px;">Meu protocolo</div>
+    <div class="rotina90">
 
-    <div id="routineEmptyState" class="empty-state">
-      Você ainda não respondeu o questionário.
-      <div style="margin-top:14px;"><button class="btn btn-primary" id="btnMontarPlano2">Responder agora</button></div>
-    </div>
+      <!-- ---------- HERO ---------- -->
+      <div class="r90-hero">
+        <h1>Sua Transformação<br>de 90 Dias</h1>
+        <p>Constância vence perfeição</p>
+      </div>
 
-    <div id="routineContent" style="display:none;">
-      <div class="card">
-        <span class="routine-badge" id="routineBadge">Protocolo</span>
-        <p id="routineNote" style="font-size:12.8px;"></p>
-        <div class="routine-cols">
-          <div class="routine-col"><h4>☀️ Manhã</h4><div id="routineManha"></div></div>
-          <div class="routine-col"><h4>🌙 Noite</h4><div id="routineNoite"></div></div>
+      <!-- ---------- ESTADO: AINDA NÃO COMEÇOU ---------- -->
+      <div class="r90-card r90-start-card" id="r90StartCard">
+        <p id="r90StartMsg">Escolha seu tratamento lá no topo da página e comece a contagem dos seus 90 dias.</p>
+        <button class="r90-btn r90-btn-primary" id="btnComecar90">Começar meus 90 dias 🚀</button>
+        <button class="r90-btn r90-btn-ghost" id="btnIrParaSeletor" style="display:none;">Escolher tratamento lá em cima ↑</button>
+      </div>
+
+      <!-- ---------- CONTEÚDO PRINCIPAL (só aparece depois de começar) ---------- -->
+      <div id="r90Main" style="display:none;">
+
+        <!-- barra de progresso -->
+        <div class="r90-card r90-progress-card">
+          <div class="r90-progress-top">
+            <span id="r90DiaLabel">Dia 1 de 90</span>
+            <span id="r90PctLabel">0%</span>
+          </div>
+          <div class="r90-progress-bar"><div class="r90-progress-fill" id="r90ProgressFill"></div></div>
+          <div class="r90-stats-row">
+            <div class="r90-stat"><b id="r90StatFeitos">0</b><span>Dias Feitos</span></div>
+            <div class="r90-stat"><b id="r90StatFalhados">0</b><span>Dias Falhados</span></div>
+            <div class="r90-stat"><b id="r90StatSequencia">0</b><span>Sequência 🔥</span></div>
+          </div>
         </div>
+
+        <!-- abas Hoje / Semana / Mês -->
+        <div class="r90-tabs" id="r90Tabs">
+          <button class="active" data-r90tab="hoje">Hoje</button>
+          <button data-r90tab="semana">Semana</button>
+          <button data-r90tab="mes">Mês</button>
+        </div>
+
+        <!-- ABA HOJE -->
+        <div class="r90-tab-panel active" id="r90PanelHoje">
+          <div class="r90-card r90-today-card">
+            <div class="r90-today-date" id="r90TodayDate">Hoje</div>
+            <div id="r90TaskList"></div>
+          </div>
+        </div>
+
+        <!-- ABA SEMANA -->
+        <div class="r90-tab-panel" id="r90PanelSemana">
+          <div class="r90-week-grid" id="r90WeekGrid"></div>
+        </div>
+
+        <!-- ABA MÊS -->
+        <div class="r90-tab-panel" id="r90PanelMes">
+          <div class="r90-month-nav">
+            <button id="r90MonthPrev">‹</button>
+            <span id="r90MonthLabel">Mês 1 (dias 1-30)</span>
+            <button id="r90MonthNext">›</button>
+          </div>
+          <div class="r90-month-grid" id="r90MonthGrid"></div>
+          <div class="r90-legend">
+            <span><i class="dot green"></i> Fez tudo</span>
+            <span><i class="dot yellow"></i> Fez metade</span>
+            <span><i class="dot red"></i> Falhou</span>
+            <span><i class="dot gray"></i> Ainda não chegou</span>
+          </div>
+        </div>
+
+        <!-- anotações e vitórias -->
+        <div class="r90-card r90-notes-card">
+          <b class="r90-section-title">📝 Anotações e Vitórias</b>
+          <div class="r90-field">
+            <label>Como você se sentiu hoje?</label>
+            <textarea id="r90NotaHoje" placeholder="Escreva livremente..."></textarea>
+          </div>
+          <div class="r90-field">
+            <label>Vitória do dia</label>
+            <textarea id="r90VitoriaHoje" placeholder="Ex: Minha pele já está menos áspera"></textarea>
+          </div>
+          <button class="r90-btn r90-btn-primary" id="btnSalvarAnotacao">Salvar Anotação</button>
+        </div>
+
+        <!-- gamificação / selos -->
+        <div class="r90-card r90-badges-card">
+          <b class="r90-section-title">🏅 Conquiste seus selos</b>
+          <div class="r90-badges-grid" id="r90BadgesGrid"></div>
+        </div>
+
       </div>
-      <button class="btn btn-outline btn-block" style="margin-top:12px;" id="btnRefazerQuiz">Refazer questionário</button>
     </div>
-
-    <div class="section-label">Lembretes</div>
-    <div class="card">
-      <div class="field">
-        <label for="reminderTime">Horário</label>
-        <input type="time" id="reminderTime" value="08:00">
-      </div>
-      <div class="field">
-        <label for="reminderText">O que lembrar</label>
-        <input type="text" id="reminderText" placeholder="Ex: passar hidratante">
-      </div>
-      <button class="btn btn-primary btn-block" id="btnAddReminder">Adicionar lembrete</button>
-      <button class="btn btn-outline btn-block" style="margin-top:10px;" id="btnNotifPerm">Ativar notificações</button>
-      <div id="reminderList"></div>
-    </div>
-
-    <div class="section-label">Mitos e verdades</div>
-    <div id="mythList"></div>
-
-    <div class="section-label">Perguntas frequentes</div>
-    <div id="faqList"></div>
   </section>
+
+  <!-- botão flutuante: reiniciar os 90 dias -->
+  <button class="r90-fab" id="btnReiniciar90" style="display:none;">↺ Reiniciar meus 90 dias</button>
 
   <!-- ============================================================
        TELA 5 — PRODUTOS (+ Meu Kit em banner)
@@ -889,6 +1060,19 @@ footer.disclaimer{max-width:520px;margin:26px auto 0;padding:16px 20px;font-size
   </div>
 </div>
 
+<!-- ============================================================
+     MODAL — DETALHE DO DIA (calendário de 90 dias, aba Mês)
+     ============================================================ -->
+<div class="modal-overlay" id="dayDetailOverlay">
+  <div class="modal-sheet r90-modal-sheet">
+    <div class="modal-head">
+      <b style="font-size:15px;" id="dayDetailTitle">Dia</b>
+      <button class="modal-close" id="dayDetailCloseBtn">✕</button>
+    </div>
+    <div id="dayDetailBody"></div>
+  </div>
+</div>
+
 <script>
 (function(){
 "use strict";
@@ -910,7 +1094,14 @@ var defaultState = {
   posts:[],            // {id, fotoDataUrl, legenda, date, likedByMe, likes, comments:[]}
   communityInteractions:{}, // seedPostId -> {likedByMe, extraLikes, comments:[]}
   challenge:{ startDate:null, days:{} },
-  reminders:[]
+  tratamentosEscolhidos:[],  // ['estrias','celulite','varizes'] — seletor do topo da página
+  rotina90:{                 // calendário gamificado de 90 dias (aba Rotina)
+    started:false,
+    startDate:null,          // ISO — dia em que ela clicou "Começar meus 90 dias"
+    treatments:[],           // snapshot dos tratamentos usados pra gerar as tarefas diárias
+    days:{},                 // 'YYYY-MM-DD' -> {statuses:{taskId:'done'|'fail'}, nota:'', vitoria:''}
+    badgesUnlocked:[]        // [7,15,30,60,90]
+  }
 };
 
 var state = loadState();
@@ -1692,63 +1883,6 @@ function dicaDoDia(){
   return dicaDoDiaInfo().texto;
 }
 
-/* ============================================================
-   MITOS E VERDADES — conteúdo educativo, aba Rotina
-   ============================================================ */
-var MYTHS = [
-  { verdict:'mito', q:'Manteiga de cacau sozinha faz a marca sumir.', r:'Ajuda a hidratar, mas isolada não reduz marcas já formadas — o resultado visível vem de ativos como retinoico ou vitamina C, combinados com hidratação constante.' },
-  { verdict:'verdade', q:'Marcas recentes respondem melhor ao tratamento que marcas antigas.', r:'Enquanto a marca ainda está vermelha, há mais vasos ativos na região, o que costuma favorecer a resposta a ativos e procedimentos.' },
-  { verdict:'mito', q:'Bronzear a pele disfarça a marca.', r:'O bronzeado aumenta o contraste entre a pele ao redor e a marca, deixando-a mais visível — não menos.' },
-  { verdict:'verdade', q:'Genética influencia a chance de ter marcas na pele.', r:'Histórico familiar é um dos fatores de risco mais consistentes — a estrutura de colágeno da pele tem componente hereditário.' },
-  { verdict:'mito', q:'Só quem engorda ou emagrece rápido tem marcas na pele.', r:'Crescimento acelerado (estirões na adolescência), gestação, ganho de massa muscular e até fatores hormonais também rompem as fibras de colágeno da pele.' },
-  { verdict:'verdade', q:'A pele grávida e lactante precisa de ativos diferentes da rotina padrão.', r:'Ácido retinoico e alguns derivados de vitamina A não são recomendados na gestação e amamentação — por isso o protocolo gestante do app evita esses ativos.' },
-  { verdict:'mito', q:'Massagear a região não faz nenhuma diferença.', r:'A massagem, mesmo que não elimine a marca sozinha, ajuda na absorção do produto e estimula a circulação local, o que apoia o processo.' },
-  { verdict:'verdade', q:'Resultados visíveis geralmente levam semanas, não dias.', r:'A renovação da pele é um processo biológico gradual — a maioria dos protocolos mostra evolução perceptível a partir de 4 a 8 semanas de uso constante.' },
-  { verdict:'mito', q:'Produto caro sempre funciona melhor que um produto acessível.', r:'O que importa é o ativo presente na fórmula e a constância de uso — não o preço. Muitos ativos eficazes existem em opções de diferentes faixas de preço.' },
-  { verdict:'verdade', q:'Proteção solar é parte do tratamento, não só prevenção.', r:'A exposição solar sem proteção pode escurecer a área tratada e atrasar a evolução visual, especialmente em marcas mais recentes.' }
-];
-function renderMyths(){
-  var wrap = document.getElementById('mythList');
-  if(!wrap) return;
-  wrap.innerHTML = MYTHS.map(function(m,i){
-    return '<div class="myth-item" data-i="'+i+'">'
-      + '<div class="myth-head"><b><span class="myth-verdict '+m.verdict+'">'+m.verdict+'</span>'+m.q+'</b><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" fill="none"><path d="M12 5v14M5 12h14"/></svg></div>'
-      + '<div class="myth-body"><div class="myth-body-in">'+m.r+'</div></div>'
-    + '</div>';
-  }).join('');
-  wrap.querySelectorAll('.myth-head').forEach(function(h){
-    h.addEventListener('click', function(){ h.closest('.myth-item').classList.toggle('open'); });
-  });
-}
-
-/* ============================================================
-   PERGUNTAS FREQUENTES — dúvidas reais que a comunidade
-   costuma trazer, reaproveitando o mesmo padrão de accordion
-   dos mitos e verdades (mesma classe, verdict vira "faq")
-   ============================================================ */
-var FAQS = [
-  { q:'Em quanto tempo vou ver resultado?', r:'Depende do tipo de marca e da constância. Marcas vermelhas costumam mostrar evolução perceptível em 3 a 6 semanas; marcas brancas levam de 8 a 12 semanas ou mais. O gráfico de evolução do app te ajuda a acompanhar isso sem depender só da memória.' },
-  { q:'Posso usar mais de um produto do kit ao mesmo tempo?', r:'Sim, desde que sigam a ordem manhã/noite sugerida no protocolo. Evite combinar dois ativos fortes (como retinoico e ácidos esfoliantes) na mesma aplicação — isso pode irritar a pele.' },
-  { q:'O app substitui uma consulta com dermatologista?', r:'Não. O EvoluaPele é uma ferramenta de acompanhamento e educação, não um diagnóstico. Se notar vermelhidão fora do normal, dor ou qualquer reação, procure um profissional.' },
-  { q:'Minhas fotos e informações ficam salvas onde?', r:'Neste protótipo, os dados ficam salvos apenas no armazenamento local do seu navegador — ninguém mais tem acesso a eles. Numa versão publicada com conta de usuária, isso normalmente passaria a ficar em um servidor seguro.' },
-  { q:'Posso mudar de protocolo depois de montado?', r:'Sim, a qualquer momento em Rotina → Refazer questionário. Isso é comum quando o tipo de marca muda (de vermelha para branca, por exemplo) ou quando a fase de vida muda, como início ou fim da gestação.' },
-  { q:'Preciso postar na Jornada para usar o app?', r:'Não, postar é totalmente opcional. O mapa do corpo, o protocolo e os lembretes funcionam de forma independente da parte social — use a Jornada só se quiser compartilhar ou se inspirar com a comunidade.' },
-  { q:'É normal a marca parecer pior antes de melhorar?', r:'Em alguns casos, ao iniciar ativos como retinoico, pode haver leve descamação ou sensibilidade temporária — o chamado período de adaptação. Se persistir por mais de 2 semanas, vale reduzir a frequência e conversar com um profissional.' }
-];
-function renderFaqs(){
-  var wrap = document.getElementById('faqList');
-  if(!wrap) return;
-  wrap.innerHTML = FAQS.map(function(f,i){
-    return '<div class="myth-item" data-faq="'+i+'">'
-      + '<div class="myth-head"><b>'+f.q+'</b><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" fill="none"><path d="M12 5v14M5 12h14"/></svg></div>'
-      + '<div class="myth-body"><div class="myth-body-in">'+f.r+'</div></div>'
-    + '</div>';
-  }).join('');
-  wrap.querySelectorAll('.myth-head').forEach(function(h){
-    h.addEventListener('click', function(){ h.closest('.myth-item').classList.toggle('open'); });
-  });
-}
-
 var feedTab = 'meu';
 document.getElementById('feedToggle').addEventListener('click', function(e){
   var b = e.target.closest('button[data-feed]');
@@ -1933,8 +2067,6 @@ var quizAnswers = {};
 
 function openQuiz(){ quizStep=0; quizAnswers={}; renderQuizProgress(); renderQuizStep(); quizOverlay.classList.add('open'); }
 document.getElementById('btnMontarPlano').addEventListener('click', openQuiz);
-document.getElementById('btnMontarPlano2').addEventListener('click', openQuiz);
-document.getElementById('btnRefazerQuiz').addEventListener('click', openQuiz);
 document.getElementById('quizCloseBtn').addEventListener('click', function(){ quizOverlay.classList.remove('open'); });
 
 function renderQuizProgress(){
@@ -1991,72 +2123,6 @@ function gerarRotina(respostas){
   saveState();
   return tipo;
 }
-
-function renderRotina(){
-  var empty = document.getElementById('routineEmptyState');
-  var content = document.getElementById('routineContent');
-  if(!state.quiz){
-    empty.style.display='block'; content.style.display='none';
-  } else {
-    empty.style.display='none'; content.style.display='block';
-    var rot = ROUTINES[state.quiz.routineType] || ROUTINES.vermelhas;
-    document.getElementById('routineBadge').textContent = 'Protocolo · '+rot.label;
-    document.getElementById('routineNote').textContent = rot.nota;
-    document.getElementById('routineManha').innerHTML = rot.manha.map(function(s,i){ return '<div class="routine-step"><span class="num">'+(i+1)+'</span>'+s+'</div>'; }).join('');
-    document.getElementById('routineNoite').innerHTML = rot.noite.map(function(s,i){ return '<div class="routine-step"><span class="num">'+(i+1)+'</span>'+s+'</div>'; }).join('');
-  }
-  renderReminders();
-  renderMyths();
-  renderFaqs();
-}
-
-/* ============================================================
-   LEMBRETES
-   ============================================================ */
-document.getElementById('btnAddReminder').addEventListener('click', function(){
-  var time = document.getElementById('reminderTime').value;
-  var text = document.getElementById('reminderText').value.trim();
-  if(!time || !text){ toast('Preencha horário e o que lembrar.','warn'); return; }
-  state.reminders.push({ id:uid(), time:time, text:text });
-  saveState();
-  document.getElementById('reminderText').value='';
-  toast('Lembrete criado ✓','ok');
-  renderReminders();
-});
-function renderReminders(){
-  var list = document.getElementById('reminderList');
-  if(!state.reminders.length){ list.innerHTML='<p style="font-size:12.5px;margin-top:10px;color:var(--text-mute);">Nenhum lembrete cadastrado ainda.</p>'; return; }
-  var sorted = state.reminders.slice().sort(function(a,b){return a.time>b.time?1:-1;});
-  list.innerHTML = sorted.map(function(r){
-    return '<div class="reminder-row"><div class="reminder-time">'+r.time+'</div><div class="reminder-info">'+r.text+'</div><button class="reminder-del" data-del="'+r.id+'">remover</button></div>';
-  }).join('');
-  list.querySelectorAll('[data-del]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      state.reminders = state.reminders.filter(function(r){return r.id!==btn.dataset.del;});
-      saveState(); renderReminders(); toast('Lembrete removido.','ok');
-    });
-  });
-}
-document.getElementById('btnNotifPerm').addEventListener('click', function(){
-  if(!('Notification' in window)){ toast('Este navegador não suporta notificações.','warn'); return; }
-  Notification.requestPermission().then(function(perm){
-    toast(perm==='granted' ? 'Notificações ativadas ✓' : 'Permissão não concedida.', perm==='granted'?'ok':'warn');
-  });
-});
-var firedThisMinute = {};
-setInterval(function(){
-  var now=new Date();
-  var hhmm=('0'+now.getHours()).slice(-2)+':'+('0'+now.getMinutes()).slice(-2);
-  state.reminders.forEach(function(r){
-    if(r.time===hhmm){
-      var key=r.id+hhmm;
-      if(firedThisMinute[key]) return;
-      firedThisMinute[key]=true;
-      toast('⏰ '+r.text,'ok');
-      if('Notification' in window && Notification.permission==='granted'){ new Notification('EvoluaPele', {body:r.text}); }
-    }
-  });
-},20000);
 
 /* ============================================================
    PRODUTOS + MEU KIT (banner) — com link de compra externo
@@ -2151,7 +2217,7 @@ function renderProdutos(){
    → prova social. Sem nenhum direcionamento pra WhatsApp ou clínica.
    ============================================================ */
 
-var selectedTreatments = []; // ['estrias','celulite','varizes']
+var selectedTreatments = (state.tratamentosEscolhidos || []).slice(); // ['estrias','celulite','varizes']
 
 var TREATMENT_META = {
   estrias:{
@@ -2303,7 +2369,10 @@ document.getElementById('treatmentPicker').addEventListener('click', function(e)
   var idx = selectedTreatments.indexOf(t);
   if(idx>-1) selectedTreatments.splice(idx,1);
   else selectedTreatments.push(t);
+  state.tratamentosEscolhidos = selectedTreatments.slice();
+  saveState();
   renderTreatmentPicker();
+  if(typeof atualizarEstadoInicialR90 === 'function') atualizarEstadoInicialR90();
 });
 
 document.getElementById('btnVerCronograma').addEventListener('click', function(){
@@ -2383,23 +2452,381 @@ function renderCronogramaSection(){
   }).join('');
 }
 
-function renderProvaSocialSection(){
-  var ordered = treatmentsOrdenados();
-  var perTreatment = ordered.length===1 ? 3 : 2;
-  var cards = [];
-  ordered.forEach(function(t){
-    TESTIMONIALS[t].slice(0, perTreatment).forEach(function(dep){
-      cards.push({ treat:t, dep:dep });
+/* ============================================================
+   ABA ROTINA — calendário futurista gamificado de 90 dias
+   ============================================================
+   Regras de negócio:
+   - As tarefas do dia são puxadas automaticamente dos
+     tratamentos escolhidos no seletor do topo da página.
+   - Tudo é salvo no localStorage (via state.rotina90), nada de
+     login ou servidor.
+   - "Dia feito" = todas as tarefas do dia marcadas como CONCLUÍ.
+   - "Dia falhado" = pelo menos uma tarefa marcada como FALHEI
+     naquele dia.
+   - Sequência atual = quantos dias seguidos (terminando hoje ou
+     ontem) estão 100% completos.
+   - Selos são desbloqueados pelo total de dias feitos (7/15/30/60/90).
+   ============================================================ */
+
+/* ---- 3 tarefas diárias por tratamento (a última é sempre comum) ---- */
+var TAREFAS_DIARIAS = {
+  estrias:[
+    { id:'estrias_esfoliacao', label:'Esfoliação Poderosa', detalhe:'3 minutos, movimentos circulares' },
+    { id:'estrias_hidratacao', label:'Hidratação de Choque', detalhe:'2x hoje — manhã e noite' },
+    { id:'agua', label:'Beber 2L de Água', detalhe:'Ao longo do dia' }
+  ],
+  celulite:[
+    { id:'celulite_escovacao', label:'Escovação a Seco', detalhe:'5 minutos, antes do banho' },
+    { id:'celulite_exercicio', label:'Exercício de 7 Minutos', detalhe:'Agachamento + avanço + glúteo' },
+    { id:'agua', label:'Beber 2L de Água', detalhe:'Ao longo do dia' }
+  ],
+  varizes:[
+    { id:'varizes_elevacao', label:'Elevação de Pernas', detalhe:'15 minutos, 2x ao dia' },
+    { id:'varizes_caminhada', label:'Caminhada', detalhe:'20 minutos, ritmo leve' },
+    { id:'agua', label:'Beber 2L de Água', detalhe:'Ao longo do dia' }
+  ]
+};
+
+var R90_BADGES = [
+  { dias:7,  emoji:'🗡️', nome:'Guerreira' },
+  { dias:15, emoji:'🛡️', nome:'Constante' },
+  { dias:30, emoji:'🌙', nome:'Transformação Iniciada' },
+  { dias:60, emoji:'⚡', nome:'Quase lá' },
+  { dias:90, emoji:'👑', nome:'NOVA PELE DESBLOQUEADA' }
+];
+
+var WEEKDAY_NAMES = ['dom','seg','ter','qua','qui','sex','sáb'];
+var r90MonthOffset = 0; // qual bloco de 30 dias está sendo exibido na aba Mês (0, 1 ou 2)
+var r90ActiveTab = 'hoje';
+
+/* ---- monta a lista de tarefas do dia a partir dos tratamentos salvos ---- */
+function getTarefasDoDia(){
+  var treatments = state.rotina90.treatments.length ? state.rotina90.treatments : selectedTreatments;
+  var vistos = {};
+  var lista = [];
+  treatments.forEach(function(t){
+    (TAREFAS_DIARIAS[t] || []).forEach(function(tarefa){
+      if(vistos[tarefa.id]) return;
+      vistos[tarefa.id] = true;
+      lista.push(tarefa);
     });
   });
-  var starSvg = '<svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 1-5 5 1.5 7-6.5-3.5L5 21.5 6.5 14.5l-5-5 7-1z"/></svg>';
-  document.getElementById('provaSocialConteudo').innerHTML = cards.map(function(c){
-    return '<div class="card testi-card">'
-      + '<div class="testi-stars">'+starSvg+starSvg+starSvg+starSvg+starSvg+'</div>'
-      + '<p>"'+c.dep.texto+'"</p>'
-      + '<div style="margin-top:10px;"><span class="testi-name">'+c.dep.nome+'</span><span class="testi-tag">Tratamento de '+TREATMENT_META[c.treat].label+'</span></div>'
+  return lista;
+}
+
+/* ---- número do dia da jornada (1 a 90), ou null se ainda não começou ---- */
+function r90DiaAtual(){
+  if(!state.rotina90.started) return null;
+  var n = daysBetween(state.rotina90.startDate, todayISO()) + 1;
+  return Math.max(1, Math.min(90, n));
+}
+function r90DataDoDia(n){
+  return addDaysISO(state.rotina90.startDate, n-1);
+}
+
+/* ---- status de um dia específico (data ISO) ---- */
+function r90StatusDoDia(dateISO){
+  var registro = state.rotina90.days[dateISO];
+  var tarefas = getTarefasDoDia();
+  if(!registro || !tarefas.length) return { done:0, fail:0, total:tarefas.length, pct:0 };
+  var done=0, fail=0;
+  tarefas.forEach(function(t){
+    var s = registro.statuses[t.id];
+    if(s==='done') done++;
+    else if(s==='fail') fail++;
+  });
+  return { done:done, fail:fail, total:tarefas.length, pct: tarefas.length ? Math.round((done/tarefas.length)*100) : 0 };
+}
+
+/* ---- estatísticas gerais (dias feitos / falhados / sequência) ---- */
+function r90ComputeStats(){
+  var diaAtual = r90DiaAtual();
+  var feitos=0, falhados=0;
+  if(diaAtual){
+    for(var n=1; n<=diaAtual; n++){
+      var st = r90StatusDoDia(r90DataDoDia(n));
+      if(st.total && st.done===st.total) feitos++;
+      else if(st.fail>0) falhados++;
+    }
+  }
+  // sequência atual: conta pra trás a partir de hoje (ou ontem, se hoje ainda não foi 100%)
+  var sequencia = 0;
+  if(diaAtual){
+    var hojeSt = r90StatusDoDia(r90DataDoDia(diaAtual));
+    var inicioBusca = (hojeSt.total && hojeSt.done===hojeSt.total) ? diaAtual : diaAtual-1;
+    for(var n2=inicioBusca; n2>=1; n2--){
+      var st2 = r90StatusDoDia(r90DataDoDia(n2));
+      if(st2.total && st2.done===st2.total) sequencia++;
+      else break;
+    }
+  }
+  return { feitos:feitos, falhados:falhados, sequencia:sequencia, diaAtual:diaAtual };
+}
+
+/* ---- inicia (ou reinicia) a jornada de 90 dias ---- */
+function iniciarRotina90(){
+  state.rotina90.started = true;
+  state.rotina90.startDate = todayISO();
+  state.rotina90.treatments = selectedTreatments.slice();
+  state.rotina90.days = {};
+  state.rotina90.badgesUnlocked = [];
+  saveState();
+  r90MonthOffset = 0;
+  renderRotina90();
+  toast('Seus 90 dias começaram agora 🚀','ok');
+}
+
+/* ---- marca uma tarefa como concluída ou falhada ---- */
+function r90MarcarTarefa(taskId, status){
+  var hoje = todayISO();
+  if(!state.rotina90.days[hoje]) state.rotina90.days[hoje] = { statuses:{}, nota:'', vitoria:'' };
+  var atual = state.rotina90.days[hoje].statuses[taskId];
+  state.rotina90.days[hoje].statuses[taskId] = (atual===status) ? undefined : status; // clique de novo = desmarca
+  saveState();
+  renderRotina90();
+}
+
+/* ---- checa e desbloqueia selos, mostrando animação/toast ---- */
+function r90CheckBadges(feitos){
+  R90_BADGES.forEach(function(b){
+    if(feitos>=b.dias && state.rotina90.badgesUnlocked.indexOf(b.dias)===-1){
+      state.rotina90.badgesUnlocked.push(b.dias);
+      saveState();
+      toast('Selo desbloqueado: '+b.emoji+' '+b.nome,'ok');
+    }
+  });
+}
+
+/* ============================================================
+   RENDER — ponto de entrada chamado ao abrir a aba Rotina
+   ============================================================ */
+function renderRotina(){ renderRotina90(); }
+
+function renderRotina90(){
+  var startCard = document.getElementById('r90StartCard');
+  var main = document.getElementById('r90Main');
+  var fab = document.getElementById('btnReiniciar90');
+
+  if(!state.rotina90.started){
+    startCard.style.display = 'block';
+    main.style.display = 'none';
+    fab.style.display = 'none';
+    var temTratamento = selectedTreatments.length>0;
+    document.getElementById('r90StartMsg').textContent = temTratamento
+      ? 'Tudo pronto! Seu plano de '+selectedTreatments.map(function(t){return TREATMENT_META[t].label;}).join(' + ')+' está esperando por você.'
+      : 'Escolha seu tratamento lá no topo da página e comece a contagem dos seus 90 dias.';
+    document.getElementById('btnComecar90').style.display = temTratamento ? 'inline-flex' : 'none';
+    document.getElementById('btnIrParaSeletor').style.display = temTratamento ? 'none' : 'inline-flex';
+    return;
+  }
+
+  startCard.style.display = 'none';
+  main.style.display = 'block';
+  fab.style.display = 'inline-flex';
+
+  var stats = r90ComputeStats();
+  r90CheckBadges(stats.feitos);
+
+  // barra de progresso
+  document.getElementById('r90DiaLabel').textContent = 'Dia '+stats.diaAtual+' de 90';
+  document.getElementById('r90PctLabel').textContent = Math.round((stats.diaAtual/90)*100)+'%';
+  document.getElementById('r90ProgressFill').style.width = ((stats.diaAtual/90)*100)+'%';
+  document.getElementById('r90StatFeitos').textContent = stats.feitos;
+  document.getElementById('r90StatFalhados').textContent = stats.falhados;
+  document.getElementById('r90StatSequencia').textContent = stats.sequencia;
+
+  renderR90Hoje();
+  renderR90Semana();
+  renderR90Mes();
+  renderR90Badges();
+  carregarAnotacaoDoDia();
+}
+
+/* ---- ABA HOJE ---- */
+function renderR90Hoje(){
+  var hoje = todayISO();
+  var d = new Date(hoje+'T00:00:00');
+  var dias = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+  document.getElementById('r90TodayDate').textContent = dias[d.getDay()]+' · '+fmtDate(hoje);
+
+  var registro = state.rotina90.days[hoje];
+  var tarefas = getTarefasDoDia();
+
+  if(!tarefas.length){
+    document.getElementById('r90TaskList').innerHTML = '<p style="color:var(--r90-text-dim);font-size:13px;">Nenhum tratamento selecionado ainda. Escolha um lá no topo da página.</p>';
+    return;
+  }
+
+  document.getElementById('r90TaskList').innerHTML = tarefas.map(function(t){
+    var status = registro ? registro.statuses[t.id] : null;
+    var cls = status==='done' ? 'done' : status==='fail' ? 'fail' : '';
+    return '<div class="r90-task-row '+cls+'" data-task="'+t.id+'">'
+      + '<div class="r90-task-info"><b>'+(status==='done'?'✅ ':'')+t.label+'</b><span>'+t.detalhe+'</span></div>'
+      + '<div class="r90-task-actions">'
+        + '<button class="btn-ok" data-status="done" title="Concluí">✓</button>'
+        + '<button class="btn-fail" data-status="fail" title="Falhei">✕</button>'
+      + '</div>'
     + '</div>';
+  }).join('') + (registro && Object.keys(registro.statuses||{}).some(function(k){return registro.statuses[k]==='fail';})
+      ? '<div class="r90-fail-msg">Amanhã a gente faz melhor 💪</div>' : '');
+
+  document.querySelectorAll('#r90TaskList .r90-task-row').forEach(function(row){
+    row.querySelectorAll('button').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        r90MarcarTarefa(row.dataset.task, btn.dataset.status);
+        var freshRow = document.querySelector('#r90TaskList .r90-task-row[data-task="'+row.dataset.task+'"]');
+        if(freshRow) freshRow.classList.add('just-marked');
+      });
+    });
+  });
+}
+
+/* ---- ABA SEMANA (7 cards, semana que contém hoje) ---- */
+function renderR90Semana(){
+  var hoje = todayISO();
+  var d = new Date(hoje+'T00:00:00');
+  var offsetSegunda = (d.getDay()+6)%7; // 0 = segunda
+  var segundaISO = addDaysISO(hoje, -offsetSegunda);
+
+  var html = '';
+  for(var i=0;i<7;i++){
+    var dataISO = addDaysISO(segundaISO, i);
+    var dObj = new Date(dataISO+'T00:00:00');
+    var dentroDoPlano = state.rotina90.started && dataISO>=state.rotina90.startDate && dataISO<=todayISO();
+    var st = dentroDoPlano ? r90StatusDoDia(dataISO) : null;
+    var cls = 'r90-day-card';
+    if(!dentroDoPlano) cls += ' locked';
+    else if(st.total && st.done===st.total) cls += ' full';
+    else if(st.fail>0) cls += ' fail';
+    html += '<div class="'+cls+'" data-date="'+dataISO+'">'
+      + '<div class="dname">'+WEEKDAY_NAMES[dObj.getDay()]+'</div>'
+      + '<div class="ddate">'+fmtDate(dataISO)+'</div>'
+      + (dentroDoPlano
+          ? '<div class="dpct">'+st.pct+'%</div><div class="dfrac">'+st.done+'/'+st.total+' feitas</div>'
+          : '<div class="dpct">—</div><div class="dfrac">fora do plano</div>')
+    + '</div>';
+  }
+  document.getElementById('r90WeekGrid').innerHTML = html;
+}
+
+/* ---- ABA MÊS (bloco de 30 dias, navegável) ---- */
+function renderR90Mes(){
+  var inicioBloco = r90MonthOffset*30 + 1;
+  document.getElementById('r90MonthLabel').textContent = 'Mês '+(r90MonthOffset+1)+' (dias '+inicioBloco+'-'+(inicioBloco+29)+')';
+  document.getElementById('r90MonthPrev').disabled = r90MonthOffset<=0;
+  document.getElementById('r90MonthNext').disabled = r90MonthOffset>=2;
+
+  var diaAtual = r90DiaAtual();
+  var html = '';
+  for(var i=0;i<30;i++){
+    var n = inicioBloco+i;
+    var dataISO = r90DataDoDia(n);
+    var cls = 'r90-month-cell';
+    var label = n;
+    if(n>diaAtual){
+      cls += ' gray';
+    } else {
+      var st = r90StatusDoDia(dataISO);
+      if(st.total && st.done===st.total) cls += ' green';
+      else if(st.fail>0 && st.done===0) cls += ' red';
+      else if(st.done>0) cls += ' yellow';
+      else cls += ' gray';
+    }
+    html += '<div class="'+cls+'" data-dia="'+n+'">'+label+'</div>';
+  }
+  document.getElementById('r90MonthGrid').innerHTML = html;
+
+  document.querySelectorAll('#r90MonthGrid .r90-month-cell').forEach(function(cell){
+    cell.addEventListener('click', function(){
+      var n = +cell.dataset.dia;
+      if(n>diaAtual) return; // dia que ainda não chegou
+      abrirDetalheDoDia(n);
+    });
+  });
+}
+document.getElementById('r90MonthPrev').addEventListener('click', function(){
+  if(r90MonthOffset>0){ r90MonthOffset--; renderR90Mes(); }
+});
+document.getElementById('r90MonthNext').addEventListener('click', function(){
+  if(r90MonthOffset<2){ r90MonthOffset++; renderR90Mes(); }
+});
+
+/* ---- pop-up de detalhe do dia (aba Mês) ---- */
+function abrirDetalheDoDia(n){
+  var dataISO = r90DataDoDia(n);
+  var registro = state.rotina90.days[dataISO];
+  var tarefas = getTarefasDoDia();
+  document.getElementById('dayDetailTitle').textContent = 'Dia '+n+' · '+fmtDate(dataISO);
+
+  var tarefasHtml = tarefas.map(function(t){
+    var status = registro ? registro.statuses[t.id] : null;
+    var tag = status==='done' ? '<span class="tag-done">✓ concluí</span>' : status==='fail' ? '<span class="tag-fail">✕ falhei</span>' : '<span class="tag-pending">não marcado</span>';
+    return '<div class="r90-detail-row"><span>'+t.label+'</span>'+tag+'</div>';
   }).join('');
+
+  var notaHtml = '';
+  if(registro && (registro.nota || registro.vitoria)){
+    notaHtml = '<div class="r90-detail-note">'
+      + (registro.nota ? '<b>Como ela se sentiu</b>'+registro.nota+'<br><br>' : '')
+      + (registro.vitoria ? '<b>Vitória do dia</b>'+registro.vitoria : '')
+    + '</div>';
+  }
+
+  document.getElementById('dayDetailBody').innerHTML = tarefasHtml + notaHtml;
+  document.getElementById('dayDetailOverlay').classList.add('open');
+}
+document.getElementById('dayDetailCloseBtn').addEventListener('click', function(){
+  document.getElementById('dayDetailOverlay').classList.remove('open');
+});
+
+/* ---- anotações e vitórias do dia ---- */
+function carregarAnotacaoDoDia(){
+  var registro = state.rotina90.days[todayISO()];
+  document.getElementById('r90NotaHoje').value = registro ? (registro.nota||'') : '';
+  document.getElementById('r90VitoriaHoje').value = registro ? (registro.vitoria||'') : '';
+}
+document.getElementById('btnSalvarAnotacao').addEventListener('click', function(){
+  var hoje = todayISO();
+  if(!state.rotina90.days[hoje]) state.rotina90.days[hoje] = { statuses:{}, nota:'', vitoria:'' };
+  state.rotina90.days[hoje].nota = document.getElementById('r90NotaHoje').value.trim();
+  state.rotina90.days[hoje].vitoria = document.getElementById('r90VitoriaHoje').value.trim();
+  saveState();
+  toast('Anotação salva ✓','ok');
+});
+
+/* ---- selos / gamificação ---- */
+function renderR90Badges(){
+  document.getElementById('r90BadgesGrid').innerHTML = R90_BADGES.map(function(b){
+    var unlocked = state.rotina90.badgesUnlocked.indexOf(b.dias)>-1;
+    return '<div class="r90-badge'+(unlocked?' unlocked':'')+'"><div class="bic">'+(unlocked?b.emoji:'🔒')+'</div><b>'+b.dias+' dias</b><span>'+b.nome+'</span></div>';
+  }).join('');
+}
+
+/* ---- abas Hoje / Semana / Mês ---- */
+document.getElementById('r90Tabs').addEventListener('click', function(e){
+  var btn = e.target.closest('button[data-r90tab]');
+  if(!btn) return;
+  r90ActiveTab = btn.dataset.r90tab;
+  document.querySelectorAll('#r90Tabs button').forEach(function(b){ b.classList.toggle('active', b===btn); });
+  document.getElementById('r90PanelHoje').classList.toggle('active', r90ActiveTab==='hoje');
+  document.getElementById('r90PanelSemana').classList.toggle('active', r90ActiveTab==='semana');
+  document.getElementById('r90PanelMes').classList.toggle('active', r90ActiveTab==='mes');
+});
+
+/* ---- começar / ir pro seletor / reiniciar ---- */
+document.getElementById('btnComecar90').addEventListener('click', iniciarRotina90);
+document.getElementById('btnIrParaSeletor').addEventListener('click', function(){
+  document.getElementById('treatmentPicker').scrollIntoView({behavior:'smooth', block:'center'});
+});
+document.getElementById('btnReiniciar90').addEventListener('click', function(){
+  var ok = window.confirm('Tem certeza que quer reiniciar seus 90 dias? Todo o progresso salvo vai ser apagado.');
+  if(!ok) return;
+  iniciarRotina90();
+});
+
+/* ---- chamado sempre que a seleção de tratamentos muda (ver seletor do topo) ---- */
+function atualizarEstadoInicialR90(){
+  if(!state.rotina90.started) renderRotina90();
 }
 
 /* ============================================================
